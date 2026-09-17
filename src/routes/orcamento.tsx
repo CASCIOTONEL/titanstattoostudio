@@ -87,7 +87,7 @@ function OrcamentoPage() {
         </div>
         <div>
           <label className={labelClass} htmlFor="whatsapp">WhatsApp</label>
-          <input id="whatsapp" name="whatsapp" maxLength={20} className={fieldClass} placeholder="(11) 90000-0000" />
+          <input id="whatsapp" name="whatsapp" maxLength={20} className={fieldClass} placeholder="(51) 90000-0000" />
         </div>
         <div>
           <label className={labelClass} htmlFor="email">E-mail</label>

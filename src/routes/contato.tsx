@@ -34,6 +34,7 @@ function ContatoPage() {
           <div>
             <p className="text-xs uppercase tracking-[0.22em] text-foreground">Endereço</p>
             <p className="mt-2">{studio.address}</p>
+            <p>{studio.cep}</p>
           </div>
           <div>
             <p className="text-xs uppercase tracking-[0.22em] text-foreground">Horários</p>
@@ -49,7 +50,26 @@ function ContatoPage() {
             <p className="text-xs uppercase tracking-[0.22em] text-foreground">Canais</p>
             <p className="mt-2">{studio.phoneDisplay}</p>
             <p>{studio.email}</p>
-            <p>{studio.instagram}</p>
+            <p>
+              <a
+                href={`https://instagram.com/${studio.instagram.replace("@", "")}`}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-foreground"
+              >
+                Instagram {studio.instagram}
+              </a>
+            </p>
+            <p>
+              <a
+                href="https://facebook.com/titanstattoo"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-foreground"
+              >
+                Facebook {studio.facebook}
+              </a>
+            </p>
           </div>
           <a
             href={whatsappLink("Olá! Gostaria de tirar uma dúvida com a Titans.")}
@@ -67,7 +87,7 @@ function ContatoPage() {
             className="h-full min-h-80 w-full grayscale"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=Vila%20Madalena%2C%20S%C3%A3o%20Paulo&output=embed"
+            src="https://www.google.com/maps?q=Rua%20Mathias%20Velho%2C%20170%2C%20Canoas%2C%20RS&output=embed"
           />
         </div>
       </div>
