@@ -1,15 +1,15 @@
 import cascioPhoto from "@/assets/artist-cascio.jpg.asset.json";
 import ricardoPhoto from "@/assets/artist-ricardo.jpg.asset.json";
 import braianPhoto from "@/assets/artist-braian.jpg.asset.json";
-import cascio6077 from "@/assets/cascio-6077-edited.jpg.asset.json";
-import cascio6108 from "@/assets/cascio-6108-edited.jpg.asset.json";
-import cascio6155 from "@/assets/cascio-6155-edited.jpg.asset.json";
-import cascio6197 from "@/assets/cascio-6197-edited.jpg.asset.json";
-import cascio6460 from "@/assets/cascio-6460-edited.jpg.asset.json";
-import cascio6509 from "@/assets/cascio-6509-edited.jpg.asset.json";
-import cascio6535 from "@/assets/cascio-6535-edited.jpg.asset.json";
-import cascio7138 from "@/assets/cascio-7138-edited.jpg.asset.json";
-import cascio7147 from "@/assets/cascio-7147-edited.jpg.asset.json";
+import cascio6077 from "@/assets/cascio-6077-unified.jpg.asset.json";
+import cascio6108 from "@/assets/cascio-6108-unified.jpg.asset.json";
+import cascio6155 from "@/assets/cascio-6155-unified.jpg.asset.json";
+import cascio6197 from "@/assets/cascio-6197-unified.jpg.asset.json";
+import cascio6460 from "@/assets/cascio-6460-unified.jpg.asset.json";
+import cascio6509 from "@/assets/cascio-6509-unified.jpg.asset.json";
+import cascio6535 from "@/assets/cascio-6535-unified.jpg.asset.json";
+import cascio7138 from "@/assets/cascio-7138-unified.jpg.asset.json";
+import cascio7147 from "@/assets/cascio-7147-unified.jpg.asset.json";
 
 export const studio = {
   name: "Titans Tattoo Studio",
