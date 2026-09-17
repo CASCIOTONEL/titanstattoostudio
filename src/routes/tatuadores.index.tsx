@@ -44,7 +44,7 @@ function ArtistsPage() {
               loading="lazy"
               width={912}
               height={1104}
-              className="h-80 w-full object-cover grayscale transition duration-700 group-hover:grayscale-0"
+              className="h-80 w-full object-cover object-top transition duration-700 group-hover:scale-[1.02]"
             />
             <div className="p-6">
               <h3 className="font-display text-xl uppercase tracking-[0.08em]">{artist.name}</h3>

@@ -61,7 +61,7 @@ function ArtistPage() {
         loading="lazy"
         width={912}
         height={1104}
-        className="mt-10 h-[420px] w-full max-w-md border border-border/60 object-cover md:h-[520px]"
+        className="mt-10 h-[420px] w-full max-w-md border border-border/60 object-cover object-top md:h-[520px]"
       />
 
       <div className="mt-8 flex flex-wrap gap-3">
@@ -84,7 +84,7 @@ function ArtistPage() {
             loading="lazy"
             width={912}
             height={1104}
-            className="h-[460px] w-full border border-border/60 object-cover"
+            className="h-[460px] w-full border border-border/60 object-cover object-top"
           />
         ))}
       </div>

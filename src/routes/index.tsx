@@ -109,7 +109,7 @@ function Home() {
                 loading="lazy"
                 width={912}
                 height={1104}
-                className="h-96 w-full object-cover transition duration-700 group-hover:scale-[1.04]"
+                className="h-96 w-full object-cover object-top transition duration-700 group-hover:scale-[1.04]"
               />
             </figure>
           ))}
@@ -134,12 +134,12 @@ function Home() {
               className="group border border-border/60"
             >
               <img
-                src={artist.works[0]!.src}
-                alt={artist.works[0]!.alt}
+                src={artist.photo}
+                alt={`Retrato do tatuador ${artist.name}`}
                 loading="lazy"
                 width={912}
                 height={1104}
-                className="h-72 w-full object-cover transition duration-700 group-hover:scale-[1.02]"
+                className="h-72 w-full object-cover object-top transition duration-700 group-hover:scale-[1.02]"
               />
               <div className="p-6">
                 <h3 className="font-display text-lg uppercase tracking-[0.08em]">{artist.name}</h3>
