@@ -61,7 +61,7 @@ function PortfolioPage() {
               loading="lazy"
               width={912}
               height={1104}
-              className="h-[420px] w-full object-cover grayscale transition duration-700 group-hover:scale-[1.03]"
+              className="h-[420px] w-full object-cover transition duration-700 group-hover:scale-[1.03]"
             />
             <figcaption className="absolute inset-x-0 bottom-0 bg-background/80 px-4 py-3 text-xs uppercase tracking-[0.18em] text-muted-foreground backdrop-blur">
               {item.style} · {item.artist}
