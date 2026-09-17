@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { BrandLogo } from "@/components/site/BrandLogo";
 
 const nav = [
   { to: "/", label: "Início" },
@@ -18,11 +19,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-        <Link to="/" className="group leading-none" onClick={() => setOpen(false)}>
-          <span className="font-display text-2xl tracking-[0.18em] text-foreground">TITANS</span>
-          <span className="ml-2 text-[10px] uppercase tracking-[0.35em] text-muted-foreground">
-            Tattoo Studio
-          </span>
+        <Link to="/" className="block w-36 sm:w-44" onClick={() => setOpen(false)}>
+          <BrandLogo priority />
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex">

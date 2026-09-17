@@ -1,15 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { studio } from "@/lib/studio";
+import { BrandLogo } from "@/components/site/BrandLogo";
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-border/60 bg-card/40">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-3">
         <div>
-          <p className="font-display text-2xl tracking-[0.18em] text-foreground">TITANS</p>
-          <p className="mt-1 text-[10px] uppercase tracking-[0.35em] text-muted-foreground">
-            Tattoo Studio
-          </p>
+          <BrandLogo className="max-w-56" />
           <p className="mt-5 max-w-xs text-sm text-muted-foreground">
             Estúdio de tatuagem, cobertura, remoção a laser e piercing. Trabalho autoral,
             biossegurança e atendimento com hora marcada.

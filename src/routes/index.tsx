@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Section, SectionTitle } from "@/components/site/Section";
+import { BrandLogo } from "@/components/site/BrandLogo";
 import heroImage from "@/assets/hero-studio.jpg";
 import { artists, campaigns, portfolio, services, studio, testimonials, whatsappLink } from "@/lib/studio";
 
@@ -36,6 +37,7 @@ function Home() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30" />
         <div className="relative mx-auto w-full max-w-6xl px-5 py-24">
+          <BrandLogo priority className="mb-10 max-w-sm md:max-w-md" />
           <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
             São Paulo · desde 2014
           </p>
