@@ -1,9 +1,3 @@
-import tattoo1 from "@/assets/tattoo-1.jpg";
-import tattoo2 from "@/assets/tattoo-2.jpg";
-import tattoo3 from "@/assets/tattoo-3.jpg";
-import tattoo4 from "@/assets/tattoo-4.jpg";
-import tattoo5 from "@/assets/tattoo-5.jpg";
-import tattoo6 from "@/assets/tattoo-6.jpg";
 import cascioPhoto from "@/assets/artist-cascio.jpg.asset.json";
 import ricardoPhoto from "@/assets/artist-ricardo.jpg.asset.json";
 import braianPhoto from "@/assets/artist-braian.jpg.asset.json";
@@ -91,8 +85,7 @@ export const artists: Artist[] = [
     photo: cascioPhoto.url,
     specialties: ["Realismo", "Preto e cinza", "Cobertura", "Colorido"],
     works: [
-      { src: tattoo1, alt: "Tatuagem de leão em realismo preto e cinza no antebraço" },
-      { src: tattoo5, alt: "Retrato realista tatuado no ombro" },
+      { src: cascioPhoto.url, alt: "Cascio — realismo e preto e cinza" },
     ],
   },
   {
@@ -103,8 +96,7 @@ export const artists: Artist[] = [
     photo: ricardoPhoto.url,
     specialties: ["Blackwork", "Fine line", "Geek", "Colorido"],
     works: [
-      { src: tattoo2, alt: "Tatuagem fine line de montanhas no braço" },
-      { src: tattoo6, alt: "Lettering tatuado no pulso" },
+      { src: ricardoPhoto.url, alt: "Ricardo — blackwork e fine line" },
     ],
   },
   {
@@ -115,8 +107,7 @@ export const artists: Artist[] = [
     photo: braianPhoto.url,
     specialties: ["Preto e cinza", "Blackwork", "Fine line", "Colorido"],
     works: [
-      { src: tattoo3, alt: "Braço fechado em blackwork ornamental" },
-      { src: tattoo4, alt: "Tatuagem de cobra e adaga na perna" },
+      { src: braianPhoto.url, alt: "Braian — preto e cinza e blackwork" },
     ],
   },
 ];
@@ -130,12 +121,12 @@ export type PortfolioItem = {
 };
 
 export const portfolio: PortfolioItem[] = [
-  { id: "1", src: tattoo1, alt: "Leão em realismo preto e cinza", style: "Realismo", artist: "Cascio" },
-  { id: "2", src: tattoo3, alt: "Braço fechado ornamental", style: "Blackwork", artist: "Braian" },
-  { id: "3", src: tattoo2, alt: "Montanhas em fine line", style: "Fine line", artist: "Ricardo" },
-  { id: "4", src: tattoo5, alt: "Retrato realista no ombro", style: "Realismo", artist: "Cascio" },
-  { id: "5", src: tattoo4, alt: "Cobra e adaga na perna", style: "Blackwork", artist: "Braian" },
-  { id: "6", src: tattoo6, alt: "Lettering no pulso", style: "Lettering", artist: "Ricardo" },
+  { id: "1", src: cascioPhoto.url, alt: "Cascio — realismo e preto e cinza", style: "Realismo", artist: "Cascio" },
+  { id: "2", src: braianPhoto.url, alt: "Braian — blackwork", style: "Blackwork", artist: "Braian" },
+  { id: "3", src: ricardoPhoto.url, alt: "Ricardo — fine line", style: "Fine line", artist: "Ricardo" },
+  { id: "4", src: cascioPhoto.url, alt: "Cascio — coberturas e colorido", style: "Colorido", artist: "Cascio" },
+  { id: "5", src: braianPhoto.url, alt: "Braian — preto e cinza", style: "Preto e cinza", artist: "Braian" },
+  { id: "6", src: ricardoPhoto.url, alt: "Ricardo — geek e colorido", style: "Geek", artist: "Ricardo" },
 ];
 
 export const testimonials = [
