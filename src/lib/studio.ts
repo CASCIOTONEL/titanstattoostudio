@@ -7,11 +7,14 @@ import tattoo6 from "@/assets/tattoo-6.jpg";
 
 export const studio = {
   name: "Titans Tattoo Studio",
-  phoneDisplay: "(11) 99999-0000",
-  whatsapp: "5511999990000",
-  email: "contato@titanstattoo.com.br",
-  address: "Rua Exemplo, 123 — Vila Madalena, São Paulo/SP",
-  instagram: "@titanstattoo",
+  phoneDisplay: "(51) 99178-6170",
+  whatsapp: "5551991786170",
+  email: "contato@titanstattoostudio.com.br",
+  address: "Rua Mathias Velho, 170 — Sala 201, Centro, Canoas/RS",
+  cep: "CEP 92310-300",
+  since: 2011,
+  instagram: "@titanstattoostudio",
+  facebook: "titans tattoo",
   hours: [
     { day: "Segunda a sexta", time: "11h às 20h" },
     { day: "Sábado", time: "10h às 18h" },
