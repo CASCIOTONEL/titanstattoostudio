@@ -1,6 +1,15 @@
 import cascioPhoto from "@/assets/artist-cascio.jpg.asset.json";
 import ricardoPhoto from "@/assets/artist-ricardo.jpg.asset.json";
 import braianPhoto from "@/assets/artist-braian.jpg.asset.json";
+import cascio6077 from "@/assets/cascio-6077-edited.jpg.asset.json";
+import cascio6108 from "@/assets/cascio-6108-edited.jpg.asset.json";
+import cascio6155 from "@/assets/cascio-6155-edited.jpg.asset.json";
+import cascio6197 from "@/assets/cascio-6197-edited.jpg.asset.json";
+import cascio6460 from "@/assets/cascio-6460-edited.jpg.asset.json";
+import cascio6509 from "@/assets/cascio-6509-edited.jpg.asset.json";
+import cascio6535 from "@/assets/cascio-6535-edited.jpg.asset.json";
+import cascio7138 from "@/assets/cascio-7138-edited.jpg.asset.json";
+import cascio7147 from "@/assets/cascio-7147-edited.jpg.asset.json";
 
 export const studio = {
   name: "Titans Tattoo Studio",
@@ -85,7 +94,15 @@ export const artists: Artist[] = [
     photo: cascioPhoto.url,
     specialties: ["Realismo", "Preto e cinza", "Cobertura", "Colorido"],
     works: [
-      { src: cascioPhoto.url, alt: "Cascio — realismo e preto e cinza" },
+      { src: cascio6108.url, alt: "Big Ben em preto e cinza tatuado por Cascio" },
+      { src: cascio6155.url, alt: "Tower Bridge em preto e cinza tatuada por Cascio" },
+      { src: cascio6197.url, alt: "Pezinho de bebê em realismo tatuado por Cascio" },
+      { src: cascio6460.url, alt: "Nossa Senhora com flores coloridas tatuada por Cascio" },
+      { src: cascio6509.url, alt: "Pezinho de bebê com nome em preto e cinza tatuado por Cascio" },
+      { src: cascio6535.url, alt: "Águia realista em preto e cinza tatuada por Cascio" },
+      { src: cascio7138.url, alt: "Rosa colorida na mão tatuada por Cascio" },
+      { src: cascio6077.url, alt: "Rapunzel colorida tatuada por Cascio" },
+      { src: cascio7147.url, alt: "Anjo em preto e cinza tatuado por Cascio" },
     ],
   },
   {
@@ -121,12 +138,19 @@ export type PortfolioItem = {
 };
 
 export const portfolio: PortfolioItem[] = [
-  { id: "1", src: cascioPhoto.url, alt: "Cascio — realismo e preto e cinza", style: "Realismo", artist: "Cascio" },
-  { id: "2", src: braianPhoto.url, alt: "Braian — blackwork", style: "Blackwork", artist: "Braian" },
-  { id: "3", src: ricardoPhoto.url, alt: "Ricardo — fine line", style: "Fine line", artist: "Ricardo" },
-  { id: "4", src: cascioPhoto.url, alt: "Cascio — coberturas e colorido", style: "Colorido", artist: "Cascio" },
-  { id: "5", src: braianPhoto.url, alt: "Braian — preto e cinza", style: "Preto e cinza", artist: "Braian" },
-  { id: "6", src: ricardoPhoto.url, alt: "Ricardo — geek e colorido", style: "Geek", artist: "Ricardo" },
+  { id: "cascio-6108", src: cascio6108.url, alt: "Big Ben em preto e cinza tatuado por Cascio", style: "Realismo", artist: "Cascio" },
+  { id: "cascio-6155", src: cascio6155.url, alt: "Tower Bridge em preto e cinza tatuada por Cascio", style: "Realismo", artist: "Cascio" },
+  { id: "cascio-6197", src: cascio6197.url, alt: "Pezinho de bebê em realismo tatuado por Cascio", style: "Fine line", artist: "Cascio" },
+  { id: "cascio-6460", src: cascio6460.url, alt: "Nossa Senhora com flores coloridas tatuada por Cascio", style: "Colorido", artist: "Cascio" },
+  { id: "cascio-6509", src: cascio6509.url, alt: "Pezinho de bebê com nome em preto e cinza tatuado por Cascio", style: "Realismo", artist: "Cascio" },
+  { id: "cascio-6535", src: cascio6535.url, alt: "Águia realista em preto e cinza tatuada por Cascio", style: "Realismo", artist: "Cascio" },
+  { id: "cascio-7138", src: cascio7138.url, alt: "Rosa colorida na mão tatuada por Cascio", style: "Colorido", artist: "Cascio" },
+  { id: "cascio-6077", src: cascio6077.url, alt: "Rapunzel colorida tatuada por Cascio", style: "Colorido", artist: "Cascio" },
+  { id: "cascio-7147", src: cascio7147.url, alt: "Anjo em preto e cinza tatuado por Cascio", style: "Realismo", artist: "Cascio" },
+  { id: "braian-1", src: braianPhoto.url, alt: "Braian — blackwork", style: "Blackwork", artist: "Braian" },
+  { id: "ricardo-1", src: ricardoPhoto.url, alt: "Ricardo — fine line", style: "Fine line", artist: "Ricardo" },
+  { id: "braian-2", src: braianPhoto.url, alt: "Braian — preto e cinza", style: "Preto e cinza", artist: "Braian" },
+  { id: "ricardo-2", src: ricardoPhoto.url, alt: "Ricardo — geek e colorido", style: "Geek", artist: "Ricardo" },
 ];
 
 export const testimonials = [
