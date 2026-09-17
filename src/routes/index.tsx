@@ -36,12 +36,12 @@ function Home() {
           className="absolute inset-0 size-full object-cover opacity-45 grayscale"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30" />
-        <div className="relative mx-auto w-full max-w-6xl px-5 py-24">
+        <div className="relative mx-auto flex w-full max-w-6xl flex-col items-center px-5 py-24 text-center">
           <BrandLogo priority className="mb-10 max-w-sm md:max-w-md" />
           <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
             Canoas/RS · desde {studio.since}
           </p>
-          <h1 className="mt-6 max-w-3xl font-display text-5xl uppercase leading-[0.95] tracking-[0.02em] text-foreground md:text-8xl">
+          <h1 className="mt-6 font-display text-5xl uppercase leading-[0.95] tracking-[0.02em] text-foreground md:text-8xl">
             A sua história
             <br />
             marcada na pele
@@ -50,7 +50,7 @@ function Home() {
             Projeto autoral, execução precisa e um estúdio que trata cada sessão como um
             compromisso sério. Do primeiro rascunho ao retoque final.
           </p>
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Link
               to="/orcamento"
               className="border border-foreground bg-foreground px-7 py-4 text-xs uppercase tracking-[0.22em] text-background transition-opacity hover:opacity-85"
