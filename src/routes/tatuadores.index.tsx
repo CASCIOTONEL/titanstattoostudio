@@ -39,8 +39,8 @@ function ArtistsPage() {
             className="group border border-border/60"
           >
             <img
-              src={artist.works[0]!.src}
-              alt={artist.works[0]!.alt}
+              src={artist.photo}
+              alt={`Retrato do tatuador ${artist.name}`}
               loading="lazy"
               width={912}
               height={1104}

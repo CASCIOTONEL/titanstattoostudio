@@ -55,6 +55,15 @@ function ArtistPage() {
       </h1>
       <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground">{artist.bio}</p>
 
+      <img
+        src={artist.photo}
+        alt={`Retrato do tatuador ${artist.name}`}
+        loading="lazy"
+        width={912}
+        height={1104}
+        className="mt-10 h-[420px] w-full max-w-md border border-border/60 object-cover grayscale md:h-[520px]"
+      />
+
       <div className="mt-8 flex flex-wrap gap-3">
         {artist.specialties.map((s) => (
           <span
