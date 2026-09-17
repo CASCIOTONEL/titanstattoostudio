@@ -4,6 +4,9 @@ import tattoo3 from "@/assets/tattoo-3.jpg";
 import tattoo4 from "@/assets/tattoo-4.jpg";
 import tattoo5 from "@/assets/tattoo-5.jpg";
 import tattoo6 from "@/assets/tattoo-6.jpg";
+import cascioPhoto from "@/assets/artist-cascio.jpg.asset.json";
+import ricardoPhoto from "@/assets/artist-ricardo.jpg.asset.json";
+import braianPhoto from "@/assets/artist-braian.jpg.asset.json";
 
 export const studio = {
   name: "Titans Tattoo Studio",
@@ -74,42 +77,46 @@ export type Artist = {
   name: string;
   role: string;
   bio: string;
+  photo: string;
   specialties: string[];
   works: { src: string; alt: string }[];
 };
 
 export const artists: Artist[] = [
   {
-    slug: "ricardo-vale",
-    name: "Ricardo Vale",
-    role: "Realismo preto e cinza",
-    bio: "Doze anos de estrada, especializado em retratos e animais em preto e cinza. Trabalha com sessões longas e projetos de braço fechado.",
-    specialties: ["Realismo", "Retrato", "Fechamento de braço"],
+    slug: "cascio",
+    name: "Cascio",
+    role: "Realismo e preto e cinza",
+    bio: "Tatuador residente do Titans Tattoo Studio. Trabalha realismo e preto e cinza com sessões longas e acabamento detalhado.",
+    photo: cascioPhoto.url,
+    specialties: ["Realismo", "Preto e cinza", "Ilustrativo"],
     works: [
       { src: tattoo1, alt: "Tatuagem de leão em realismo preto e cinza no antebraço" },
       { src: tattoo5, alt: "Retrato realista tatuado no ombro" },
     ],
   },
   {
-    slug: "helena-cruz",
-    name: "Helena Cruz",
-    role: "Fine line e minimalismo",
-    bio: "Traço fino, composições delicadas e lettering. Atende muito primeiro trabalho e projetos pequenos com acabamento impecável.",
-    specialties: ["Fine line", "Minimalismo", "Lettering"],
+    slug: "ricardo",
+    name: "Ricardo",
+    role: "Blackwork e lettering",
+    bio: "Tatuador residente do Titans Tattoo Studio. Blackwork, lettering e trabalhos coloridos de estilo livre.",
+    photo: ricardoPhoto.url,
+    specialties: ["Blackwork", "Lettering", "Colorido"],
     works: [
-      { src: tattoo2, alt: "Tatuagem fine line de montanhas no braço" },
-      { src: tattoo6, alt: "Lettering delicado tatuado no pulso" },
+      { src: tattoo4, alt: "Tatuagem de cobra e adaga na perna" },
+      { src: tattoo6, alt: "Lettering tatuado no pulso" },
     ],
   },
   {
-    slug: "diego-matos",
-    name: "Diego Matos",
-    role: "Blackwork e ornamental",
-    bio: "Padrões ornamentais, mandalas e blackwork pesado. Especialista em cobertura de trabalhos antigos.",
-    specialties: ["Blackwork", "Ornamental", "Cobertura"],
+    slug: "braian",
+    name: "Braian",
+    role: "Blackwork e fine line",
+    bio: "Tatuador residente do Titans Tattoo Studio. Fine line, blackwork e composições ornamentais de traço fino.",
+    photo: braianPhoto.url,
+    specialties: ["Blackwork", "Fine line", "Ornamental"],
     works: [
+      { src: tattoo2, alt: "Tatuagem fine line de montanhas no braço" },
       { src: tattoo3, alt: "Braço fechado em blackwork ornamental" },
-      { src: tattoo4, alt: "Tatuagem de cobra e adaga na perna" },
     ],
   },
 ];
@@ -123,28 +130,28 @@ export type PortfolioItem = {
 };
 
 export const portfolio: PortfolioItem[] = [
-  { id: "1", src: tattoo1, alt: "Leão em realismo preto e cinza", style: "Realismo", artist: "Ricardo Vale" },
-  { id: "2", src: tattoo3, alt: "Braço fechado ornamental", style: "Blackwork", artist: "Diego Matos" },
-  { id: "3", src: tattoo2, alt: "Montanhas em fine line", style: "Fine line", artist: "Helena Cruz" },
-  { id: "4", src: tattoo5, alt: "Retrato realista no ombro", style: "Realismo", artist: "Ricardo Vale" },
-  { id: "5", src: tattoo4, alt: "Cobra e adaga na perna", style: "Blackwork", artist: "Diego Matos" },
-  { id: "6", src: tattoo6, alt: "Lettering no pulso", style: "Fine line", artist: "Helena Cruz" },
+  { id: "1", src: tattoo1, alt: "Leão em realismo preto e cinza", style: "Realismo", artist: "Cascio" },
+  { id: "2", src: tattoo3, alt: "Braço fechado ornamental", style: "Blackwork", artist: "Braian" },
+  { id: "3", src: tattoo2, alt: "Montanhas em fine line", style: "Fine line", artist: "Braian" },
+  { id: "4", src: tattoo5, alt: "Retrato realista no ombro", style: "Realismo", artist: "Cascio" },
+  { id: "5", src: tattoo4, alt: "Cobra e adaga na perna", style: "Blackwork", artist: "Ricardo" },
+  { id: "6", src: tattoo6, alt: "Lettering no pulso", style: "Lettering", artist: "Ricardo" },
 ];
 
 export const testimonials = [
   {
     name: "Marina L.",
-    text: "Fiz minha primeira tattoo com a Helena e fui tratada com uma paciência absurda. O traço ficou perfeito e a cicatrização foi tranquila.",
+    text: "Fiz minha primeira tattoo com o Braian e fui tratada com uma paciência absurda. O traço ficou perfeito e a cicatrização foi tranquila.",
     service: "Fine line",
   },
   {
     name: "Bruno A.",
-    text: "Cobri uma tatuagem de 15 anos atrás com o Diego. O estúdio é impecável e o resultado passou muito do que eu esperava.",
+    text: "Cobri uma tatuagem de 15 anos atrás com o Ricardo. O estúdio é impecável e o resultado passou muito do que eu esperava.",
     service: "Cobertura",
   },
   {
     name: "Carla S.",
-    text: "Três sessões com o Ricardo para fechar o braço. Organização, horário respeitado e um realismo de outro nível.",
+    text: "Três sessões com o Cascio para fechar o braço. Organização, horário respeitado e um realismo de outro nível.",
     service: "Realismo",
   },
 ];
