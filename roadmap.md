@@ -6,6 +6,7 @@
 - [x] Home (hero, serviços, portfólio, depoimentos, campanhas, CTA)
 - [x] /servicos, /portfolio, /tatuadores, /tatuadores/$slug, /contato, /faq
 - [x] /orcamento com formulário completo (envio via WhatsApp)
+- [ ] Melhorar enquadramento e equalizar contraste das fotos do portfólio do Cascio
 
 ## Etapa 2 — Orçamento + CRM (backend)
 - [ ] Ativar Lovable Cloud, tabelas + RLS
