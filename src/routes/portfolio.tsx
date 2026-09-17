@@ -1,0 +1,115 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { Section, SectionTitle } from "@/components/site/Section";
+import { artists, portfolio } from "@/lib/studio";
+import { cn } from "@/lib/utils";
+
+export const Route = createFileRoute("/portfolio")({
+  head: () => ({
+    meta: [
+      { title: "Portfólio — Titans Tattoo Studio" },
+      {
+        name: "description",
+        content:
+          "Trabalhos do Titans Tattoo Studio em realismo, fine line e blackwork, filtrados por tatuador e estilo.",
+      },
+      { property: "og:title", content: "Portfólio — Titans Tattoo Studio" },
+      {
+        property: "og:description",
+        content: "Realismo, fine line e blackwork feitos pelos tatuadores da Titans.",
+      },
+    ],
+  }),
+  component: PortfolioPage,
+});
+
+const styles = ["Todos", "Realismo", "Fine line", "Blackwork"];
+
+function PortfolioPage() {
+  const [style, setStyle] = useState("Todos");
+  const [artist, setArtist] = useState("Todos");
+
+  const items = portfolio.filter(
+    (item) =>
+      (style === "Todos" || item.style === style) && (artist === "Todos" || item.artist === artist),
+  );
+
+  return (
+    <Section>
+      <SectionTitle
+        eyebrow="Trabalhos"
+        title="Portfólio"
+        description="Filtre por estilo ou por tatuador para encontrar a referência mais próxima da sua ideia."
+      />
+
+      <div className="mt-10 space-y-4">
+        <Filters label="Estilo" options={styles} value={style} onChange={setStyle} />
+        <Filters
+          label="Tatuador"
+          options={["Todos", ...artists.map((a) => a.name)]}
+          value={artist}
+          onChange={setArtist}
+        />
+      </div>
+
+      <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {items.map((item) => (
+          <figure key={item.id} className="group relative overflow-hidden border border-border/60">
+            <img
+              src={item.src}
+              alt={item.alt}
+              loading="lazy"
+              width={912}
+              height={1104}
+              className="h-[420px] w-full object-cover grayscale transition duration-700 group-hover:scale-[1.03]"
+            />
+            <figcaption className="absolute inset-x-0 bottom-0 bg-background/80 px-4 py-3 text-xs uppercase tracking-[0.18em] text-muted-foreground backdrop-blur">
+              {item.style} · {item.artist}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      {items.length === 0 ? (
+        <p className="mt-12 text-sm text-muted-foreground">
+          Nenhum trabalho com esses filtros ainda.
+        </p>
+      ) : null}
+    </Section>
+  );
+}
+
+function Filters({
+  label,
+  options,
+  value,
+  onChange,
+}: {
+  label: string;
+  options: string[];
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  return (
+    <div className="flex flex-wrap items-center gap-3">
+      <span className="w-20 text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
+        {label}
+      </span>
+      {options.map((option) => (
+        <button
+          key={option}
+          type="button"
+          onClick={() => onChange(option)}
+          className={cn(
+            "border px-4 py-2 text-xs uppercase tracking-[0.18em] transition-colors",
+            value === option
+              ? "border-foreground bg-foreground text-background"
+              : "border-border text-muted-foreground hover:text-foreground",
+          )}
+        >
+          {option}
+        </button>
+      ))}
+    </div>
+  );
+}

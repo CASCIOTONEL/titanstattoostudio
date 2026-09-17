@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as ServicosRouteImport } from './routes/servicos'
+import { Route as TatuadoresIndexRouteImport } from './routes/tatuadores.index'
+import { Route as TatuadoresSlugRouteImport } from './routes/tatuadores.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioRoute = PortfolioRouteImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosRoute = ServicosRouteImport.update({
+  id: '/servicos',
+  path: '/servicos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TatuadoresIndexRoute = TatuadoresIndexRouteImport.update({
+  id: '/tatuadores/',
+  path: '/tatuadores/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TatuadoresSlugRoute = TatuadoresSlugRouteImport.update({
+  id: '/tatuadores/$slug',
+  path: '/tatuadores/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contato': typeof ContatoRoute
+  '/faq': typeof FaqRoute
+  '/portfolio': typeof PortfolioRoute
+  '/servicos': typeof ServicosRoute
+  '/tatuadores/$slug': typeof TatuadoresSlugRoute
+  '/tatuadores/': typeof TatuadoresIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contato': typeof ContatoRoute
+  '/faq': typeof FaqRoute
+  '/portfolio': typeof PortfolioRoute
+  '/servicos': typeof ServicosRoute
+  '/tatuadores/$slug': typeof TatuadoresSlugRoute
+  '/tatuadores': typeof TatuadoresIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contato': typeof ContatoRoute
+  '/faq': typeof FaqRoute
+  '/portfolio': typeof PortfolioRoute
+  '/servicos': typeof ServicosRoute
+  '/tatuadores/$slug': typeof TatuadoresSlugRoute
+  '/tatuadores/': typeof TatuadoresIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/contato'
+    | '/faq'
+    | '/portfolio'
+    | '/servicos'
+    | '/tatuadores/$slug'
+    | '/tatuadores/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/contato'
+    | '/faq'
+    | '/portfolio'
+    | '/servicos'
+    | '/tatuadores/$slug'
+    | '/tatuadores'
+  id:
+    | '__root__'
+    | '/'
+    | '/contato'
+    | '/faq'
+    | '/portfolio'
+    | '/servicos'
+    | '/tatuadores/$slug'
+    | '/tatuadores/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContatoRoute: typeof ContatoRoute
+  FaqRoute: typeof FaqRoute
+  PortfolioRoute: typeof PortfolioRoute
+  ServicosRoute: typeof ServicosRoute
+  TatuadoresSlugRoute: typeof TatuadoresSlugRoute
+  TatuadoresIndexRoute: typeof TatuadoresIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio': {
+      id: '/portfolio'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos': {
+      id: '/servicos'
+      path: '/servicos'
+      fullPath: '/servicos'
+      preLoaderRoute: typeof ServicosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tatuadores/': {
+      id: '/tatuadores/'
+      path: '/tatuadores'
+      fullPath: '/tatuadores/'
+      preLoaderRoute: typeof TatuadoresIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tatuadores/$slug': {
+      id: '/tatuadores/$slug'
+      path: '/tatuadores/$slug'
+      fullPath: '/tatuadores/$slug'
+      preLoaderRoute: typeof TatuadoresSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContatoRoute: ContatoRoute,
+  FaqRoute: FaqRoute,
+  PortfolioRoute: PortfolioRoute,
+  ServicosRoute: ServicosRoute,
+  TatuadoresSlugRoute: TatuadoresSlugRoute,
+  TatuadoresIndexRoute: TatuadoresIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
