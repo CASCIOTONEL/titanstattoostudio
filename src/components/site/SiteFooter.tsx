@@ -26,16 +26,35 @@ export function SiteFooter() {
         <div className="space-y-2 text-sm text-muted-foreground">
           <p className="mb-4 text-xs uppercase tracking-[0.22em] text-foreground">Contato</p>
           <p>{studio.address}</p>
+          <p>{studio.cep}</p>
           <p>{studio.phoneDisplay}</p>
           <p>{studio.email}</p>
-          <p>{studio.instagram}</p>
+          <p>
+            <a
+              href={`https://instagram.com/${studio.instagram.replace("@", "")}`}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-foreground"
+            >
+              Instagram {studio.instagram}
+            </a>
+          </p>
+          <p>
+            <a
+              href="https://facebook.com/titanstattoo"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-foreground"
+            >
+              Facebook {studio.facebook}
+            </a>
+          </p>
         </div>
       </div>
 
       <div className="border-t border-border/60 px-5 py-6">
         <p className="mx-auto max-w-6xl text-xs text-muted-foreground">
-          © {new Date().getFullYear()} {studio.name}. Conteúdo de exemplo — dados, fotos e
-          endereço serão substituídos pelo material oficial do estúdio.
+          © {new Date().getFullYear()} {studio.name} · Canoas/RS · desde {studio.since}
         </p>
       </div>
     </footer>

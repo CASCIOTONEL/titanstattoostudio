@@ -7,13 +7,13 @@ import { artists, campaigns, portfolio, services, studio, testimonials, whatsapp
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Titans Tattoo Studio — Tatuagem autoral em São Paulo" },
+      { title: "Titans Tattoo Studio — Tatuagem autoral em Canoas/RS" },
       {
         name: "description",
         content:
-          "Estúdio de tatuagem, cobertura, remoção a laser e piercing. Projeto autoral, biossegurança e agenda com hora marcada.",
+          "Estúdio de tatuagem, cobertura, remoção a laser e piercing em Canoas/RS. Projeto autoral, biossegurança e agenda com hora marcada.",
       },
-      { property: "og:title", content: "Titans Tattoo Studio — Tatuagem autoral" },
+      { property: "og:title", content: "Titans Tattoo Studio — Tatuagem autoral em Canoas/RS" },
       {
         property: "og:description",
         content: "Tattoo, cobertura, remoção a laser e piercing com artistas residentes.",
@@ -39,7 +39,7 @@ function Home() {
         <div className="relative mx-auto w-full max-w-6xl px-5 py-24">
           <BrandLogo priority className="mb-10 max-w-sm md:max-w-md" />
           <p className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
-            São Paulo · desde 2014
+            Canoas/RS · desde {studio.since}
           </p>
           <h1 className="mt-6 max-w-3xl font-display text-5xl uppercase leading-[0.95] tracking-[0.02em] text-foreground md:text-8xl">
             A sua história
