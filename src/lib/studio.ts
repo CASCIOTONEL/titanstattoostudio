@@ -86,10 +86,10 @@ export const artists: Artist[] = [
   {
     slug: "cascio",
     name: "Cascio",
-    role: "Realismo e preto e cinza",
-    bio: "Tatuador residente do Titans Tattoo Studio. Trabalha realismo e preto e cinza com sessões longas e acabamento detalhado.",
+    role: "Realismo, preto e cinza e coberturas",
+    bio: "Tatuador residente do Titans Tattoo Studio. Realismo e preto e cinza, com coberturas e trabalhos coloridos.",
     photo: cascioPhoto.url,
-    specialties: ["Realismo", "Preto e cinza", "Ilustrativo"],
+    specialties: ["Realismo", "Preto e cinza", "Cobertura", "Colorido"],
     works: [
       { src: tattoo1, alt: "Tatuagem de leão em realismo preto e cinza no antebraço" },
       { src: tattoo5, alt: "Retrato realista tatuado no ombro" },
@@ -98,25 +98,25 @@ export const artists: Artist[] = [
   {
     slug: "ricardo",
     name: "Ricardo",
-    role: "Blackwork e lettering",
-    bio: "Tatuador residente do Titans Tattoo Studio. Blackwork, lettering e trabalhos coloridos de estilo livre.",
+    role: "Blackwork, fine line, geek e colorido",
+    bio: "Tatuador residente do Titans Tattoo Studio. Blackwork, fine line, temas geek e trabalhos coloridos.",
     photo: ricardoPhoto.url,
-    specialties: ["Blackwork", "Lettering", "Colorido"],
+    specialties: ["Blackwork", "Fine line", "Geek", "Colorido"],
     works: [
-      { src: tattoo4, alt: "Tatuagem de cobra e adaga na perna" },
+      { src: tattoo2, alt: "Tatuagem fine line de montanhas no braço" },
       { src: tattoo6, alt: "Lettering tatuado no pulso" },
     ],
   },
   {
     slug: "braian",
     name: "Braian",
-    role: "Blackwork e fine line",
-    bio: "Tatuador residente do Titans Tattoo Studio. Fine line, blackwork e composições ornamentais de traço fino.",
+    role: "Preto e cinza, blackwork e fine line",
+    bio: "Tatuador residente do Titans Tattoo Studio. Preto e cinza, blackwork, fine line e trabalhos coloridos.",
     photo: braianPhoto.url,
-    specialties: ["Blackwork", "Fine line", "Ornamental"],
+    specialties: ["Preto e cinza", "Blackwork", "Fine line", "Colorido"],
     works: [
-      { src: tattoo2, alt: "Tatuagem fine line de montanhas no braço" },
       { src: tattoo3, alt: "Braço fechado em blackwork ornamental" },
+      { src: tattoo4, alt: "Tatuagem de cobra e adaga na perna" },
     ],
   },
 ];
@@ -132,9 +132,9 @@ export type PortfolioItem = {
 export const portfolio: PortfolioItem[] = [
   { id: "1", src: tattoo1, alt: "Leão em realismo preto e cinza", style: "Realismo", artist: "Cascio" },
   { id: "2", src: tattoo3, alt: "Braço fechado ornamental", style: "Blackwork", artist: "Braian" },
-  { id: "3", src: tattoo2, alt: "Montanhas em fine line", style: "Fine line", artist: "Braian" },
+  { id: "3", src: tattoo2, alt: "Montanhas em fine line", style: "Fine line", artist: "Ricardo" },
   { id: "4", src: tattoo5, alt: "Retrato realista no ombro", style: "Realismo", artist: "Cascio" },
-  { id: "5", src: tattoo4, alt: "Cobra e adaga na perna", style: "Blackwork", artist: "Ricardo" },
+  { id: "5", src: tattoo4, alt: "Cobra e adaga na perna", style: "Blackwork", artist: "Braian" },
   { id: "6", src: tattoo6, alt: "Lettering no pulso", style: "Lettering", artist: "Ricardo" },
 ];
 
@@ -146,7 +146,7 @@ export const testimonials = [
   },
   {
     name: "Bruno A.",
-    text: "Cobri uma tatuagem de 15 anos atrás com o Ricardo. O estúdio é impecável e o resultado passou muito do que eu esperava.",
+    text: "Cobri uma tatuagem de 15 anos atrás com o Cascio. O estúdio é impecável e o resultado passou muito do que eu esperava.",
     service: "Cobertura",
   },
   {
