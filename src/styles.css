@@ -19,7 +19,10 @@
  */
 
 @theme inline {
+  --font-sans: "Barlow", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Oswald", "Barlow Condensed", ui-sans-serif, sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
+
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
@@ -141,5 +144,19 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+  }
+
+  ::selection {
+    background: var(--color-foreground);
+    color: var(--color-background);
   }
 }
+
