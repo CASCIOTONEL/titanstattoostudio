@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as OrcamentoRouteImport } from './routes/orcamento'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as TatuadoresIndexRouteImport } from './routes/tatuadores.index'
@@ -30,6 +31,11 @@ const ContatoRoute = ContatoRouteImport.update({
 const FaqRoute = FaqRouteImport.update({
   id: '/faq',
   path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrcamentoRoute = OrcamentoRouteImport.update({
+  id: '/orcamento',
+  path: '/orcamento',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PortfolioRoute = PortfolioRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
+  '/orcamento': typeof OrcamentoRoute
   '/portfolio': typeof PortfolioRoute
   '/servicos': typeof ServicosRoute
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
+  '/orcamento': typeof OrcamentoRoute
   '/portfolio': typeof PortfolioRoute
   '/servicos': typeof ServicosRoute
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
+  '/orcamento': typeof OrcamentoRoute
   '/portfolio': typeof PortfolioRoute
   '/servicos': typeof ServicosRoute
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contato'
     | '/faq'
+    | '/orcamento'
     | '/portfolio'
     | '/servicos'
     | '/tatuadores/$slug'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contato'
     | '/faq'
+    | '/orcamento'
     | '/portfolio'
     | '/servicos'
     | '/tatuadores/$slug'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contato'
     | '/faq'
+    | '/orcamento'
     | '/portfolio'
     | '/servicos'
     | '/tatuadores/$slug'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContatoRoute: typeof ContatoRoute
   FaqRoute: typeof FaqRoute
+  OrcamentoRoute: typeof OrcamentoRoute
   PortfolioRoute: typeof PortfolioRoute
   ServicosRoute: typeof ServicosRoute
   TatuadoresSlugRoute: typeof TatuadoresSlugRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/faq'
       fullPath: '/faq'
       preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/orcamento': {
+      id: '/orcamento'
+      path: '/orcamento'
+      fullPath: '/orcamento'
+      preLoaderRoute: typeof OrcamentoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/portfolio': {
@@ -179,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContatoRoute: ContatoRoute,
   FaqRoute: FaqRoute,
+  OrcamentoRoute: OrcamentoRoute,
   PortfolioRoute: PortfolioRoute,
   ServicosRoute: ServicosRoute,
   TatuadoresSlugRoute: TatuadoresSlugRoute,
