@@ -78,7 +78,6 @@ function AuthPage() {
         </div>
 
         {error ? <p role="alert" className="text-sm text-destructive">{error}</p> : null}
-        {message ? <p className="text-sm text-muted-foreground">{message}</p> : null}
 
         <div className="flex flex-wrap items-center gap-5">
           <button
@@ -86,18 +85,7 @@ function AuthPage() {
             disabled={loading}
             className="border border-foreground/80 px-7 py-4 text-xs uppercase tracking-[0.22em] transition-colors hover:bg-foreground hover:text-background disabled:opacity-50"
           >
-            {loading ? "Aguarde..." : mode === "entrar" ? "Entrar" : "Criar acesso"}
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setMode(mode === "entrar" ? "criar" : "entrar");
-              setError(null);
-              setMessage(null);
-            }}
-            className="text-xs uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-foreground"
-          >
-            {mode === "entrar" ? "Criar acesso da equipe" : "Já tenho acesso"}
+            {loading ? "Aguarde..." : "Entrar"}
           </button>
         </div>
       </form>
