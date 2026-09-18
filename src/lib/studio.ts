@@ -4,6 +4,7 @@ import braianPhoto from "@/assets/artist-braian.jpg.asset.json";
 import remocaoLaserPhoto from "@/assets/servico-remocao-laser.jpg.asset.json";
 import piercingPhoto from "@/assets/servico-piercing.jpg.asset.json";
 import tattooPhoto from "@/assets/servico-tattoo.jpg.asset.json";
+import coberturaPhoto from "@/assets/servico-cobertura.jpg.asset.json";
 
 export const studio = {
   name: "Titans Tattoo Studio",
@@ -52,6 +53,7 @@ export const services: Service[] = [
     description:
       "Avaliamos a pele, a densidade do pigmento antigo e propomos o caminho certo: cobertura completa, reforço ou clareamento prévio a laser antes de cobrir.",
     points: ["Avaliação presencial", "Plano em etapas", "Clareamento quando necessário"],
+    image: coberturaPhoto.url,
   },
   {
     slug: "remocao-laser",
