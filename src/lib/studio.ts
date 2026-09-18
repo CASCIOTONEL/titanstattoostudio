@@ -47,6 +47,14 @@ import cascioAguia from "@/assets/cascio-D476582A-0E20-42F0-AF92-87DA5210A7D0.pn
 import cascioOrquideas from "@/assets/cascio-DD9C8D6E-66BF-4A56-8D96-0A09068A1957.png.asset.json";
 import cascioMulher from "@/assets/cascio-F5F0F516-00C9-4FB7-B56F-F7C679395AF2.png.asset.json";
 import cascioMerida from "@/assets/cascio-IMG_5402.jpeg.asset.json";
+import ricardoGanesha from "@/assets/ricardo-ganesha.jpg.asset.json";
+import ricardoTartaruga from "@/assets/ricardo-tartaruga.jpg.asset.json";
+import ricardoArcanjo from "@/assets/ricardo-arcanjo.jpg.asset.json";
+import ricardoMarioPatch from "@/assets/ricardo-mario-patch.jpg.asset.json";
+import ricardoCabraPatch from "@/assets/ricardo-cabra-patch.jpg.asset.json";
+import ricardoMinniePatch from "@/assets/ricardo-minnie-patch.jpg.asset.json";
+import ricardoJigglypuffPatch from "@/assets/ricardo-jigglypuff-patch.jpg.asset.json";
+import ricardoAnimeBlackwork from "@/assets/ricardo-anime-blackwork.jpg.asset.json";
 
 export const studio = {
   name: "Titans Tattoo Studio",
@@ -166,12 +174,19 @@ export const artists: Artist[] = [
   {
     slug: "ricardo",
     name: "Ricardo",
-    role: "Blackwork, fine line, geek e colorido",
-    bio: "Tatuador residente do Titans Tattoo Studio. Blackwork, fine line, temas geek e trabalhos coloridos.",
+    role: "Blackwork, fine line, realismo, geek e patch tattoo",
+    bio: "Tatuador residente do Titans Tattoo Studio com trabalhos em blackwork, fine line, realismo e micro-realismo, preto e cinza, anime e geek, além de projetos coloridos em patch tattoo com efeito de bordado.",
     photo: ricardoPhoto.url,
-    specialties: ["Blackwork", "Fine line", "Geek", "Colorido"],
+    specialties: ["Blackwork", "Fine line", "Realismo", "Micro-realismo", "Preto e cinza", "Geek", "Anime", "Colorido", "Patch tattoo"],
     works: [
-      { src: ricardoPhoto.url, alt: "Ricardo — blackwork e fine line" },
+      { src: ricardoGanesha.url, alt: "Tatuagem de Ganesha em preto e cinza por Ricardo" },
+      { src: ricardoTartaruga.url, alt: "Tatuagem fine line de tartaruga por Ricardo" },
+      { src: ricardoArcanjo.url, alt: "Tatuagem realista de arcanjo por Ricardo" },
+      { src: ricardoMarioPatch.url, alt: "Tatuagem patch colorida do Mario por Ricardo" },
+      { src: ricardoCabraPatch.url, alt: "Tatuagem patch colorida de cabra por Ricardo" },
+      { src: ricardoMinniePatch.url, alt: "Tatuagem patch colorida da Minnie por Ricardo" },
+      { src: ricardoJigglypuffPatch.url, alt: "Tatuagem patch colorida do Jigglypuff por Ricardo" },
+      { src: ricardoAnimeBlackwork.url, alt: "Tatuagem anime em blackwork por Ricardo" },
     ],
   },
   {
@@ -237,7 +252,14 @@ export const portfolio: PortfolioItem[] = [
   { id: "cascio-orquideas", src: cascioOrquideas.url, alt: "Tatuagem realista colorida de orquídeas", style: "Colorido", artist: "Cascio" },
   { id: "cascio-mulher", src: cascioMulher.url, alt: "Tatuagem realista de mulher", style: "Preto e cinza", artist: "Cascio" },
   { id: "cascio-merida", src: cascioMerida.url, alt: "Tatuagem colorida da Merida", style: "Geek", artist: "Cascio" },
-  { id: "ricardo", src: ricardoPhoto.url, alt: "Retrato do tatuador Ricardo", style: "Blackwork", artist: "Ricardo" },
+  { id: "ricardo-ganesha", src: ricardoGanesha.url, alt: "Tatuagem de Ganesha em preto e cinza", style: "Preto e cinza", artist: "Ricardo" },
+  { id: "ricardo-tartaruga", src: ricardoTartaruga.url, alt: "Tatuagem fine line de tartaruga", style: "Fine line", artist: "Ricardo" },
+  { id: "ricardo-arcanjo", src: ricardoArcanjo.url, alt: "Tatuagem realista de arcanjo", style: "Realismo", artist: "Ricardo" },
+  { id: "ricardo-mario-patch", src: ricardoMarioPatch.url, alt: "Tatuagem patch colorida do Mario", style: "Patch tattoo", artist: "Ricardo" },
+  { id: "ricardo-cabra-patch", src: ricardoCabraPatch.url, alt: "Tatuagem patch colorida de cabra", style: "Patch tattoo", artist: "Ricardo" },
+  { id: "ricardo-minnie-patch", src: ricardoMinniePatch.url, alt: "Tatuagem patch colorida da Minnie", style: "Patch tattoo", artist: "Ricardo" },
+  { id: "ricardo-jigglypuff-patch", src: ricardoJigglypuffPatch.url, alt: "Tatuagem patch colorida do Jigglypuff", style: "Patch tattoo", artist: "Ricardo" },
+  { id: "ricardo-anime-blackwork", src: ricardoAnimeBlackwork.url, alt: "Tatuagem anime em blackwork", style: "Blackwork", artist: "Ricardo" },
   { id: "braian-5722", src: braian5722.url, alt: "Tatuagem realista de cachorro no braço", style: "Realismo", artist: "Braian" },
   { id: "braian-6634", src: braian6634.url, alt: "Retrato realista de cachorro no antebraço", style: "Realismo", artist: "Braian" },
   { id: "braian-8589", src: braian8589.url, alt: "Tatuagem colorida de dragão", style: "Colorido", artist: "Braian" },
