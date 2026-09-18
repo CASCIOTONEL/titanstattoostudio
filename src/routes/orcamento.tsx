@@ -80,7 +80,7 @@ function OrcamentoPage() {
     setPreviews(list.map((f) => URL.createObjectURL(f)));
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const raw = Object.fromEntries(form.entries());
@@ -95,6 +95,7 @@ function OrcamentoPage() {
       return;
     }
     setError(null);
+    setSaving(true);
     const d = parsed.data;
 
     const linhas = [
@@ -115,8 +116,46 @@ function OrcamentoPage() {
     ];
 
     const link = whatsappLink(linhas.join("\n"));
-    window.open(link, "_blank", "noopener");
-    setSent({ nome: d.nome, link });
+    const janela = window.open(link, "_blank", "noopener");
+
+    try {
+      const pasta = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+      const caminhos: string[] = [];
+      for (const [i, file] of files.entries()) {
+        const ext = file.name.split(".").pop()?.toLowerCase() ?? "jpg";
+        const path = `${pasta}/${i + 1}.${ext}`;
+        const { error: upErr } = await supabase.storage.from("referencias").upload(path, file, {
+          contentType: file.type || "image/jpeg",
+        });
+        if (!upErr) caminhos.push(path);
+      }
+
+      const { error: insertError } = await supabase.from("leads").insert({
+        nome: d.nome,
+        whatsapp: d.whatsapp,
+        email: d.email || null,
+        endereco: d.endereco,
+        servico: d.servico,
+        ideia: d.ideia,
+        largura_cm: d.largura,
+        altura_cm: d.altura,
+        local_corpo: d.local,
+        cor: d.cor,
+        tipo: d.tipo,
+        tatuador: d.tatuador,
+        disponibilidade: d.disponibilidade || null,
+        referencias: caminhos,
+      });
+      if (insertError) throw insertError;
+    } catch (err) {
+      console.error("Falha ao salvar o orçamento", err);
+    } finally {
+      setSaving(false);
+      if (!janela) {
+        // pop-up bloqueado: a tela de confirmação oferece o link novamente
+      }
+      setSent({ nome: d.nome, link });
+    }
   }
 
   if (sent) {

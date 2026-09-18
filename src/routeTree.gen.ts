@@ -10,17 +10,29 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as OrcamentoRouteImport } from './routes/orcamento'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as ServicosRouteImport } from './routes/servicos'
+import { Route as AuthenticatedOrcamentosRouteImport } from './routes/_authenticated/orcamentos'
 import { Route as TatuadoresIndexRouteImport } from './routes/tatuadores.index'
 import { Route as TatuadoresSlugRouteImport } from './routes/tatuadores.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContatoRoute = ContatoRouteImport.update({
@@ -48,6 +60,11 @@ const ServicosRoute = ServicosRouteImport.update({
   path: '/servicos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedOrcamentosRoute = AuthenticatedOrcamentosRouteImport.update({
+  id: '/orcamentos',
+  path: '/orcamentos',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const TatuadoresIndexRoute = TatuadoresIndexRouteImport.update({
   id: '/tatuadores/',
   path: '/tatuadores/',
@@ -61,32 +78,39 @@ const TatuadoresSlugRoute = TatuadoresSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
   '/orcamento': typeof OrcamentoRoute
   '/portfolio': typeof PortfolioRoute
   '/servicos': typeof ServicosRoute
+  '/orcamentos': typeof AuthenticatedOrcamentosRoute
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
   '/tatuadores/': typeof TatuadoresIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
   '/orcamento': typeof OrcamentoRoute
   '/portfolio': typeof PortfolioRoute
   '/servicos': typeof ServicosRoute
+  '/orcamentos': typeof AuthenticatedOrcamentosRoute
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
   '/tatuadores': typeof TatuadoresIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
   '/orcamento': typeof OrcamentoRoute
   '/portfolio': typeof PortfolioRoute
   '/servicos': typeof ServicosRoute
+  '/_authenticated/orcamentos': typeof AuthenticatedOrcamentosRoute
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
   '/tatuadores/': typeof TatuadoresIndexRoute
 }
@@ -94,37 +118,46 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/contato'
     | '/faq'
     | '/orcamento'
     | '/portfolio'
     | '/servicos'
+    | '/orcamentos'
     | '/tatuadores/$slug'
     | '/tatuadores/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/contato'
     | '/faq'
     | '/orcamento'
     | '/portfolio'
     | '/servicos'
+    | '/orcamentos'
     | '/tatuadores/$slug'
     | '/tatuadores'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
+    | '/auth'
     | '/contato'
     | '/faq'
     | '/orcamento'
     | '/portfolio'
     | '/servicos'
+    | '/_authenticated/orcamentos'
     | '/tatuadores/$slug'
     | '/tatuadores/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   ContatoRoute: typeof ContatoRoute
   FaqRoute: typeof FaqRoute
   OrcamentoRoute: typeof OrcamentoRoute
@@ -141,6 +174,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contato': {
@@ -178,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/orcamentos': {
+      id: '/_authenticated/orcamentos'
+      path: '/orcamentos'
+      fullPath: '/orcamentos'
+      preLoaderRoute: typeof AuthenticatedOrcamentosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/tatuadores/': {
       id: '/tatuadores/'
       path: '/tatuadores'
@@ -195,8 +249,21 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedOrcamentosRoute: typeof AuthenticatedOrcamentosRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedOrcamentosRoute: AuthenticatedOrcamentosRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   ContatoRoute: ContatoRoute,
   FaqRoute: FaqRoute,
   OrcamentoRoute: OrcamentoRoute,
