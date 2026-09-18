@@ -2,6 +2,8 @@ import cascioPhoto from "@/assets/artist-cascio.jpg.asset.json";
 import ricardoPhoto from "@/assets/artist-ricardo.jpg.asset.json";
 import braianPhoto from "@/assets/artist-braian.jpg.asset.json";
 import remocaoLaserPhoto from "@/assets/servico-remocao-laser.jpg.asset.json";
+import piercingPhoto from "@/assets/servico-piercing.jpg.asset.json";
+import tattooPhoto from "@/assets/servico-tattoo.jpg.asset.json";
 
 export const studio = {
   name: "Titans Tattoo Studio",
@@ -41,6 +43,7 @@ export const services: Service[] = [
     description:
       "Do primeiro rascunho à sessão final. Desenvolvemos o projeto junto com você, ajustamos tamanho e posicionamento no corpo e executamos com material descartável e equipamento profissional.",
     points: ["Projeto autoral", "Sessões de 1h a 8h", "Orçamento sem compromisso"],
+    image: tattooPhoto.url,
   },
   {
     slug: "cobertura",
@@ -66,6 +69,7 @@ export const services: Service[] = [
     description:
       "Perfurações de orelha, corpo e face com técnica asséptica, joias de titânio ASTM F-136 e orientação completa de cicatrização.",
     points: ["Titânio implant grade", "Sala esterilizada", "Acompanhamento da troca"],
+    image: piercingPhoto.url,
   },
 ];
 
