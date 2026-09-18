@@ -53,9 +53,12 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-border/60 px-5 py-6">
-        <p className="mx-auto max-w-6xl text-xs text-muted-foreground">
-          © {new Date().getFullYear()} {studio.name} · Canoas/RS · desde {studio.since}
-        </p>
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
+          <p>© {new Date().getFullYear()} {studio.name} · Canoas/RS · desde {studio.since}</p>
+          <Link to="/orcamentos" className="transition-colors hover:text-foreground">
+            Área do estúdio
+          </Link>
+        </div>
       </div>
     </footer>
   );
