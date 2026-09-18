@@ -80,8 +80,8 @@ export const studio = {
   instagram: "@titanstattoostudio",
   facebook: "titans tattoo",
   hours: [
-    { day: "Segunda a sexta", time: "11h às 20h" },
-    { day: "Sábado", time: "10h às 18h" },
+    { day: "Segunda a sexta", time: "10h às 19h" },
+    { day: "Sábado", time: "10h às 17h" },
     { day: "Domingo", time: "Fechado" },
   ],
 };
