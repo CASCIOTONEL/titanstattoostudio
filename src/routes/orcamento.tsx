@@ -289,6 +289,10 @@ function OrcamentoPage() {
             Ou fale direto: {studio.phoneDisplay}
           </p>
         </div>
+
+        <p className="md:col-span-2 mt-2 border-t border-border pt-6 text-sm text-muted-foreground">
+          Após enviar as informações acima, a loja entra em contato com o orçamento em até <span className="text-foreground">24 horas</span>.
+        </p>
       </form>
     </Section>
   );
