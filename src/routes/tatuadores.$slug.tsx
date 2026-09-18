@@ -45,7 +45,8 @@ export const Route = createFileRoute("/tatuadores/$slug")({
 
 function ArtistPage() {
   const { slug } = Route.useParams();
-  const artist = artists.find((a) => a.slug === slug)!;
+  const artist = artists.find((a) => a.slug === slug);
+  if (!artist) return null;
 
   return (
     <Section>
@@ -61,7 +62,7 @@ function ArtistPage() {
         loading="lazy"
         width={912}
         height={1104}
-        className={`mt-10 h-[420px] w-full max-w-md border border-border/60 object-cover md:h-[520px] ${artist.slug === "braian" ? "object-center" : "object-top"}`}
+        className={`mt-10 h-[420px] w-full max-w-md grayscale border border-border/60 object-cover transition duration-700 hover:grayscale-0 md:h-[520px] ${artist.slug === "braian" ? "object-center" : "object-top"}`}
       />
 
       <div className="mt-8 flex flex-wrap gap-3">
@@ -84,7 +85,7 @@ function ArtistPage() {
             loading="lazy"
             width={912}
             height={1104}
-            className={`h-[460px] w-full border border-border/60 object-cover ${artist.slug === "braian" ? "object-center" : "object-top"}`}
+            className={`h-[460px] w-full grayscale border border-border/60 object-cover transition duration-700 hover:grayscale-0 ${artist.slug === "braian" ? "object-center" : "object-top"}`}
           />
         ))}
       </div>
