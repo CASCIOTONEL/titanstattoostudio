@@ -15,6 +15,8 @@
 - [x] Ativar Lovable Cloud, tabelas + RLS
 - [x] Salvar leads e upload de referências
 - [x] Aba /orcamentos (área do estúdio, acesso único titans.tattoo@gmail.com)
+- [x] Novos orçamentos aparecem em tempo real na aba /orcamentos
+- [ ] Aviso automático no WhatsApp do estúdio (5551991786170) a cada novo orçamento — retomar DEPOIS de definir o domínio do site (exige conectar WhatsApp Business)
 - [ ] Funil/kanban de atendimento no /admin
 
 ## Etapa 3 — Agenda
