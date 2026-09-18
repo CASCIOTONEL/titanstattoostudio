@@ -14,7 +14,7 @@
 ## Etapa 2 — Orçamento + CRM (backend)
 - [x] Ativar Lovable Cloud, tabelas + RLS
 - [x] Salvar leads e upload de referências
-- [x] Aba /orcamentos (área do estúdio, login por e-mail e senha)
+- [x] Aba /orcamentos (área do estúdio, acesso único titans.tattoo@gmail.com)
 - [ ] Funil/kanban de atendimento no /admin
 
 ## Etapa 3 — Agenda
