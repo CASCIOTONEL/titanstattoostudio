@@ -50,7 +50,12 @@ function AuthPage() {
         if (data.session) {
           await navigate({ to: "/orcamentos" });
         } else {
-          setMessage("Conta criada. Confirme o e-mail pelo link que enviamos e depois entre.");
+          const { error: signInError } = await supabase.auth.signInWithPassword({
+            email,
+            password: senha,
+          });
+          if (signInError) throw signInError;
+          await navigate({ to: "/orcamentos" });
         }
       }
     } catch (err) {
