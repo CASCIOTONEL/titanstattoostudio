@@ -53,6 +53,7 @@ export const services: Service[] = [
     description:
       "Avaliamos a pele, a densidade do pigmento antigo e propomos o caminho certo: cobertura completa, reforço ou clareamento prévio a laser antes de cobrir.",
     points: ["Avaliação presencial", "Plano em etapas", "Clareamento quando necessário"],
+    image: coberturaPhoto.url,
   },
   {
     slug: "remocao-laser",
