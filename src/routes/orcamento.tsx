@@ -322,9 +322,10 @@ function OrcamentoPage() {
         <div className="md:col-span-2 flex flex-wrap items-center gap-4">
           <button
             type="submit"
-            className="border border-foreground/80 px-7 py-4 text-xs uppercase tracking-[0.22em] transition-colors hover:bg-foreground hover:text-background"
+            disabled={saving}
+            className="border border-foreground/80 px-7 py-4 text-xs uppercase tracking-[0.22em] transition-colors hover:bg-foreground hover:text-background disabled:opacity-50"
           >
-            Enviar pelo WhatsApp
+            {saving ? "Enviando..." : "Enviar pelo WhatsApp"}
           </button>
           <p className="text-xs text-muted-foreground">
             Ou fale direto: {studio.phoneDisplay}
