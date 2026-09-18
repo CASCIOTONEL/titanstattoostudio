@@ -23,36 +23,21 @@ const labelClass = "mb-2 block text-[11px] uppercase tracking-[0.22em] text-mute
 
 function AuthPage() {
   const navigate = useNavigate();
-  const [mode, setMode] = useState<"entrar" | "criar">("entrar");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("titans.tattoo@gmail.com");
   const [senha, setSenha] = useState("");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     setError(null);
-    setMessage(null);
     setLoading(true);
     try {
-      if (mode === "entrar") {
-        const { error } = await supabase.auth.signInWithPassword({ email, password: senha });
-        if (error) throw error;
-        await navigate({ to: "/orcamentos" });
-      } else {
-        const { error } = await supabase.auth.signUp({
-          email,
-          password: senha,
-          options: { emailRedirectTo: `${window.location.origin}/orcamentos` },
-        });
-        if (error) throw error;
-        setMessage(
-          "Conta criada! Enviamos um link de confirmação para o seu e-mail. Abra o link para ativar o acesso à Área do estúdio.",
-        );
-      }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Não foi possível concluir. Tente novamente.");
+      const { error } = await supabase.auth.signInWithPassword({ email, password: senha });
+      if (error) throw error;
+      await navigate({ to: "/orcamentos" });
+    } catch {
+      setError("E-mail ou senha incorretos.");
     } finally {
       setLoading(false);
     }
