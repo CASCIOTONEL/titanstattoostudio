@@ -55,14 +55,30 @@ function PortfolioPage() {
         description="Filtre por estilo ou por tatuador para encontrar a referência mais próxima da sua ideia."
       />
 
-      <div className="mt-10 space-y-4">
+      <div className="mt-10 border-b border-border/60">
+        <div className="flex flex-wrap gap-x-8 gap-y-2" role="tablist" aria-label="Tatuadores">
+          {["Todos", ...artists.map((a) => a.name)].map((name) => (
+            <button
+              key={name}
+              type="button"
+              role="tab"
+              aria-selected={artist === name}
+              onClick={() => setArtist(name)}
+              className={cn(
+                "relative pb-3 font-display text-sm uppercase tracking-[0.22em] transition-colors md:text-base",
+                artist === name
+                  ? "text-foreground after:absolute after:inset-x-0 after:bottom-[-1px] after:h-px after:bg-foreground"
+                  : "text-muted-foreground hover:text-foreground",
+              )}
+            >
+              {name}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-8">
         <Filters label="Estilo" options={styles} value={style} onChange={setStyle} />
-        <Filters
-          label="Tatuador"
-          options={["Todos", ...artists.map((a) => a.name)]}
-          value={artist}
-          onChange={setArtist}
-        />
       </div>
 
       <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
