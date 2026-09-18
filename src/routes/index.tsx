@@ -117,7 +117,7 @@ function Home() {
                 loading="lazy"
                 width={912}
                 height={1104}
-                className={`h-96 w-full object-cover transition duration-700 group-hover:scale-[1.04] ${item.artist === "Braian" ? "object-center" : "object-top"}`}
+                className={`h-96 w-full grayscale object-cover transition duration-700 group-hover:scale-[1.04] group-hover:grayscale-0 ${item.artist === "Braian" ? "object-center" : "object-top"}`}
               />
             </figure>
           ))}
@@ -147,7 +147,7 @@ function Home() {
                 loading="lazy"
                 width={912}
                 height={1104}
-                className={`h-72 w-full object-cover transition duration-700 group-hover:scale-[1.02] ${artist.slug === "braian" ? "object-center" : "object-top"}`}
+                className={`h-72 w-full grayscale object-cover transition duration-700 group-hover:scale-[1.02] group-hover:grayscale-0 ${artist.slug === "braian" ? "object-center" : "object-top"}`}
               />
               <div className="p-6">
                 <h3 className="font-display text-lg uppercase tracking-[0.08em]">{artist.name}</h3>
