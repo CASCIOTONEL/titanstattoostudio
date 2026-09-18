@@ -85,7 +85,7 @@ function ArtistPage() {
             loading="lazy"
             width={912}
             height={1104}
-            className={`h-[460px] w-full grayscale border border-border/60 object-cover transition duration-700 hover:grayscale-0 ${artist.slug === "braian" ? "object-center" : "object-top"}`}
+            className="h-[460px] w-full border border-border/60 object-cover object-center transition duration-700 hover:scale-[1.01]"
           />
         ))}
       </div>

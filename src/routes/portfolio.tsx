@@ -73,7 +73,7 @@ function PortfolioPage() {
               loading="lazy"
               width={912}
               height={1104}
-              className={`h-[420px] w-full grayscale object-cover transition duration-700 group-hover:scale-[1.03] group-hover:grayscale-0 ${item.artist === "Braian" ? "object-center" : "object-top"}`}
+              className={`h-[420px] w-full object-cover transition duration-700 group-hover:scale-[1.03] ${item.id === "cascio" || item.id === "ricardo" ? "grayscale group-hover:grayscale-0 object-top" : "object-center"}`}
             />
             <figcaption className="absolute inset-x-0 bottom-0 bg-background/80 px-4 py-3 text-xs uppercase tracking-[0.18em] text-muted-foreground backdrop-blur">
               {item.style} · {item.artist}
