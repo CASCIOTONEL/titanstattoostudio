@@ -14,7 +14,72 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      leads: {
+        Row: {
+          altura_cm: number
+          cor: string | null
+          created_at: string
+          disponibilidade: string | null
+          email: string | null
+          endereco: string
+          id: string
+          ideia: string
+          largura_cm: number
+          local_corpo: string
+          nome: string
+          observacoes: string | null
+          referencias: string[]
+          servico: string
+          status: string
+          tatuador: string | null
+          tipo: string | null
+          updated_at: string
+          whatsapp: string
+        }
+        Insert: {
+          altura_cm: number
+          cor?: string | null
+          created_at?: string
+          disponibilidade?: string | null
+          email?: string | null
+          endereco: string
+          id?: string
+          ideia: string
+          largura_cm: number
+          local_corpo: string
+          nome: string
+          observacoes?: string | null
+          referencias?: string[]
+          servico: string
+          status?: string
+          tatuador?: string | null
+          tipo?: string | null
+          updated_at?: string
+          whatsapp: string
+        }
+        Update: {
+          altura_cm?: number
+          cor?: string | null
+          created_at?: string
+          disponibilidade?: string | null
+          email?: string | null
+          endereco?: string
+          id?: string
+          ideia?: string
+          largura_cm?: number
+          local_corpo?: string
+          nome?: string
+          observacoes?: string | null
+          referencias?: string[]
+          servico?: string
+          status?: string
+          tatuador?: string | null
+          tipo?: string | null
+          updated_at?: string
+          whatsapp?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
