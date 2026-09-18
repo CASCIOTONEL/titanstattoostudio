@@ -55,6 +55,19 @@ import ricardoCabraPatch from "@/assets/ricardo-cabra-patch.jpg.asset.json";
 import ricardoMinniePatch from "@/assets/ricardo-minnie-patch.jpg.asset.json";
 import ricardoJigglypuffPatch from "@/assets/ricardo-jigglypuff-patch.jpg.asset.json";
 import ricardoAnimeBlackwork from "@/assets/ricardo-anime-blackwork.jpg.asset.json";
+import ricardoCarpa from "@/assets/ricardo-carpa.jpg.asset.json";
+import ricardoFamily from "@/assets/ricardo-family.jpg.asset.json";
+import ricardoTupac from "@/assets/ricardo-tupac.jpg.asset.json";
+import ricardoDna from "@/assets/ricardo-dna.webp.asset.json";
+import ricardoLeao from "@/assets/ricardo-leao.webp.asset.json";
+import ricardoJinx from "@/assets/ricardo-jinx.webp.asset.json";
+import ricardoFiguras from "@/assets/ricardo-figuras.webp.asset.json";
+import ricardoEspada from "@/assets/ricardo-espada.jpg.asset.json";
+import ricardoGeometrico from "@/assets/ricardo-geometrico.jpg.asset.json";
+import ricardoMaos from "@/assets/ricardo-maos.jpg.asset.json";
+import ricardoGato from "@/assets/ricardo-gato.jpg.asset.json";
+import ricardoLettering from "@/assets/ricardo-lettering.jpg.asset.json";
+import ricardoCaveira from "@/assets/ricardo-caveira.jpg.asset.json";
 
 export const studio = {
   name: "Titans Tattoo Studio",
@@ -187,6 +200,19 @@ export const artists: Artist[] = [
       { src: ricardoMinniePatch.url, alt: "Tatuagem patch colorida da Minnie por Ricardo" },
       { src: ricardoJigglypuffPatch.url, alt: "Tatuagem patch colorida do Jigglypuff por Ricardo" },
       { src: ricardoAnimeBlackwork.url, alt: "Tatuagem anime em blackwork por Ricardo" },
+      { src: ricardoCarpa.url, alt: "Tatuagem colorida de carpa com flores de cerejeira por Ricardo" },
+      { src: ricardoFamily.url, alt: "Tatuagem fine line de família com coração anatômico por Ricardo" },
+      { src: ricardoTupac.url, alt: "Tatuagem realista em preto e cinza do Tupac por Ricardo" },
+      { src: ricardoDna.url, alt: "Tatuagem blackwork de DNA, cérebro e coração por Ricardo" },
+      { src: ricardoLeao.url, alt: "Tatuagem realista de leão com rosa e relógio por Ricardo" },
+      { src: ricardoJinx.url, alt: "Tatuagem colorida da Jinx por Ricardo" },
+      { src: ricardoFiguras.url, alt: "Tatuagem em preto e cinza de figuras entrelaçadas por Ricardo" },
+      { src: ricardoEspada.url, alt: "Tatuagem blackwork de espada com lettering por Ricardo" },
+      { src: ricardoGeometrico.url, alt: "Tatuagem fine line geométrica por Ricardo" },
+      { src: ricardoMaos.url, alt: "Tatuagem realista de mãos em preto e cinza por Ricardo" },
+      { src: ricardoGato.url, alt: "Tatuagem colorida de gato com moldura floral por Ricardo" },
+      { src: ricardoLettering.url, alt: "Tatuagem blackwork de lettering por Ricardo" },
+      { src: ricardoCaveira.url, alt: "Tatuagem blackwork de caveira com folhas por Ricardo" },
     ],
   },
   {
@@ -260,6 +286,19 @@ export const portfolio: PortfolioItem[] = [
   { id: "ricardo-minnie-patch", src: ricardoMinniePatch.url, alt: "Tatuagem patch colorida da Minnie", style: "Patch tattoo", artist: "Ricardo" },
   { id: "ricardo-jigglypuff-patch", src: ricardoJigglypuffPatch.url, alt: "Tatuagem patch colorida do Jigglypuff", style: "Patch tattoo", artist: "Ricardo" },
   { id: "ricardo-anime-blackwork", src: ricardoAnimeBlackwork.url, alt: "Tatuagem anime em blackwork", style: "Blackwork", artist: "Ricardo" },
+  { id: "ricardo-carpa", src: ricardoCarpa.url, alt: "Tatuagem colorida de carpa com flores de cerejeira", style: "Colorido", artist: "Ricardo" },
+  { id: "ricardo-family", src: ricardoFamily.url, alt: "Tatuagem fine line de família com coração anatômico", style: "Fine line", artist: "Ricardo" },
+  { id: "ricardo-tupac", src: ricardoTupac.url, alt: "Tatuagem realista em preto e cinza do Tupac", style: "Realismo", artist: "Ricardo" },
+  { id: "ricardo-dna", src: ricardoDna.url, alt: "Tatuagem blackwork de DNA, cérebro e coração", style: "Blackwork", artist: "Ricardo" },
+  { id: "ricardo-leao", src: ricardoLeao.url, alt: "Tatuagem realista de leão com rosa e relógio", style: "Realismo", artist: "Ricardo" },
+  { id: "ricardo-jinx", src: ricardoJinx.url, alt: "Tatuagem colorida da Jinx", style: "Colorido", artist: "Ricardo" },
+  { id: "ricardo-figuras", src: ricardoFiguras.url, alt: "Tatuagem em preto e cinza de figuras entrelaçadas", style: "Preto e cinza", artist: "Ricardo" },
+  { id: "ricardo-espada", src: ricardoEspada.url, alt: "Tatuagem blackwork de espada com lettering", style: "Blackwork", artist: "Ricardo" },
+  { id: "ricardo-geometrico", src: ricardoGeometrico.url, alt: "Tatuagem fine line geométrica", style: "Fine line", artist: "Ricardo" },
+  { id: "ricardo-maos", src: ricardoMaos.url, alt: "Tatuagem realista de mãos em preto e cinza", style: "Realismo", artist: "Ricardo" },
+  { id: "ricardo-gato", src: ricardoGato.url, alt: "Tatuagem colorida de gato com moldura floral", style: "Colorido", artist: "Ricardo" },
+  { id: "ricardo-lettering", src: ricardoLettering.url, alt: "Tatuagem blackwork de lettering", style: "Blackwork", artist: "Ricardo" },
+  { id: "ricardo-caveira", src: ricardoCaveira.url, alt: "Tatuagem blackwork de caveira com folhas", style: "Blackwork", artist: "Ricardo" },
   { id: "braian-5722", src: braian5722.url, alt: "Tatuagem realista de cachorro no braço", style: "Realismo", artist: "Braian" },
   { id: "braian-6634", src: braian6634.url, alt: "Retrato realista de cachorro no antebraço", style: "Realismo", artist: "Braian" },
   { id: "braian-8589", src: braian8589.url, alt: "Tatuagem colorida de dragão", style: "Colorido", artist: "Braian" },
