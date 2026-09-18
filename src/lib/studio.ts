@@ -14,6 +14,14 @@ import braian9404 from "@/assets/braian-IMG_9404.jpg.asset.json";
 import braian9614 from "@/assets/braian-IMG_9614.jpg.asset.json";
 import braianSnapseed from "@/assets/braian-Snapseed.jpg.asset.json";
 import braian1543 from "@/assets/braian-IMG_1543.jpg.asset.json";
+import braian1663 from "@/assets/braian-IMG_1663.jpg.asset.json";
+import braian1683 from "@/assets/braian-IMG_1683.jpg.asset.json";
+import braian2845 from "@/assets/braian-IMG_2845.jpg.asset.json";
+import braian4217 from "@/assets/braian-IMG_4217.jpg.asset.json";
+import braian4482 from "@/assets/braian-IMG_4482.jpg.asset.json";
+import braian5099 from "@/assets/braian-IMG_5099.jpg.asset.json";
+import braian0708 from "@/assets/braian-IMG_0708.jpg.asset.json";
+import braian1468 from "@/assets/braian-IMG_1468.jpg.asset.json";
 
 export const studio = {
   name: "Titans Tattoo Studio",
@@ -120,10 +128,10 @@ export const artists: Artist[] = [
   {
     slug: "braian",
     name: "Braian",
-    role: "Preto e cinza, blackwork e fine line",
-    bio: "Tatuador residente do Titans Tattoo Studio. Preto e cinza, blackwork, fine line e trabalhos coloridos.",
+    role: "Colorido, geek, anime, realismo e fine line",
+    bio: "Tatuador residente do Titans Tattoo Studio com trabalhos que transitam entre o colorido vibrante, geek e anime, realismo e micro-realismo, fine line, preto e cinza, blackwork, aquarela e new school.",
     photo: braianPhoto.url,
-    specialties: ["Preto e cinza", "Blackwork", "Fine line", "Colorido"],
+    specialties: ["Colorido", "Geek", "Anime", "Realismo", "Micro-realismo", "Fine line", "Preto e cinza", "Blackwork", "Aquarela", "New school"],
     works: [
       { src: braian5722.url, alt: "Tatuagem realista de cachorro no braço por Braian" },
       { src: braian6634.url, alt: "Retrato realista de cachorro no antebraço por Braian" },
@@ -134,6 +142,14 @@ export const artists: Artist[] = [
       { src: braian9614.url, alt: "Fechamento de perna em preto e cinza por Braian" },
       { src: braianSnapseed.url, alt: "Tatuagem colorida do Homem-Aranha por Braian" },
       { src: braian1543.url, alt: "Tatuagem fine line de dragão por Braian" },
+      { src: braian1663.url, alt: "Tatuagem new school colorida por Braian" },
+      { src: braian1683.url, alt: "Tatuagem anime colorida da Nezuko por Braian" },
+      { src: braian2845.url, alt: "Tatuagem geek colorida do Mario por Braian" },
+      { src: braian4217.url, alt: "Tatuagem micro-realista de tubarão por Braian" },
+      { src: braian4482.url, alt: "Tatuagem colorida de cachorro por Braian" },
+      { src: braian5099.url, alt: "Tatuagem em aquarela de abelha e flores por Braian" },
+      { src: braian0708.url, alt: "Tatuagem anime colorida do Goku por Braian" },
+      { src: braian1468.url, alt: "Tatuagem anime colorida de dragão por Braian" },
     ],
   },
 ];
@@ -158,6 +174,14 @@ export const portfolio: PortfolioItem[] = [
   { id: "braian-9614", src: braian9614.url, alt: "Fechamento de perna em preto e cinza", style: "Preto e cinza", artist: "Braian" },
   { id: "braian-snapseed", src: braianSnapseed.url, alt: "Tatuagem colorida do Homem-Aranha", style: "Geek", artist: "Braian" },
   { id: "braian-1543", src: braian1543.url, alt: "Tatuagem fine line de dragão", style: "Fine line", artist: "Braian" },
+  { id: "braian-1663", src: braian1663.url, alt: "Tatuagem new school colorida", style: "New school", artist: "Braian" },
+  { id: "braian-1683", src: braian1683.url, alt: "Tatuagem anime colorida da Nezuko", style: "Anime", artist: "Braian" },
+  { id: "braian-2845", src: braian2845.url, alt: "Tatuagem geek colorida do Mario", style: "Geek", artist: "Braian" },
+  { id: "braian-4217", src: braian4217.url, alt: "Tatuagem micro-realista de tubarão", style: "Micro-realismo", artist: "Braian" },
+  { id: "braian-4482", src: braian4482.url, alt: "Tatuagem colorida de cachorro", style: "Colorido", artist: "Braian" },
+  { id: "braian-5099", src: braian5099.url, alt: "Tatuagem em aquarela de abelha e flores", style: "Aquarela", artist: "Braian" },
+  { id: "braian-0708", src: braian0708.url, alt: "Tatuagem anime colorida do Goku", style: "Anime", artist: "Braian" },
+  { id: "braian-1468", src: braian1468.url, alt: "Tatuagem anime colorida de dragão", style: "Anime", artist: "Braian" },
 ];
 
 export const testimonials = [

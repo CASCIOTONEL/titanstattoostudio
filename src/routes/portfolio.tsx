@@ -23,7 +23,19 @@ export const Route = createFileRoute("/portfolio")({
   component: PortfolioPage,
 });
 
-const styles = ["Todos", "Realismo", "Fine line", "Blackwork", "Preto e cinza", "Colorido", "Geek"];
+const styles = [
+  "Todos",
+  "Realismo",
+  "Micro-realismo",
+  "Fine line",
+  "Blackwork",
+  "Preto e cinza",
+  "Colorido",
+  "Geek",
+  "Anime",
+  "Aquarela",
+  "New school",
+];
 
 function PortfolioPage() {
   const [style, setStyle] = useState("Todos");
