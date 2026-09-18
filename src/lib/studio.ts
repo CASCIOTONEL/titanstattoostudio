@@ -73,7 +73,7 @@ export const studio = {
   name: "Titans Tattoo Studio",
   phoneDisplay: "(51) 99178-6170",
   whatsapp: "5551991786170",
-  email: "contato@titanstattoostudio.com.br",
+  email: "titans.tattoo@gmail.com",
   address: "Rua Mathias Velho, 170 — Sala 201, Centro, Canoas/RS",
   cep: "CEP 92310-300",
   since: 2011,
