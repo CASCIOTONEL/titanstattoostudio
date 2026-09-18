@@ -17,7 +17,7 @@ export const Route = createFileRoute("/orcamento")({
       {
         name: "description",
         content:
-          "Conte sua ideia, tamanho, local do corpo e referências. Respondemos com valor estimado e disponibilidade.",
+          "Envie sua referência, o tamanho em centímetros e o local do corpo. Respondemos com valor estimado e disponibilidade.",
       },
       { property: "og:title", content: "Solicitar orçamento — Titans Tattoo Studio" },
       {
@@ -34,42 +34,130 @@ const fieldClass =
 
 const labelClass = "mb-2 block text-[11px] uppercase tracking-[0.22em] text-muted-foreground";
 
+const bodyParts = [
+  "Antebraço",
+  "Braço / bíceps",
+  "Ombro",
+  "Mão / dedos",
+  "Peito",
+  "Costas",
+  "Costela / lateral",
+  "Abdômen",
+  "Coxa",
+  "Panturrilha",
+  "Pé / tornozelo",
+  "Pescoço",
+  "Outro (explico no WhatsApp)",
+];
+
+const orcamentoSchema = z.object({
+  nome: z.string().trim().min(2, "Informe seu nome completo.").max(100),
+  whatsapp: z.string().trim().min(8, "Informe um WhatsApp válido com DDD.").max(20),
+  email: z.string().trim().email("Informe um e-mail válido.").max(255).or(z.literal("")),
+  endereco: z.string().trim().min(5, "Informe seu endereço (cidade e bairro no mínimo).").max(200),
+  servico: z.string().trim().min(1),
+  ideia: z.string().trim().min(10, "Descreva sua ideia com pelo menos 10 caracteres.").max(1500),
+  largura: z.coerce.number().positive("Informe a largura em centímetros.").max(300),
+  altura: z.coerce.number().positive("Informe a altura em centímetros.").max(300),
+  local: z.string().trim().min(1, "Selecione o local do corpo."),
+  cor: z.string(),
+  tipo: z.string(),
+  tatuador: z.string(),
+  disponibilidade: z.string().trim().max(120),
+});
+
 function OrcamentoPage() {
   const search = Route.useSearch();
   const [error, setError] = useState<string | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
+  const [previews, setPreviews] = useState<string[]>([]);
+  const [sent, setSent] = useState<null | { nome: string; link: string }>(null);
+
+  function handleFiles(event: React.ChangeEvent<HTMLInputElement>) {
+    const list = Array.from(event.target.files ?? []).slice(0, 5);
+    setFiles(list);
+    previews.forEach((url) => URL.revokeObjectURL(url));
+    setPreviews(list.map((f) => URL.createObjectURL(f)));
+  }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    const get = (k: string) => String(form.get(k) ?? "").trim();
+    const raw = Object.fromEntries(form.entries());
 
-    const nome = get("nome");
-    const whats = get("whatsapp");
-    const ideia = get("ideia");
-    if (nome.length < 2 || whats.length < 8 || ideia.length < 10) {
-      setError("Preencha nome, WhatsApp e uma descrição da ideia com pelo menos 10 caracteres.");
+    const parsed = orcamentoSchema.safeParse(raw);
+    if (!parsed.success) {
+      setError(parsed.error.issues[0]?.message ?? "Verifique os campos obrigatórios.");
+      return;
+    }
+    if (files.length === 0) {
+      setError("Anexe pelo menos uma imagem de referência.");
       return;
     }
     setError(null);
+    const d = parsed.data;
 
     const linhas = [
       "*Novo orçamento — site Titans*",
-      `Nome: ${nome}`,
-      `WhatsApp: ${whats}`,
-      `E-mail: ${get("email") || "-"}`,
-      `Nascimento: ${get("nascimento") || "-"}`,
-      `Serviço: ${get("servico")}`,
-      `Ideia: ${ideia}`,
-      `Tamanho aproximado: ${get("tamanho") || "-"}`,
-      `Local do corpo: ${get("local") || "-"}`,
-      `Estilo de cor: ${get("cor")}`,
-      `Tipo de trabalho: ${get("tipo")}`,
-      `Tatuador de preferência: ${get("tatuador")}`,
-      `Disponibilidade: ${get("disponibilidade") || "-"}`,
-      `Referências: ${get("referencias") || "envio pelo WhatsApp"}`,
+      `Nome: ${d.nome}`,
+      `WhatsApp: ${d.whatsapp}`,
+      `E-mail: ${d.email || "-"}`,
+      `Endereço: ${d.endereco}`,
+      `Serviço: ${d.servico}`,
+      `Ideia: ${d.ideia}`,
+      `Tamanho: ${d.largura} cm x ${d.altura} cm`,
+      `Local do corpo: ${d.local}`,
+      `Estilo de cor: ${d.cor}`,
+      `Tipo de trabalho: ${d.tipo}`,
+      `Tatuador de preferência: ${d.tatuador}`,
+      `Disponibilidade: ${d.disponibilidade || "-"}`,
+      `Referências: ${files.length} imagem(ns) — vou anexar aqui na conversa.`,
     ];
 
-    window.open(whatsappLink(linhas.join("\n")), "_blank", "noopener");
+    const link = whatsappLink(linhas.join("\n"));
+    window.open(link, "_blank", "noopener");
+    setSent({ nome: d.nome, link });
+  }
+
+  if (sent) {
+    return (
+      <Section>
+        <SectionTitle
+          eyebrow="Pedido enviado"
+          title={`Obrigado, ${sent.nome.split(" ")[0]}!`}
+          description="Seu orçamento foi aberto no WhatsApp do estúdio. Envie agora as imagens de referência na conversa para finalizarmos o pedido."
+        />
+        <div className="mt-10 max-w-2xl space-y-6">
+          {previews.length > 0 ? (
+            <div className="flex flex-wrap gap-3">
+              {previews.map((src) => (
+                <img key={src} src={src} alt="Referência anexada" className="h-28 w-28 object-cover border border-border" />
+              ))}
+            </div>
+          ) : null}
+          <p className="text-sm text-muted-foreground">
+            Respondemos em horário comercial. Se a janela do WhatsApp não abriu, use o botão abaixo ou ligue para {studio.phoneDisplay}.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <a
+              href={sent.link}
+              target="_blank"
+              rel="noopener"
+              className="border border-foreground/80 px-7 py-4 text-xs uppercase tracking-[0.22em] transition-colors hover:bg-foreground hover:text-background"
+            >
+              Abrir WhatsApp novamente
+            </a>
+            <button
+              type="button"
+              onClick={() => setSent(null)}
+              className="border border-border px-7 py-4 text-xs uppercase tracking-[0.22em] text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Fazer outro orçamento
+            </button>
+          </div>
+        </div>
+      </Section>
+    );
   }
 
   return (
@@ -77,16 +165,16 @@ function OrcamentoPage() {
       <SectionTitle
         eyebrow="Primeiro passo"
         title="Solicitar orçamento"
-        description="Quanto mais detalhes, mais preciso o valor. Ao enviar, sua ficha segue direto para o WhatsApp do estúdio."
+        description="Campos com * são obrigatórios. Quanto mais detalhes, mais preciso o valor. Ao enviar, sua ficha segue direto para o WhatsApp do estúdio."
       />
 
-      <form onSubmit={handleSubmit} className="mt-12 grid max-w-3xl gap-6 md:grid-cols-2">
+      <form onSubmit={handleSubmit} noValidate className="mt-12 grid max-w-3xl gap-6 md:grid-cols-2">
         <div>
-          <label className={labelClass} htmlFor="nome">Nome completo</label>
+          <label className={labelClass} htmlFor="nome">Nome completo *</label>
           <input id="nome" name="nome" maxLength={100} className={fieldClass} placeholder="Seu nome" />
         </div>
         <div>
-          <label className={labelClass} htmlFor="whatsapp">WhatsApp</label>
+          <label className={labelClass} htmlFor="whatsapp">WhatsApp *</label>
           <input id="whatsapp" name="whatsapp" maxLength={20} className={fieldClass} placeholder="(51) 90000-0000" />
         </div>
         <div>
@@ -94,12 +182,12 @@ function OrcamentoPage() {
           <input id="email" name="email" type="email" maxLength={255} className={fieldClass} placeholder="voce@email.com" />
         </div>
         <div>
-          <label className={labelClass} htmlFor="nascimento">Data de nascimento</label>
-          <input id="nascimento" name="nascimento" type="date" className={fieldClass} />
+          <label className={labelClass} htmlFor="endereco">Endereço *</label>
+          <input id="endereco" name="endereco" maxLength={200} className={fieldClass} placeholder="Rua, número, bairro, cidade" />
         </div>
 
         <div className="md:col-span-2">
-          <label className={labelClass} htmlFor="servico">Serviço</label>
+          <label className={labelClass} htmlFor="servico">Serviço *</label>
           <select id="servico" name="servico" defaultValue={search.service ?? services[0]!.name} className={fieldClass}>
             {services.map((s) => (
               <option key={s.slug} value={s.name}>{s.name}</option>
@@ -108,17 +196,50 @@ function OrcamentoPage() {
         </div>
 
         <div className="md:col-span-2">
-          <label className={labelClass} htmlFor="ideia">Sua ideia</label>
+          <label className={labelClass} htmlFor="ideia">Sua ideia *</label>
           <textarea id="ideia" name="ideia" rows={5} maxLength={1500} className={fieldClass} placeholder="Descreva o desenho, o significado e o estilo que você quer." />
         </div>
 
+        <div className="md:col-span-2">
+          <label className={labelClass} htmlFor="referencias">Imagens de referência *</label>
+          <input
+            id="referencias"
+            name="referencias"
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handleFiles}
+            className="w-full border border-border bg-card/40 px-4 py-3 text-sm text-muted-foreground file:mr-4 file:border file:border-border file:bg-transparent file:px-4 file:py-2 file:text-xs file:uppercase file:tracking-[0.18em] file:text-foreground"
+          />
+          <p className="mt-2 text-xs text-muted-foreground">
+            Até 5 imagens. Elas seguem anexadas por você na conversa do WhatsApp que abrimos ao enviar.
+          </p>
+          {previews.length > 0 ? (
+            <div className="mt-4 flex flex-wrap gap-3">
+              {previews.map((src) => (
+                <img key={src} src={src} alt="Pré-visualização da referência" className="h-24 w-24 object-cover border border-border" />
+              ))}
+            </div>
+          ) : null}
+        </div>
+
         <div>
-          <label className={labelClass} htmlFor="tamanho">Tamanho aproximado</label>
-          <input id="tamanho" name="tamanho" maxLength={60} className={fieldClass} placeholder="Ex: 15 cm" />
+          <label className={labelClass} htmlFor="largura">Largura (cm) *</label>
+          <input id="largura" name="largura" type="number" min={1} max={300} step="0.5" className={fieldClass} placeholder="Ex: 12" />
         </div>
         <div>
-          <label className={labelClass} htmlFor="local">Local do corpo</label>
-          <input id="local" name="local" maxLength={60} className={fieldClass} placeholder="Ex: antebraço direito" />
+          <label className={labelClass} htmlFor="altura">Altura (cm) *</label>
+          <input id="altura" name="altura" type="number" min={1} max={300} step="0.5" className={fieldClass} placeholder="Ex: 18" />
+        </div>
+
+        <div className="md:col-span-2">
+          <label className={labelClass} htmlFor="local">Local do corpo *</label>
+          <select id="local" name="local" defaultValue="" className={fieldClass}>
+            <option value="" disabled>Selecione o local</option>
+            {bodyParts.map((p) => (
+              <option key={p} value={p}>{p}</option>
+            ))}
+          </select>
         </div>
 
         <div>
@@ -151,11 +272,6 @@ function OrcamentoPage() {
         <div>
           <label className={labelClass} htmlFor="disponibilidade">Disponibilidade de datas</label>
           <input id="disponibilidade" name="disponibilidade" maxLength={120} className={fieldClass} placeholder="Ex: sábados pela manhã" />
-        </div>
-
-        <div className="md:col-span-2">
-          <label className={labelClass} htmlFor="referencias">Referências</label>
-          <input id="referencias" name="referencias" maxLength={300} className={fieldClass} placeholder="Links de referências (as fotos você envia no WhatsApp)" />
         </div>
 
         {error ? (
