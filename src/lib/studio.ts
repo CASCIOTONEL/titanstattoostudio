@@ -4,6 +4,7 @@ import braianPhoto from "@/assets/artist-braian.jpg.asset.json";
 import remocaoLaserPhoto from "@/assets/servico-remocao-laser.jpg.asset.json";
 import piercingPhoto from "@/assets/servico-piercing.jpg.asset.json";
 import tattooPhoto from "@/assets/servico-tattoo.jpg.asset.json";
+import coberturaPhoto from "@/assets/servico-cobertura.jpg.asset.json";
 
 export const studio = {
   name: "Titans Tattoo Studio",
