@@ -1,6 +1,7 @@
 import cascioPhoto from "@/assets/artist-cascio.jpg.asset.json";
 import ricardoPhoto from "@/assets/artist-ricardo.jpg.asset.json";
 import braianPhoto from "@/assets/artist-braian.jpg.asset.json";
+import remocaoLaserPhoto from "@/assets/servico-remocao-laser.jpg.asset.json";
 
 export const studio = {
   name: "Titans Tattoo Studio",
@@ -29,6 +30,7 @@ export type Service = {
   short: string;
   description: string;
   points: string[];
+  image?: string;
 };
 
 export const services: Service[] = [
@@ -51,10 +53,11 @@ export const services: Service[] = [
   {
     slug: "remocao-laser",
     name: "Remoção a laser",
-    short: "Clareamento e remoção com laser Q-Switched em sessões espaçadas.",
+    short: "Clareamento e remoção com laser Nd:YAG em sessões espaçadas.",
     description:
       "Protocolo com número de sessões estimado na avaliação, cuidados pós-sessão e acompanhamento fotográfico da evolução.",
     points: ["Avaliação da pele", "Sessões a cada 45 dias", "Registro antes e depois"],
+    image: remocaoLaserPhoto.url,
   },
   {
     slug: "piercing",

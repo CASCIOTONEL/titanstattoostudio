@@ -86,6 +86,14 @@ function Home() {
                 {service.name}
               </h3>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{service.short}</p>
+              {service.image && (
+                <img
+                  src={service.image}
+                  alt={service.name}
+                  loading="lazy"
+                  className="mt-6 h-48 w-full object-cover"
+                />
+              )}
             </article>
           ))}
         </div>

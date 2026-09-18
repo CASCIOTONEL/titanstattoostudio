@@ -40,6 +40,14 @@ function ServicosPage() {
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
                 {service.description}
               </p>
+              {service.image && (
+                <img
+                  src={service.image}
+                  alt={service.name}
+                  loading="lazy"
+                  className="mt-6 h-64 w-full object-cover"
+                />
+              )}
               <ul className="mt-6 space-y-2">
                 {service.points.map((point) => (
                   <li key={point} className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
