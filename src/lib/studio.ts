@@ -22,6 +22,23 @@ import braian4482 from "@/assets/braian-IMG_4482.jpg.asset.json";
 import braian5099 from "@/assets/braian-IMG_5099.jpg.asset.json";
 import braian0708 from "@/assets/braian-IMG_0708.jpg.asset.json";
 import braian1468 from "@/assets/braian-IMG_1468.jpg.asset.json";
+import cascioRapunzel from "@/assets/cascio-2EEE1F99-940C-4570-81EE-1DB6BFB536ED.jpeg.asset.json";
+import cascioTowerBridge from "@/assets/cascio-2EF96065-F072-4D31-8331-359F522E146A.png.asset.json";
+import cascioArcanjo from "@/assets/cascio-7D3D1EAB-7493-4B5C-8518-E13AFA5A88F4.png.asset.json";
+import cascioCinema from "@/assets/cascio-8C822F78-4C83-469D-ABB5-2122F567FB40.png.asset.json";
+import cascioAnime from "@/assets/cascio-31B5B765-BAFD-4A69-88EF-35BD677AF498.png.asset.json";
+import cascioAstronauta from "@/assets/cascio-33FC6431-FC88-4B07-9FE9-F623A3B6CE44.png.asset.json";
+import cascioLeoes from "@/assets/cascio-44A9254C-2349-4447-BD2E-E0CEB6797ADD.png.asset.json";
+import cascioTartaruga from "@/assets/cascio-46F69B4F-A843-480A-980B-D096E27E4858.webp.asset.json";
+import cascioBorboleta from "@/assets/cascio-66FBD93E-77C0-42C9-9EA9-5112C7A44887.jpeg.asset.json";
+import cascioGoku from "@/assets/cascio-69E1D0E1-BEAF-45EE-ACF6-041FF3C81CD9.webp.asset.json";
+import cascioAnjo from "@/assets/cascio-83CAF6D0-F62B-46F6-A3CB-6BA4C2CEDC21.png.asset.json";
+import cascioNossaSenhora from "@/assets/cascio-778CE0E0-9D29-49B8-82D8-A9F768F5AC29.webp.asset.json";
+import cascioNoivaCadaver from "@/assets/cascio-907EAC4C-B4D7-4197-91DE-E6302E5BBD9C.webp.asset.json";
+import cascioJesus from "@/assets/cascio-8324BD64-45EF-46AD-AC5F-FCBA7A41FBE4.png.asset.json";
+import cascioAguiaRato from "@/assets/cascio-8579B645-9917-481C-9B01-3A49C60B8813.png.asset.json";
+import cascioCoruja from "@/assets/cascio-A07BF075-38B8-40BC-967D-C2D88D56646E.webp.asset.json";
+import cascioLobo from "@/assets/cascio-AF044896-CA8F-402D-8EB1-D4BD0D517449.webp.asset.json";
 
 export const studio = {
   name: "Titans Tattoo Studio",
@@ -106,12 +123,28 @@ export const artists: Artist[] = [
   {
     slug: "cascio",
     name: "Cascio",
-    role: "Realismo, preto e cinza e coberturas",
-    bio: "Tatuador residente do Titans Tattoo Studio. Realismo e preto e cinza, com coberturas e trabalhos coloridos.",
+    role: "Realismo, preto e cinza, colorido e coberturas",
+    bio: "Tatuador residente do Titans Tattoo Studio com trabalhos em realismo e micro-realismo, preto e cinza, colorido, fine line, anime e geek, aquarela e new school, além de projetos de cobertura.",
     photo: cascioPhoto.url,
-    specialties: ["Realismo", "Preto e cinza", "Cobertura", "Colorido"],
+    specialties: ["Realismo", "Micro-realismo", "Preto e cinza", "Colorido", "Fine line", "Anime", "Geek", "Aquarela", "New school", "Cobertura"],
     works: [
-      { src: cascioPhoto.url, alt: "Retrato do tatuador Cascio" },
+      { src: cascioRapunzel.url, alt: "Tatuagem colorida da Rapunzel por Cascio" },
+      { src: cascioTowerBridge.url, alt: "Tatuagem realista da Tower Bridge por Cascio" },
+      { src: cascioArcanjo.url, alt: "Tatuagem realista de arcanjo por Cascio" },
+      { src: cascioCinema.url, alt: "Tatuagem em aquarela com tema de cinema por Cascio" },
+      { src: cascioAnime.url, alt: "Tatuagem anime colorida por Cascio" },
+      { src: cascioAstronauta.url, alt: "Tatuagem em aquarela de astronauta por Cascio" },
+      { src: cascioLeoes.url, alt: "Tatuagem realista de leões por Cascio" },
+      { src: cascioTartaruga.url, alt: "Tatuagem micro-realista de tartaruga por Cascio" },
+      { src: cascioBorboleta.url, alt: "Tatuagem fine line de borboleta por Cascio" },
+      { src: cascioGoku.url, alt: "Tatuagem anime colorida do Goku por Cascio" },
+      { src: cascioAnjo.url, alt: "Tatuagem realista de anjo por Cascio" },
+      { src: cascioNossaSenhora.url, alt: "Tatuagem fine line colorida de Nossa Senhora por Cascio" },
+      { src: cascioNoivaCadaver.url, alt: "Tatuagem colorida da Noiva Cadáver por Cascio" },
+      { src: cascioJesus.url, alt: "Tatuagem realista de Jesus por Cascio" },
+      { src: cascioAguiaRato.url, alt: "Tatuagem new school colorida de águia e rato por Cascio" },
+      { src: cascioCoruja.url, alt: "Tatuagem colorida de coruja por Cascio" },
+      { src: cascioLobo.url, alt: "Tatuagem realista de lobo por Cascio" },
     ],
   },
   {
@@ -163,7 +196,23 @@ export type PortfolioItem = {
 };
 
 export const portfolio: PortfolioItem[] = [
-  { id: "cascio", src: cascioPhoto.url, alt: "Retrato do tatuador Cascio", style: "Realismo", artist: "Cascio" },
+  { id: "cascio-rapunzel", src: cascioRapunzel.url, alt: "Tatuagem colorida da Rapunzel", style: "Geek", artist: "Cascio" },
+  { id: "cascio-tower-bridge", src: cascioTowerBridge.url, alt: "Tatuagem realista da Tower Bridge", style: "Realismo", artist: "Cascio" },
+  { id: "cascio-arcanjo", src: cascioArcanjo.url, alt: "Tatuagem realista de arcanjo", style: "Preto e cinza", artist: "Cascio" },
+  { id: "cascio-cinema", src: cascioCinema.url, alt: "Tatuagem em aquarela com tema de cinema", style: "Aquarela", artist: "Cascio" },
+  { id: "cascio-anime", src: cascioAnime.url, alt: "Tatuagem anime colorida", style: "Anime", artist: "Cascio" },
+  { id: "cascio-astronauta", src: cascioAstronauta.url, alt: "Tatuagem em aquarela de astronauta", style: "Aquarela", artist: "Cascio" },
+  { id: "cascio-leoes", src: cascioLeoes.url, alt: "Tatuagem realista de leões", style: "Realismo", artist: "Cascio" },
+  { id: "cascio-tartaruga", src: cascioTartaruga.url, alt: "Tatuagem micro-realista de tartaruga", style: "Micro-realismo", artist: "Cascio" },
+  { id: "cascio-borboleta", src: cascioBorboleta.url, alt: "Tatuagem fine line de borboleta", style: "Fine line", artist: "Cascio" },
+  { id: "cascio-goku", src: cascioGoku.url, alt: "Tatuagem anime colorida do Goku", style: "Anime", artist: "Cascio" },
+  { id: "cascio-anjo", src: cascioAnjo.url, alt: "Tatuagem realista de anjo", style: "Preto e cinza", artist: "Cascio" },
+  { id: "cascio-nossa-senhora", src: cascioNossaSenhora.url, alt: "Tatuagem fine line colorida de Nossa Senhora", style: "Fine line", artist: "Cascio" },
+  { id: "cascio-noiva-cadaver", src: cascioNoivaCadaver.url, alt: "Tatuagem colorida da Noiva Cadáver", style: "Geek", artist: "Cascio" },
+  { id: "cascio-jesus", src: cascioJesus.url, alt: "Tatuagem realista de Jesus", style: "Realismo", artist: "Cascio" },
+  { id: "cascio-aguia-rato", src: cascioAguiaRato.url, alt: "Tatuagem new school colorida de águia e rato", style: "New school", artist: "Cascio" },
+  { id: "cascio-coruja", src: cascioCoruja.url, alt: "Tatuagem colorida de coruja", style: "Colorido", artist: "Cascio" },
+  { id: "cascio-lobo", src: cascioLobo.url, alt: "Tatuagem realista de lobo", style: "Realismo", artist: "Cascio" },
   { id: "ricardo", src: ricardoPhoto.url, alt: "Retrato do tatuador Ricardo", style: "Blackwork", artist: "Ricardo" },
   { id: "braian-5722", src: braian5722.url, alt: "Tatuagem realista de cachorro no braço", style: "Realismo", artist: "Braian" },
   { id: "braian-6634", src: braian6634.url, alt: "Retrato realista de cachorro no antebraço", style: "Realismo", artist: "Braian" },
