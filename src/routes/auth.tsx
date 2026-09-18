@@ -41,22 +41,15 @@ function AuthPage() {
         if (error) throw error;
         await navigate({ to: "/orcamentos" });
       } else {
-        const { data, error } = await supabase.auth.signUp({
+        const { error } = await supabase.auth.signUp({
           email,
           password: senha,
           options: { emailRedirectTo: `${window.location.origin}/orcamentos` },
         });
         if (error) throw error;
-        if (data.session) {
-          await navigate({ to: "/orcamentos" });
-        } else {
-          const { error: signInError } = await supabase.auth.signInWithPassword({
-            email,
-            password: senha,
-          });
-          if (signInError) throw signInError;
-          await navigate({ to: "/orcamentos" });
-        }
+        setMessage(
+          "Conta criada! Enviamos um link de confirmação para o seu e-mail. Abra o link para ativar o acesso à Área do estúdio.",
+        );
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Não foi possível concluir. Tente novamente.");
