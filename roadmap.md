@@ -8,7 +8,7 @@
 - [x] /orcamento com formulário completo (envio via WhatsApp)
 - [x] Melhorar enquadramento, equalizar contraste e manter coloridas as fotos do portfólio do Cascio
 - [x] Adicionar os novos trabalhos ao portfólio do Cascio e atualizar seus estilos
-- [ ] Adicionar o lote final de trabalhos enviado para o portfólio do Cascio
+- [x] Adicionar o lote final de trabalhos enviado para o portfólio do Cascio
 
 ## Etapa 2 — Orçamento + CRM (backend)
 - [ ] Ativar Lovable Cloud, tabelas + RLS

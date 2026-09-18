@@ -39,6 +39,14 @@ import cascioJesus from "@/assets/cascio-8324BD64-45EF-46AD-AC5F-FCBA7A41FBE4.pn
 import cascioAguiaRato from "@/assets/cascio-8579B645-9917-481C-9B01-3A49C60B8813.png.asset.json";
 import cascioCoruja from "@/assets/cascio-A07BF075-38B8-40BC-967D-C2D88D56646E.webp.asset.json";
 import cascioLobo from "@/assets/cascio-AF044896-CA8F-402D-8EB1-D4BD0D517449.webp.asset.json";
+import cascioBalanco from "@/assets/cascio-B1BC4F42-CBAB-44B8-89F4-AA6E9B08B51D.png.asset.json";
+import cascioRosa from "@/assets/cascio-BF29A457-ACAB-4DE9-8274-EDE063E2996C.png.asset.json";
+import cascioGato from "@/assets/cascio-BBAF15AF-72C2-4306-B71F-A417577D954D.png.asset.json";
+import cascioBigBen from "@/assets/cascio-C60ABD05-734A-4944-9742-2FA7FB42D18D.png.asset.json";
+import cascioAguia from "@/assets/cascio-D476582A-0E20-42F0-AF92-87DA5210A7D0.png.asset.json";
+import cascioOrquideas from "@/assets/cascio-DD9C8D6E-66BF-4A56-8D96-0A09068A1957.png.asset.json";
+import cascioMulher from "@/assets/cascio-F5F0F516-00C9-4FB7-B56F-F7C679395AF2.png.asset.json";
+import cascioMerida from "@/assets/cascio-IMG_5402.jpeg.asset.json";
 
 export const studio = {
   name: "Titans Tattoo Studio",
@@ -145,6 +153,14 @@ export const artists: Artist[] = [
       { src: cascioAguiaRato.url, alt: "Tatuagem new school colorida de águia e rato por Cascio" },
       { src: cascioCoruja.url, alt: "Tatuagem colorida de coruja por Cascio" },
       { src: cascioLobo.url, alt: "Tatuagem realista de lobo por Cascio" },
+      { src: cascioBalanco.url, alt: "Tatuagem em aquarela de criança no balanço por Cascio" },
+      { src: cascioRosa.url, alt: "Tatuagem ornamental de rosa por Cascio" },
+      { src: cascioGato.url, alt: "Tatuagem realista de gato com flores por Cascio" },
+      { src: cascioBigBen.url, alt: "Tatuagem realista do Big Ben por Cascio" },
+      { src: cascioAguia.url, alt: "Tatuagem realista de águia por Cascio" },
+      { src: cascioOrquideas.url, alt: "Tatuagem realista colorida de orquídeas por Cascio" },
+      { src: cascioMulher.url, alt: "Tatuagem realista de mulher por Cascio" },
+      { src: cascioMerida.url, alt: "Tatuagem colorida da Merida por Cascio" },
     ],
   },
   {
@@ -213,6 +229,14 @@ export const portfolio: PortfolioItem[] = [
   { id: "cascio-aguia-rato", src: cascioAguiaRato.url, alt: "Tatuagem new school colorida de águia e rato", style: "New school", artist: "Cascio" },
   { id: "cascio-coruja", src: cascioCoruja.url, alt: "Tatuagem colorida de coruja", style: "Colorido", artist: "Cascio" },
   { id: "cascio-lobo", src: cascioLobo.url, alt: "Tatuagem realista de lobo", style: "Realismo", artist: "Cascio" },
+  { id: "cascio-balanco", src: cascioBalanco.url, alt: "Tatuagem em aquarela de criança no balanço", style: "Aquarela", artist: "Cascio" },
+  { id: "cascio-rosa", src: cascioRosa.url, alt: "Tatuagem ornamental de rosa", style: "Fine line", artist: "Cascio" },
+  { id: "cascio-gato", src: cascioGato.url, alt: "Tatuagem realista de gato com flores", style: "Realismo", artist: "Cascio" },
+  { id: "cascio-big-ben", src: cascioBigBen.url, alt: "Tatuagem realista do Big Ben", style: "Preto e cinza", artist: "Cascio" },
+  { id: "cascio-aguia", src: cascioAguia.url, alt: "Tatuagem realista de águia", style: "Realismo", artist: "Cascio" },
+  { id: "cascio-orquideas", src: cascioOrquideas.url, alt: "Tatuagem realista colorida de orquídeas", style: "Colorido", artist: "Cascio" },
+  { id: "cascio-mulher", src: cascioMulher.url, alt: "Tatuagem realista de mulher", style: "Preto e cinza", artist: "Cascio" },
+  { id: "cascio-merida", src: cascioMerida.url, alt: "Tatuagem colorida da Merida", style: "Geek", artist: "Cascio" },
   { id: "ricardo", src: ricardoPhoto.url, alt: "Retrato do tatuador Ricardo", style: "Blackwork", artist: "Ricardo" },
   { id: "braian-5722", src: braian5722.url, alt: "Tatuagem realista de cachorro no braço", style: "Realismo", artist: "Braian" },
   { id: "braian-6634", src: braian6634.url, alt: "Retrato realista de cachorro no antebraço", style: "Realismo", artist: "Braian" },
