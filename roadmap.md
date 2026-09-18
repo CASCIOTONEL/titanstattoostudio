@@ -12,8 +12,9 @@
 - [x] Adicionar os trabalhos enviados ao portfólio do Ricardo e atualizar seus estilos
 
 ## Etapa 2 — Orçamento + CRM (backend)
-- [ ] Ativar Lovable Cloud, tabelas + RLS
-- [ ] Salvar leads e upload de referências
+- [x] Ativar Lovable Cloud, tabelas + RLS
+- [x] Salvar leads e upload de referências
+- [x] Aba /orcamentos (área do estúdio, login por e-mail e senha)
 - [ ] Funil/kanban de atendimento no /admin
 
 ## Etapa 3 — Agenda
