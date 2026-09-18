@@ -96,7 +96,9 @@ function OrcamentosPage() {
           setLeads((prev) => prev.map((l) => (l.id === atualizado.id ? atualizado : l)));
         },
       )
-      .subscribe();
+      .subscribe((status, err) => {
+        console.log("[leads-realtime]", status, err?.message ?? "");
+      });
     return () => {
       void supabase.removeChannel(channel);
     };
