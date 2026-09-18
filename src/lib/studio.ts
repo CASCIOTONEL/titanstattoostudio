@@ -5,6 +5,15 @@ import remocaoLaserPhoto from "@/assets/servico-remocao-laser.jpg.asset.json";
 import piercingPhoto from "@/assets/servico-piercing.jpg.asset.json";
 import tattooPhoto from "@/assets/servico-tattoo.jpg.asset.json";
 import coberturaPhoto from "@/assets/servico-cobertura.jpg.asset.json";
+import braian5722 from "@/assets/braian-IMG_5722.jpg.asset.json";
+import braian6634 from "@/assets/braian-IMG_6634.jpg.asset.json";
+import braian8589 from "@/assets/braian-IMG_8589.jpg.asset.json";
+import braian8692 from "@/assets/braian-IMG_8692.webp.asset.json";
+import braian8700 from "@/assets/braian-IMG_8700.jpg.asset.json";
+import braian9404 from "@/assets/braian-IMG_9404.jpg.asset.json";
+import braian9614 from "@/assets/braian-IMG_9614.jpg.asset.json";
+import braianSnapseed from "@/assets/braian-Snapseed.jpg.asset.json";
+import braian1543 from "@/assets/braian-IMG_1543.jpg.asset.json";
 
 export const studio = {
   name: "Titans Tattoo Studio",
@@ -116,7 +125,15 @@ export const artists: Artist[] = [
     photo: braianPhoto.url,
     specialties: ["Preto e cinza", "Blackwork", "Fine line", "Colorido"],
     works: [
-      { src: braianPhoto.url, alt: "Braian — preto e cinza e blackwork" },
+      { src: braian5722.url, alt: "Tatuagem realista de cachorro no braço por Braian" },
+      { src: braian6634.url, alt: "Retrato realista de cachorro no antebraço por Braian" },
+      { src: braian8589.url, alt: "Tatuagem colorida de dragão por Braian" },
+      { src: braian8692.url, alt: "Tatuagem colorida do Homem de Ferro por Braian" },
+      { src: braian8700.url, alt: "Tatuagem colorida de cachorro com girassóis por Braian" },
+      { src: braian9404.url, alt: "Tatuagem colorida de ampulheta por Braian" },
+      { src: braian9614.url, alt: "Fechamento de perna em preto e cinza por Braian" },
+      { src: braianSnapseed.url, alt: "Tatuagem colorida do Homem-Aranha por Braian" },
+      { src: braian1543.url, alt: "Tatuagem fine line de dragão por Braian" },
     ],
   },
 ];
@@ -132,7 +149,15 @@ export type PortfolioItem = {
 export const portfolio: PortfolioItem[] = [
   { id: "cascio", src: cascioPhoto.url, alt: "Retrato do tatuador Cascio", style: "Realismo", artist: "Cascio" },
   { id: "ricardo", src: ricardoPhoto.url, alt: "Retrato do tatuador Ricardo", style: "Blackwork", artist: "Ricardo" },
-  { id: "braian", src: braianPhoto.url, alt: "Retrato do tatuador Braian", style: "Fine line", artist: "Braian" },
+  { id: "braian-5722", src: braian5722.url, alt: "Tatuagem realista de cachorro no braço", style: "Realismo", artist: "Braian" },
+  { id: "braian-6634", src: braian6634.url, alt: "Retrato realista de cachorro no antebraço", style: "Realismo", artist: "Braian" },
+  { id: "braian-8589", src: braian8589.url, alt: "Tatuagem colorida de dragão", style: "Colorido", artist: "Braian" },
+  { id: "braian-8692", src: braian8692.url, alt: "Tatuagem colorida do Homem de Ferro", style: "Geek", artist: "Braian" },
+  { id: "braian-8700", src: braian8700.url, alt: "Tatuagem realista colorida de cachorro com girassóis", style: "Colorido", artist: "Braian" },
+  { id: "braian-9404", src: braian9404.url, alt: "Tatuagem colorida de ampulheta", style: "Colorido", artist: "Braian" },
+  { id: "braian-9614", src: braian9614.url, alt: "Fechamento de perna em preto e cinza", style: "Preto e cinza", artist: "Braian" },
+  { id: "braian-snapseed", src: braianSnapseed.url, alt: "Tatuagem colorida do Homem-Aranha", style: "Geek", artist: "Braian" },
+  { id: "braian-1543", src: braian1543.url, alt: "Tatuagem fine line de dragão", style: "Fine line", artist: "Braian" },
 ];
 
 export const testimonials = [
