@@ -3,6 +3,7 @@ import { useState } from "react";
 import { z } from "zod";
 import { Section, SectionTitle } from "@/components/site/Section";
 import { artists, services, studio, whatsappLink } from "@/lib/studio";
+import { supabase } from "@/integrations/supabase/client";
 
 const searchSchema = z.object({
   artist: z.string().optional(),
@@ -70,6 +71,7 @@ function OrcamentoPage() {
   const search = Route.useSearch();
   const [error, setError] = useState<string | null>(null);
   const [files, setFiles] = useState<File[]>([]);
+  const [saving, setSaving] = useState(false);
   const [previews, setPreviews] = useState<string[]>([]);
   const [sent, setSent] = useState<null | { nome: string; link: string }>(null);
 
