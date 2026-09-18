@@ -78,6 +78,31 @@ function OrcamentosPage() {
   }, []);
 
   useEffect(() => {
+    const channel = supabase
+      .channel("leads-realtime")
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "leads" },
+        (payload) => {
+          const novo = payload.new as Lead;
+          setLeads((prev) => (prev.some((l) => l.id === novo.id) ? prev : [novo, ...prev]));
+        },
+      )
+      .on(
+        "postgres_changes",
+        { event: "UPDATE", schema: "public", table: "leads" },
+        (payload) => {
+          const atualizado = payload.new as Lead;
+          setLeads((prev) => prev.map((l) => (l.id === atualizado.id ? atualizado : l)));
+        },
+      )
+      .subscribe();
+    return () => {
+      void supabase.removeChannel(channel);
+    };
+  }, []);
+
+  useEffect(() => {
     const paths = leads.flatMap((l) => l.referencias ?? []).filter((p) => !(p in signed));
     if (paths.length === 0) return;
     let active = true;
