@@ -23,36 +23,21 @@ const labelClass = "mb-2 block text-[11px] uppercase tracking-[0.22em] text-mute
 
 function AuthPage() {
   const navigate = useNavigate();
-  const [mode, setMode] = useState<"entrar" | "criar">("entrar");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("titans.tattoo@gmail.com");
   const [senha, setSenha] = useState("");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     setError(null);
-    setMessage(null);
     setLoading(true);
     try {
-      if (mode === "entrar") {
-        const { error } = await supabase.auth.signInWithPassword({ email, password: senha });
-        if (error) throw error;
-        await navigate({ to: "/orcamentos" });
-      } else {
-        const { error } = await supabase.auth.signUp({
-          email,
-          password: senha,
-          options: { emailRedirectTo: `${window.location.origin}/orcamentos` },
-        });
-        if (error) throw error;
-        setMessage(
-          "Conta criada! Enviamos um link de confirmação para o seu e-mail. Abra o link para ativar o acesso à Área do estúdio.",
-        );
-      }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Não foi possível concluir. Tente novamente.");
+      const { error } = await supabase.auth.signInWithPassword({ email, password: senha });
+      if (error) throw error;
+      await navigate({ to: "/orcamentos" });
+    } catch {
+      setError("E-mail ou senha incorretos.");
     } finally {
       setLoading(false);
     }
@@ -93,7 +78,6 @@ function AuthPage() {
         </div>
 
         {error ? <p role="alert" className="text-sm text-destructive">{error}</p> : null}
-        {message ? <p className="text-sm text-muted-foreground">{message}</p> : null}
 
         <div className="flex flex-wrap items-center gap-5">
           <button
@@ -101,18 +85,7 @@ function AuthPage() {
             disabled={loading}
             className="border border-foreground/80 px-7 py-4 text-xs uppercase tracking-[0.22em] transition-colors hover:bg-foreground hover:text-background disabled:opacity-50"
           >
-            {loading ? "Aguarde..." : mode === "entrar" ? "Entrar" : "Criar acesso"}
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setMode(mode === "entrar" ? "criar" : "entrar");
-              setError(null);
-              setMessage(null);
-            }}
-            className="text-xs uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-foreground"
-          >
-            {mode === "entrar" ? "Criar acesso da equipe" : "Já tenho acesso"}
+            {loading ? "Aguarde..." : "Entrar"}
           </button>
         </div>
       </form>
