@@ -39,7 +39,7 @@ const styles = [
 
 function PortfolioPage() {
   const [style, setStyle] = useState("Todos");
-  const [artist, setArtist] = useState("Todos");
+  const [artist, setArtist] = useState("Cascio");
 
   const items = portfolio.filter(
     (item) =>
