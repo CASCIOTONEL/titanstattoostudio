@@ -9,6 +9,7 @@
 - [x] Melhorar enquadramento, equalizar contraste e manter coloridas as fotos do portfólio do Cascio
 - [x] Adicionar os novos trabalhos ao portfólio do Cascio e atualizar seus estilos
 - [x] Adicionar o lote final de trabalhos enviado para o portfólio do Cascio
+- [x] Adicionar os trabalhos enviados ao portfólio do Ricardo e atualizar seus estilos
 
 ## Etapa 2 — Orçamento + CRM (backend)
 - [ ] Ativar Lovable Cloud, tabelas + RLS

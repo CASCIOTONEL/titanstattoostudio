@@ -35,6 +35,7 @@ const styles = [
   "Anime",
   "Aquarela",
   "New school",
+  "Patch tattoo",
 ];
 
 function PortfolioPage() {
