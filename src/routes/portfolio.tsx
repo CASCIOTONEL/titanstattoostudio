@@ -52,6 +52,7 @@ function PortfolioPage() {
   return (
     <Section>
       <SectionTitle
+        as="h1"
         eyebrow="Trabalhos"
         title="Portfólio"
         description="Filtre por estilo ou por tatuador para encontrar a referência mais próxima da sua ideia."
