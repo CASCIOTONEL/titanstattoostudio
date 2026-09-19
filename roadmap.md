@@ -20,6 +20,11 @@
 - [ ] Aviso automático no WhatsApp do estúdio (5551991786170) a cada novo orçamento — exige conectar WhatsApp Business
 - [ ] Funil/kanban de atendimento no /admin
 
+## Segurança e permissões
+- [x] Níveis de permissão (master, recepção, financeiro, tatuador) com tabela de papéis e RLS
+- [x] Master (titans.tattoo@gmail.com) cria usuários, define permissões, ativa/desativa e redefine senhas em /equipe
+- [x] Proteção contra senhas vazadas ativada; funções internas fora da API pública
+
 ## Etapa 3 — Agenda
 ## Etapa 4 — Pagamento e financeiro
 ## Etapa 5 — Comissões
