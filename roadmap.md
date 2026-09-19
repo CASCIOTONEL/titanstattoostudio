@@ -32,3 +32,5 @@
 - [x] Financeiro por tatuador, movimento dia a dia e fechamento semanal de comissão de 60% (terça a segunda, repasse na terça)
 ## Etapa 5 — Comissões
 ## Etapa 6 — Ficha, documentos, painel e permissões
+
+- [ ] Aviso de orcamento: enviar mensagem completa para 5551991786170 (estudio repassa ao tatuador manualmente)
