@@ -23,7 +23,7 @@ const labelClass = "mb-2 block text-[11px] uppercase tracking-[0.22em] text-mute
 
 function AuthPage() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("titans.tattoo@gmail.com");
+  const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -60,7 +60,7 @@ function AuthPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className={fieldClass}
-            placeholder="equipe@titans.com"
+            placeholder="seu e-mail"
           />
         </div>
         <div>
