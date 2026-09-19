@@ -4,6 +4,7 @@ import { z } from "zod";
 import { Section, SectionTitle } from "@/components/site/Section";
 import { artists, services, studio, whatsappLink } from "@/lib/studio";
 import { supabase } from "@/integrations/supabase/client";
+import { avisarNovoOrcamento } from "@/lib/whatsapp.functions";
 
 const searchSchema = z.object({
   artist: z.string().optional(),
@@ -134,7 +135,9 @@ function OrcamentoPage() {
         if (!upErr) caminhos.push(path);
       }
 
+      const leadId = crypto.randomUUID();
       const { error: insertError } = await supabase.from("leads").insert({
+        id: leadId,
         nome: d.nome,
         whatsapp: d.whatsapp,
         email: d.email || null,
@@ -151,6 +154,12 @@ function OrcamentoPage() {
         referencias: caminhos,
       });
       if (insertError) throw insertError;
+
+      try {
+        await avisarNovoOrcamento({ data: { leadId } });
+      } catch (avisoErr) {
+        console.error("Falha ao avisar o estúdio no WhatsApp", avisoErr);
+      }
     } catch (err) {
       console.error("Falha ao salvar o orçamento", err);
     } finally {
