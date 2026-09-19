@@ -20,6 +20,7 @@ import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as AuthenticatedClientesRouteImport } from './routes/_authenticated/clientes'
 import { Route as AuthenticatedEquipeRouteImport } from './routes/_authenticated/equipe'
 import { Route as AuthenticatedOrcamentosRouteImport } from './routes/_authenticated/orcamentos'
+import { Route as AuthenticatedPagamentosRouteImport } from './routes/_authenticated/pagamentos'
 import { Route as TatuadoresIndexRouteImport } from './routes/tatuadores.index'
 import { Route as TatuadoresSlugRouteImport } from './routes/tatuadores.$slug'
 import { Route as ApiPublicWhatsappWebhookRouteImport } from './routes/api/public/whatsapp/webhook'
@@ -78,6 +79,11 @@ const AuthenticatedOrcamentosRoute = AuthenticatedOrcamentosRouteImport.update({
   path: '/orcamentos',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedPagamentosRoute = AuthenticatedPagamentosRouteImport.update({
+  id: '/pagamentos',
+  path: '/pagamentos',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const TatuadoresIndexRoute = TatuadoresIndexRouteImport.update({
   id: '/tatuadores/',
   path: '/tatuadores/',
@@ -106,6 +112,7 @@ export interface FileRoutesByFullPath {
   '/clientes': typeof AuthenticatedClientesRoute
   '/equipe': typeof AuthenticatedEquipeRoute
   '/orcamentos': typeof AuthenticatedOrcamentosRoute
+  '/pagamentos': typeof AuthenticatedPagamentosRoute
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
   '/tatuadores/': typeof TatuadoresIndexRoute
   '/api/public/whatsapp/webhook': typeof ApiPublicWhatsappWebhookRoute
@@ -121,6 +128,7 @@ export interface FileRoutesByTo {
   '/clientes': typeof AuthenticatedClientesRoute
   '/equipe': typeof AuthenticatedEquipeRoute
   '/orcamentos': typeof AuthenticatedOrcamentosRoute
+  '/pagamentos': typeof AuthenticatedPagamentosRoute
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
   '/tatuadores': typeof TatuadoresIndexRoute
   '/api/public/whatsapp/webhook': typeof ApiPublicWhatsappWebhookRoute
@@ -138,6 +146,7 @@ export interface FileRoutesById {
   '/_authenticated/clientes': typeof AuthenticatedClientesRoute
   '/_authenticated/equipe': typeof AuthenticatedEquipeRoute
   '/_authenticated/orcamentos': typeof AuthenticatedOrcamentosRoute
+  '/_authenticated/pagamentos': typeof AuthenticatedPagamentosRoute
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
   '/tatuadores/': typeof TatuadoresIndexRoute
   '/api/public/whatsapp/webhook': typeof ApiPublicWhatsappWebhookRoute
@@ -155,6 +164,7 @@ export interface FileRouteTypes {
     | '/clientes'
     | '/equipe'
     | '/orcamentos'
+    | '/pagamentos'
     | '/tatuadores/$slug'
     | '/tatuadores/'
     | '/api/public/whatsapp/webhook'
@@ -170,6 +180,7 @@ export interface FileRouteTypes {
     | '/clientes'
     | '/equipe'
     | '/orcamentos'
+    | '/pagamentos'
     | '/tatuadores/$slug'
     | '/tatuadores'
     | '/api/public/whatsapp/webhook'
@@ -186,6 +197,7 @@ export interface FileRouteTypes {
     | '/_authenticated/clientes'
     | '/_authenticated/equipe'
     | '/_authenticated/orcamentos'
+    | '/_authenticated/pagamentos'
     | '/tatuadores/$slug'
     | '/tatuadores/'
     | '/api/public/whatsapp/webhook'
@@ -284,6 +296,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOrcamentosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/pagamentos': {
+      id: '/_authenticated/pagamentos'
+      path: '/pagamentos'
+      fullPath: '/pagamentos'
+      preLoaderRoute: typeof AuthenticatedPagamentosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/tatuadores/': {
       id: '/tatuadores/'
       path: '/tatuadores'
@@ -312,12 +331,14 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedClientesRoute: typeof AuthenticatedClientesRoute
   AuthenticatedEquipeRoute: typeof AuthenticatedEquipeRoute
   AuthenticatedOrcamentosRoute: typeof AuthenticatedOrcamentosRoute
+  AuthenticatedPagamentosRoute: typeof AuthenticatedPagamentosRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedClientesRoute: AuthenticatedClientesRoute,
   AuthenticatedEquipeRoute: AuthenticatedEquipeRoute,
   AuthenticatedOrcamentosRoute: AuthenticatedOrcamentosRoute,
+  AuthenticatedPagamentosRoute: AuthenticatedPagamentosRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

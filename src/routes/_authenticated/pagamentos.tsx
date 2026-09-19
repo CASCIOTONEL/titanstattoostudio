@@ -39,6 +39,7 @@ type LeadConcluido = {
   local_corpo: string;
 };
 
+const FORMA_PADRAO = "Pix";
 const FORMAS = ["Pix", "Cartão de crédito", "Cartão de débito", "Dinheiro", "Transferência", "Link de pagamento"];
 const TIPOS = [
   { valor: "sinal", rotulo: "Sinal" },
@@ -70,7 +71,7 @@ function PagamentosPage() {
   const [clienteNome, setClienteNome] = useState("");
   const [valor, setValor] = useState("");
   const [data, setData] = useState(hoje());
-  const [forma, setForma] = useState(FORMAS[0]);
+  const [forma, setForma] = useState(FORMA_PADRAO);
   const [tipo, setTipo] = useState("total");
   const [observacoes, setObservacoes] = useState("");
 
@@ -163,7 +164,7 @@ function PagamentosPage() {
     setClienteNome("");
     setValor("");
     setData(hoje());
-    setForma(FORMAS[0]);
+    setForma(FORMA_PADRAO);
     setTipo("total");
     setObservacoes("");
   }
