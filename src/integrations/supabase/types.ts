@@ -17,6 +17,8 @@ export type Database = {
       leads: {
         Row: {
           altura_cm: number
+          aviso_em: string | null
+          aviso_wa_id: string | null
           cor: string | null
           created_at: string
           disponibilidade: string | null
@@ -38,6 +40,8 @@ export type Database = {
         }
         Insert: {
           altura_cm: number
+          aviso_em?: string | null
+          aviso_wa_id?: string | null
           cor?: string | null
           created_at?: string
           disponibilidade?: string | null
@@ -59,6 +63,8 @@ export type Database = {
         }
         Update: {
           altura_cm?: number
+          aviso_em?: string | null
+          aviso_wa_id?: string | null
           cor?: string | null
           created_at?: string
           disponibilidade?: string | null
@@ -125,6 +131,83 @@ export type Database = {
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
           user_id?: string
+        }
+        Relationships: []
+      }
+      whatsapp_mensagens: {
+        Row: {
+          corpo: string | null
+          created_at: string
+          destinatario: string
+          erro: Json | null
+          id: string
+          lead_id: string | null
+          provider_id: string | null
+          status: string
+          status_em: string | null
+          updated_at: string
+        }
+        Insert: {
+          corpo?: string | null
+          created_at?: string
+          destinatario: string
+          erro?: Json | null
+          id?: string
+          lead_id?: string | null
+          provider_id?: string | null
+          status?: string
+          status_em?: string | null
+          updated_at?: string
+        }
+        Update: {
+          corpo?: string | null
+          created_at?: string
+          destinatario?: string
+          erro?: Json | null
+          id?: string
+          lead_id?: string | null
+          provider_id?: string | null
+          status?: string
+          status_em?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "whatsapp_mensagens_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      whatsapp_webhook_events: {
+        Row: {
+          delivery_id: string
+          event: string
+          id: string
+          payload: Json
+          processed_at: string | null
+          processing_error: string | null
+          received_at: string
+        }
+        Insert: {
+          delivery_id: string
+          event: string
+          id?: string
+          payload: Json
+          processed_at?: string | null
+          processing_error?: string | null
+          received_at?: string
+        }
+        Update: {
+          delivery_id?: string
+          event?: string
+          id?: string
+          payload?: Json
+          processed_at?: string | null
+          processing_error?: string | null
+          received_at?: string
         }
         Relationships: []
       }
