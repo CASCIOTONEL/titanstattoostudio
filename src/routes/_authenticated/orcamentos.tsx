@@ -39,15 +39,7 @@ type Lead = {
   created_at: string;
 };
 
-const statusOptions = [
-  "novo",
-  "aguardando informações",
-  "orçamento enviado",
-  "aguardando sinal",
-  "agendado",
-  "realizado",
-  "arquivado",
-];
+const statusOptions = ["aberto", "em andamento", "concluído"];
 
 function onlyDigits(value: string) {
   const digits = value.replace(/\D/g, "");
