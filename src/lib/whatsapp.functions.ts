@@ -28,7 +28,7 @@ type Lead = {
   nome: string;
   whatsapp: string;
   email: string | null;
-  endereco: string;
+  endereco: string | null;
   servico: string;
   ideia: string;
   largura_cm: number;
@@ -49,7 +49,7 @@ function resumo(lead: Lead) {
     `Nome: ${lead.nome}`,
     `WhatsApp: ${lead.whatsapp}`,
     `E-mail: ${lead.email || "-"}`,
-    `Endereço: ${lead.endereco}`,
+    `Endereço: ${lead.endereco || "-"}`,
     `Serviço: ${lead.servico}`,
     `Ideia: ${lead.ideia}`,
     `Tamanho: ${lead.largura_cm} cm x ${lead.altura_cm} cm`,
