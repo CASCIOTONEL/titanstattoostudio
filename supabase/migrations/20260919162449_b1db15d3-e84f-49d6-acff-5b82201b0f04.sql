@@ -1,0 +1,1 @@
+drop policy if exists "Visitantes podem enviar referencias" on storage.objects;
