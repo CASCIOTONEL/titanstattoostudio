@@ -230,15 +230,24 @@ function OrcamentosPage() {
                     {new Date(lead.created_at).toLocaleString("pt-BR")}
                   </p>
                 </div>
-                <select
-                  value={lead.status}
-                  onChange={(e) => mudarStatus(lead.id, e.target.value)}
-                  className="border border-border bg-card/40 px-3 py-2 text-xs uppercase tracking-[0.16em] text-foreground"
-                >
+                <div className="flex flex-wrap gap-2" role="group" aria-label="Situação do orçamento">
                   {statusOptions.map((s) => (
-                    <option key={s} value={s}>{s}</option>
+                    <button
+                      key={s}
+                      type="button"
+                      onClick={() => mudarStatus(lead.id, s)}
+                      aria-pressed={lead.status === s}
+                      className={
+                        "border px-4 py-2 text-[11px] uppercase tracking-[0.16em] transition-colors " +
+                        (lead.status === s
+                          ? "border-foreground bg-foreground text-background"
+                          : "border-border text-muted-foreground hover:text-foreground")
+                      }
+                    >
+                      {s}
+                    </button>
                   ))}
-                </select>
+                </div>
               </div>
 
               <dl className="mt-6 grid gap-4 text-sm sm:grid-cols-2 lg:grid-cols-3">
