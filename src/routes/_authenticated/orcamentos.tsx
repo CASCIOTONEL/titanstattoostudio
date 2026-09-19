@@ -158,6 +158,9 @@ function OrcamentosPage() {
     await navigate({ to: "/auth" });
   }
 
+  const podeVerOrcamentos =
+    papeis === null || papeis.some((p) => p === "master" || p === "recepcao");
+
   return (
     <Section>
       <div className="flex flex-wrap items-start justify-between gap-6">
