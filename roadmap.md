@@ -27,5 +27,6 @@
 
 ## Etapa 3 — Agenda
 ## Etapa 4 — Pagamento e financeiro
+- [x] Tela de recebimentos (/pagamentos) com valor, data, forma e vínculo aos orçamentos concluídos
 ## Etapa 5 — Comissões
 ## Etapa 6 — Ficha, documentos, painel e permissões
