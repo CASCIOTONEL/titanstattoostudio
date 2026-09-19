@@ -129,46 +129,59 @@ export const avisarNovoOrcamento = createServerFn({ method: "POST" })
     if (!reservado) return { enviado: false, motivo: "ja-avisado" as const };
 
     const texto = resumo(lead);
-    const idsEnviados: string[] = [];
+    const enviados: { id: string; destinatario: string }[] = [];
+    const numeros = destinatarios(lead.tatuador);
+
+    // Gera os links das referências uma única vez (valem 7 dias).
+    const referencias = Array.isArray(lead.referencias) ? lead.referencias.slice(0, 5) : [];
+    const links: string[] = [];
+    for (const caminho of referencias) {
+      const { data: assinada } = await supabaseAdmin.storage
+        .from("referencias")
+        .createSignedUrl(caminho, 60 * 60 * 24 * 7);
+      if (assinada?.signedUrl) links.push(assinada.signedUrl);
+    }
+
+    async function enviarPara(numero: string) {
+      if (links.length === 0) {
+        const id = await enviar(numero, { type: "text", text: { body: texto } });
+        if (id) enviados.push({ id, destinatario: numero });
+        return;
+      }
+      for (const [i, link] of links.entries()) {
+        const id = await enviar(numero, {
+          type: "image",
+          image: { link, caption: i === 0 ? texto : `Referência ${i + 1} — ${lead.nome}` },
+        });
+        if (id) enviados.push({ id, destinatario: numero });
+      }
+    }
 
     try {
-      const referencias = Array.isArray(lead.referencias) ? lead.referencias.slice(0, 5) : [];
-      let primeiraImagemEnviada = false;
-
-      for (const [i, caminho] of referencias.entries()) {
-        const { data: assinada } = await supabaseAdmin.storage
-          .from("referencias")
-          .createSignedUrl(caminho, 60 * 60 * 24 * 7);
-        if (!assinada?.signedUrl) continue;
-        const id = await enviar({
-          type: "image",
-          image: {
-            link: assinada.signedUrl,
-            caption: i === 0 ? texto : `Referência ${i + 1} — ${lead.nome}`,
-          },
-        });
-        if (id) idsEnviados.push(id);
-        if (i === 0) primeiraImagemEnviada = true;
-      }
-
-      if (!primeiraImagemEnviada) {
-        const id = await enviar({ type: "text", text: { body: texto } });
-        if (id) idsEnviados.push(id);
-      }
+      await enviarPara(numeros[0]!);
     } catch (err) {
       await supabaseAdmin.from("leads").update({ aviso_wa_id: null, aviso_em: null }).eq("id", lead.id);
       throw err;
     }
 
-    const principal = idsEnviados[0] ?? null;
+    // Avisa o tatuador escolhido; uma falha aqui não desfaz o aviso do estúdio.
+    for (const numero of numeros.slice(1)) {
+      try {
+        await enviarPara(numero);
+      } catch (err) {
+        console.error(`Falha ao avisar o tatuador (${numero}):`, err);
+      }
+    }
+
+    const principal = enviados[0]?.id ?? null;
     await supabaseAdmin.from("leads").update({ aviso_wa_id: principal }).eq("id", lead.id);
 
-    if (idsEnviados.length > 0) {
+    if (enviados.length > 0) {
       await supabaseAdmin.from("whatsapp_mensagens").upsert(
-        idsEnviados.map((id) => ({
+        enviados.map((m) => ({
           lead_id: lead.id,
-          provider_id: id,
-          destinatario: NUMERO_AVISO,
+          provider_id: m.id,
+          destinatario: m.destinatario,
           corpo: texto,
           status: "accepted",
         })),
