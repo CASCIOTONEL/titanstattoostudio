@@ -15,9 +15,9 @@ export const Route = createFileRoute("/contato")({
         property: "og:description",
         content: "Onde estamos, horários de atendimento e canais de contato.",
       },
-      { property: "og:url", content: "https://pigmentflow-pro.lovable.app/contato" },
+      { property: "og:url", content: "https://titanstattoostudio.com.br/contato" },
     ],
-    links: [{ rel: "canonical", href: "https://pigmentflow-pro.lovable.app/contato" }],
+    links: [{ rel: "canonical", href: "https://titanstattoostudio.com.br/contato" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -25,7 +25,7 @@ export const Route = createFileRoute("/contato")({
           "@context": "https://schema.org",
           "@type": "TattooParlor",
           name: studio.name,
-          url: "https://pigmentflow-pro.lovable.app/",
+          url: "https://titanstattoostudio.com.br/",
           telephone: "+55" + studio.whatsapp.slice(2),
           email: studio.email,
           address: {

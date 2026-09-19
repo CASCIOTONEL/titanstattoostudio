@@ -16,9 +16,9 @@ export const Route = createFileRoute("/tatuadores/")({
         property: "og:description",
         content: "Realismo, fine line, blackwork e cobertura com artistas residentes.",
       },
-      { property: "og:url", content: "https://pigmentflow-pro.lovable.app/tatuadores" },
+      { property: "og:url", content: "https://titanstattoostudio.com.br/tatuadores" },
     ],
-    links: [{ rel: "canonical", href: "https://pigmentflow-pro.lovable.app/tatuadores" }],
+    links: [{ rel: "canonical", href: "https://titanstattoostudio.com.br/tatuadores" }],
   }),
   component: ArtistsPage,
 });

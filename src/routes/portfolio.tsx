@@ -18,9 +18,9 @@ export const Route = createFileRoute("/portfolio")({
         property: "og:description",
         content: "Realismo, fine line e blackwork feitos pelos tatuadores da Titans.",
       },
-      { property: "og:url", content: "https://pigmentflow-pro.lovable.app/portfolio" },
+      { property: "og:url", content: "https://titanstattoostudio.com.br/portfolio" },
     ],
-    links: [{ rel: "canonical", href: "https://pigmentflow-pro.lovable.app/portfolio" }],
+    links: [{ rel: "canonical", href: "https://titanstattoostudio.com.br/portfolio" }],
   }),
   component: PortfolioPage,
 });

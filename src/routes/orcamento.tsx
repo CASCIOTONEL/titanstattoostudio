@@ -25,9 +25,9 @@ export const Route = createFileRoute("/orcamento")({
         property: "og:description",
         content: "Formulário de orçamento de tatuagem, cobertura, remoção a laser e piercing.",
       },
-      { property: "og:url", content: "https://pigmentflow-pro.lovable.app/orcamento" },
+      { property: "og:url", content: "https://titanstattoostudio.com.br/orcamento" },
     ],
-    links: [{ rel: "canonical", href: "https://pigmentflow-pro.lovable.app/orcamento" }],
+    links: [{ rel: "canonical", href: "https://titanstattoostudio.com.br/orcamento" }],
   }),
   component: OrcamentoPage,
 });

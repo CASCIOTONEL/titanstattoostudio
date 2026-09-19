@@ -18,9 +18,9 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "Tattoo, cobertura, remoção a laser e piercing com artistas residentes.",
       },
-      { property: "og:url", content: "https://pigmentflow-pro.lovable.app/" },
+      { property: "og:url", content: "https://titanstattoostudio.com.br/" },
     ],
-    links: [{ rel: "canonical", href: "https://pigmentflow-pro.lovable.app/" }],
+    links: [{ rel: "canonical", href: "https://titanstattoostudio.com.br/" }],
   }),
   component: Home,
 });
