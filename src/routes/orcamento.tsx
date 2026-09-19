@@ -4,6 +4,7 @@ import { z } from "zod";
 import { Section, SectionTitle } from "@/components/site/Section";
 import { artists, services, studio, whatsappLink } from "@/lib/studio";
 import { supabase } from "@/integrations/supabase/client";
+import { avisarNovoOrcamento } from "@/lib/whatsapp.functions";
 
 const searchSchema = z.object({
   artist: z.string().optional(),
