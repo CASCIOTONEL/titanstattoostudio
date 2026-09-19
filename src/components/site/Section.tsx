@@ -21,10 +21,12 @@ export function SectionTitle({
   eyebrow,
   title,
   description,
+  as: Heading = "h2",
 }: {
   eyebrow?: string;
   title: string;
   description?: string;
+  as?: "h1" | "h2";
 }) {
   return (
     <div className="max-w-2xl">
@@ -33,9 +35,9 @@ export function SectionTitle({
           {eyebrow}
         </p>
       ) : null}
-      <h2 className="font-display text-3xl uppercase tracking-[0.06em] text-foreground md:text-5xl">
+      <Heading className="font-display text-3xl uppercase tracking-[0.06em] text-foreground md:text-5xl">
         {title}
-      </h2>
+      </Heading>
       {description ? (
         <p className="mt-5 text-base leading-relaxed text-muted-foreground">{description}</p>
       ) : null}
