@@ -5,6 +5,31 @@ const GATEWAY_URL = "https://connector-gateway.lovable.dev/whatsapp";
 /** Número que recebe os avisos de novos orçamentos (somente dígitos, com DDI). */
 export const NUMERO_AVISO = "5551993526883";
 
+/** WhatsApp de cada tatuador — recebe o orçamento quando for o escolhido no site. */
+export const WHATSAPP_TATUADORES: Record<string, string> = {
+  cascio: "5551993526883",
+  braian: "5551997072442",
+  ricardo: "5551997025755",
+};
+
+function normalizar(texto: string) {
+  return texto
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .toLowerCase();
+}
+
+/** Lista de destinatários: o estúdio e, quando houver, o tatuador escolhido. */
+function destinatarios(tatuador: string | null) {
+  const lista = [NUMERO_AVISO];
+  if (tatuador) {
+    const numero = WHATSAPP_TATUADORES[normalizar(tatuador)];
+    if (numero && !lista.includes(numero)) lista.push(numero);
+  }
+  return lista;
+}
+
 type Lead = {
   id: string;
   nome: string;
