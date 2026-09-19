@@ -148,12 +148,26 @@ export const avisarNovoOrcamento = createServerFn({ method: "POST" })
         if (id) enviados.push({ id, destinatario: numero });
         return;
       }
+
+      // Envia o resumo em texto primeiro: garante o aviso mesmo que a imagem
+      // seja recusada pelo WhatsApp (ex.: HEIC não é aceito como mídia).
+      const idTexto = await enviar(numero, {
+        type: "text",
+        text: { body: `${texto}\n\nReferências:\n${links.join("\n")}` },
+      });
+      if (idTexto) enviados.push({ id: idTexto, destinatario: numero });
+
       for (const [i, link] of links.entries()) {
-        const id = await enviar(numero, {
-          type: "image",
-          image: { link, caption: i === 0 ? texto : `Referência ${i + 1} — ${lead!.nome}` },
-        });
-        if (id) enviados.push({ id, destinatario: numero });
+        if (/\.hei[cf](\?|$)/i.test(link)) continue; // formato não aceito pelo WhatsApp
+        try {
+          const id = await enviar(numero, {
+            type: "image",
+            image: { link, caption: `Referência ${i + 1} — ${lead!.nome}` },
+          });
+          if (id) enviados.push({ id, destinatario: numero });
+        } catch (err) {
+          console.error(`Falha ao enviar a referência ${i + 1} para ${numero}:`, err);
+        }
       }
     }
 
