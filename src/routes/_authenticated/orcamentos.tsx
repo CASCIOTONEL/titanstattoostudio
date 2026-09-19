@@ -166,14 +166,32 @@ function OrcamentosPage() {
           title="Orçamentos recebidos"
           description="Cada pedido enviado pelo site com nome, WhatsApp, endereço, dimensão e local do corpo."
         />
-        <button
-          type="button"
-          onClick={sair}
-          className="border border-border px-5 py-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Sair
-        </button>
+        <div className="flex flex-wrap gap-3">
+          {papeis?.includes("master") ? (
+            <Link
+              to="/equipe"
+              className="border border-foreground/80 px-5 py-3 text-xs uppercase tracking-[0.2em] transition-colors hover:bg-foreground hover:text-background"
+            >
+              Equipe e permissões
+            </Link>
+          ) : null}
+          <button
+            type="button"
+            onClick={sair}
+            className="border border-border px-5 py-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Sair
+          </button>
+        </div>
       </div>
+
+      {papeis !== null && papeis.length === 0 ? (
+        <p role="alert" className="mt-10 text-sm text-destructive">
+          Seu acesso ainda não tem permissão para ver os orçamentos. Peça ao administrador do estúdio
+          para liberar o seu nível de permissão.
+        </p>
+      ) : null}
+
 
       <div className="mt-8 flex flex-wrap gap-2">
         {["todos", ...statusOptions].map((s) => (
