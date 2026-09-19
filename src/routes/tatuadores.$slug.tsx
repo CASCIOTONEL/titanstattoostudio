@@ -6,7 +6,7 @@ export const Route = createFileRoute("/tatuadores/$slug")({
   loader: ({ params }) => {
     const artist = artists.find((a) => a.slug === params.slug);
     if (!artist) throw notFound();
-    return { name: artist.name, role: artist.role };
+    return { name: artist.name, role: artist.role, slug: artist.slug };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -16,13 +16,17 @@ export const Route = createFileRoute("/tatuadores/$slug")({
     }
     const title = `${loaderData.name} — Titans Tattoo Studio`;
     const description = `${loaderData.name}, ${loaderData.role} no Titans Tattoo Studio. Veja trabalhos e solicite orçamento.`;
+    const url = `https://pigmentflow-pro.lovable.app/tatuadores/${loaderData.slug}`;
     return {
       meta: [
         { title },
         { name: "description", content: description },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
+        { property: "og:type", content: "profile" },
+        { property: "og:url", content: url },
       ],
+      links: [{ rel: "canonical", href: url }],
     };
   },
   component: ArtistPage,

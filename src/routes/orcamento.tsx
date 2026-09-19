@@ -25,7 +25,9 @@ export const Route = createFileRoute("/orcamento")({
         property: "og:description",
         content: "Formulário de orçamento de tatuagem, cobertura, remoção a laser e piercing.",
       },
+      { property: "og:url", content: "https://pigmentflow-pro.lovable.app/orcamento" },
     ],
+    links: [{ rel: "canonical", href: "https://pigmentflow-pro.lovable.app/orcamento" }],
   }),
   component: OrcamentoPage,
 });
@@ -204,6 +206,7 @@ function OrcamentoPage() {
   return (
     <Section>
       <SectionTitle
+        as="h1"
         eyebrow="Primeiro passo"
         title="Solicitar orçamento"
         description="Campos com * são obrigatórios. Quanto mais detalhes, mais preciso o valor. Ao enviar, sua ficha segue direto para o WhatsApp do estúdio."

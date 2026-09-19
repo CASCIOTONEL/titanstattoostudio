@@ -16,7 +16,9 @@ export const Route = createFileRoute("/tatuadores/")({
         property: "og:description",
         content: "Realismo, fine line, blackwork e cobertura com artistas residentes.",
       },
+      { property: "og:url", content: "https://pigmentflow-pro.lovable.app/tatuadores" },
     ],
+    links: [{ rel: "canonical", href: "https://pigmentflow-pro.lovable.app/tatuadores" }],
   }),
   component: ArtistsPage,
 });
@@ -25,6 +27,7 @@ function ArtistsPage() {
   return (
     <Section>
       <SectionTitle
+        as="h1"
         eyebrow="Equipe"
         title="Tatuadores"
         description="Cada artista tem especialidade, agenda e estilo próprios. Escolha quem mais combina com a sua ideia."

@@ -18,7 +18,9 @@ export const Route = createFileRoute("/portfolio")({
         property: "og:description",
         content: "Realismo, fine line e blackwork feitos pelos tatuadores da Titans.",
       },
+      { property: "og:url", content: "https://pigmentflow-pro.lovable.app/portfolio" },
     ],
+    links: [{ rel: "canonical", href: "https://pigmentflow-pro.lovable.app/portfolio" }],
   }),
   component: PortfolioPage,
 });
@@ -50,6 +52,7 @@ function PortfolioPage() {
   return (
     <Section>
       <SectionTitle
+        as="h1"
         eyebrow="Trabalhos"
         title="Portfólio"
         description="Filtre por estilo ou por tatuador para encontrar a referência mais próxima da sua ideia."
