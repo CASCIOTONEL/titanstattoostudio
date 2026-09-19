@@ -5,6 +5,31 @@ const GATEWAY_URL = "https://connector-gateway.lovable.dev/whatsapp";
 /** Número que recebe os avisos de novos orçamentos (somente dígitos, com DDI). */
 export const NUMERO_AVISO = "5551993526883";
 
+/** WhatsApp de cada tatuador — recebe o orçamento quando for o escolhido no site. */
+export const WHATSAPP_TATUADORES: Record<string, string> = {
+  cascio: "5551993526883",
+  braian: "5551997072442",
+  ricardo: "5551997025755",
+};
+
+function normalizar(texto: string) {
+  return texto
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .toLowerCase();
+}
+
+/** Lista de destinatários: o estúdio e, quando houver, o tatuador escolhido. */
+function destinatarios(tatuador: string | null) {
+  const lista = [NUMERO_AVISO];
+  if (tatuador) {
+    const numero = WHATSAPP_TATUADORES[normalizar(tatuador)];
+    if (numero && !lista.includes(numero)) lista.push(numero);
+  }
+  return lista;
+}
+
 type Lead = {
   id: string;
   nome: string;
@@ -43,7 +68,7 @@ function resumo(lead: Lead) {
   ].join("\n");
 }
 
-async function enviar(body: Record<string, unknown>) {
+async function enviar(para: string, body: Record<string, unknown>) {
   const lovableKey = process.env["LOVABLE_API_KEY"];
   const whatsappKey = process.env["WHATSAPP_API_KEY"];
   if (!lovableKey || !whatsappKey) throw new Error("Credenciais do WhatsApp não configuradas");
@@ -55,7 +80,7 @@ async function enviar(body: Record<string, unknown>) {
       "X-Connection-Api-Key": whatsappKey,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ messaging_product: "whatsapp", to: NUMERO_AVISO, ...body }),
+    body: JSON.stringify({ messaging_product: "whatsapp", to: para, ...body }),
   });
   const texto = await response.text();
   if (!response.ok) {
@@ -104,46 +129,59 @@ export const avisarNovoOrcamento = createServerFn({ method: "POST" })
     if (!reservado) return { enviado: false, motivo: "ja-avisado" as const };
 
     const texto = resumo(lead);
-    const idsEnviados: string[] = [];
+    const enviados: { id: string; destinatario: string }[] = [];
+    const numeros = destinatarios(lead.tatuador);
+
+    // Gera os links das referências uma única vez (valem 7 dias).
+    const referencias = Array.isArray(lead.referencias) ? lead.referencias.slice(0, 5) : [];
+    const links: string[] = [];
+    for (const caminho of referencias) {
+      const { data: assinada } = await supabaseAdmin.storage
+        .from("referencias")
+        .createSignedUrl(caminho, 60 * 60 * 24 * 7);
+      if (assinada?.signedUrl) links.push(assinada.signedUrl);
+    }
+
+    async function enviarPara(numero: string) {
+      if (links.length === 0) {
+        const id = await enviar(numero, { type: "text", text: { body: texto } });
+        if (id) enviados.push({ id, destinatario: numero });
+        return;
+      }
+      for (const [i, link] of links.entries()) {
+        const id = await enviar(numero, {
+          type: "image",
+          image: { link, caption: i === 0 ? texto : `Referência ${i + 1} — ${lead!.nome}` },
+        });
+        if (id) enviados.push({ id, destinatario: numero });
+      }
+    }
 
     try {
-      const referencias = Array.isArray(lead.referencias) ? lead.referencias.slice(0, 5) : [];
-      let primeiraImagemEnviada = false;
-
-      for (const [i, caminho] of referencias.entries()) {
-        const { data: assinada } = await supabaseAdmin.storage
-          .from("referencias")
-          .createSignedUrl(caminho, 60 * 60 * 24 * 7);
-        if (!assinada?.signedUrl) continue;
-        const id = await enviar({
-          type: "image",
-          image: {
-            link: assinada.signedUrl,
-            caption: i === 0 ? texto : `Referência ${i + 1} — ${lead.nome}`,
-          },
-        });
-        if (id) idsEnviados.push(id);
-        if (i === 0) primeiraImagemEnviada = true;
-      }
-
-      if (!primeiraImagemEnviada) {
-        const id = await enviar({ type: "text", text: { body: texto } });
-        if (id) idsEnviados.push(id);
-      }
+      await enviarPara(numeros[0]!);
     } catch (err) {
       await supabaseAdmin.from("leads").update({ aviso_wa_id: null, aviso_em: null }).eq("id", lead.id);
       throw err;
     }
 
-    const principal = idsEnviados[0] ?? null;
+    // Avisa o tatuador escolhido; uma falha aqui não desfaz o aviso do estúdio.
+    for (const numero of numeros.slice(1)) {
+      try {
+        await enviarPara(numero);
+      } catch (err) {
+        console.error(`Falha ao avisar o tatuador (${numero}):`, err);
+      }
+    }
+
+    const principal = enviados[0]?.id ?? null;
     await supabaseAdmin.from("leads").update({ aviso_wa_id: principal }).eq("id", lead.id);
 
-    if (idsEnviados.length > 0) {
+    if (enviados.length > 0) {
       await supabaseAdmin.from("whatsapp_mensagens").upsert(
-        idsEnviados.map((id) => ({
+        enviados.map((m) => ({
           lead_id: lead.id,
-          provider_id: id,
-          destinatario: NUMERO_AVISO,
+          provider_id: m.id,
+          destinatario: m.destinatario,
           corpo: texto,
           status: "accepted",
         })),
@@ -162,7 +200,7 @@ export const avisarNovoOrcamento = createServerFn({ method: "POST" })
       }
     }
 
-    return { enviado: true, mensagens: idsEnviados.length };
+    return { enviado: true, mensagens: enviados.length, destinos: numeros.length };
   });
 
 const ORDEM_STATUS: Record<string, number> = {

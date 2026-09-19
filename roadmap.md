@@ -17,6 +17,7 @@
 - [x] Aba /orcamentos (área do estúdio, acesso único titans.tattoo@gmail.com)
 - [x] Novos orçamentos aparecem em tempo real na aba /orcamentos
 - [ ] Conectar domínio próprio titanstattoostudio.com.br (já registrado pelo usuário fora da Lovable)
+- [x] Aviso do orçamento também para o WhatsApp do tatuador escolhido (Cascio 51993526883, Braian 51997072442, Ricardo 51997025755)
 - [x] Aviso automático no WhatsApp a cada novo orçamento, com foto da referência — enviado para 5551993526883 (a Meta não permite que o número conectado 5551991786170 envie mensagem para ele mesmo)
 - [ ] Funil/kanban de atendimento no /admin
 
