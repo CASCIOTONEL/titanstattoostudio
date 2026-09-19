@@ -67,6 +67,22 @@ function OrcamentosPage() {
   useEffect(() => {
     let active = true;
     (async () => {
+      try {
+        const lista = await carregarPapeis();
+        if (active) setPapeis(lista);
+      } catch {
+        if (active) setPapeis([]);
+      }
+    })();
+    return () => {
+      active = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
       const { data, error } = await supabase
         .from("leads")
         .select("*")
