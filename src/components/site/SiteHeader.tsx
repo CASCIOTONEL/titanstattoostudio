@@ -35,12 +35,20 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <Link
-            to="/orcamento"
-            className="border border-foreground/80 px-4 py-2 text-xs uppercase tracking-[0.18em] text-foreground transition-colors hover:bg-foreground hover:text-background"
-          >
-            Solicitar orçamento
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              to="/orcamento"
+              className="border border-foreground/80 px-4 py-2 text-xs uppercase tracking-[0.18em] text-foreground transition-colors hover:bg-foreground hover:text-background"
+            >
+              Solicitar orçamento
+            </Link>
+            <Link
+              to="/auth"
+              className="px-4 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Área do estúdio
+            </Link>
+          </div>
         </nav>
 
         <button
@@ -55,7 +63,7 @@ export function SiteHeader() {
 
       <div className={cn("border-t border-border/60 md:hidden", open ? "block" : "hidden")}>
         <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-4">
-          {[...nav, { to: "/orcamento", label: "Solicitar orçamento" } as const].map((item) => (
+          {[...nav, { to: "/orcamento", label: "Solicitar orçamento" } as const, { to: "/auth", label: "Área do estúdio" } as const].map((item) => (
             <Link
               key={item.to}
               to={item.to}
