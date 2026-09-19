@@ -162,6 +162,12 @@ function OrcamentosPage() {
           description="Cada pedido enviado pelo site com nome, WhatsApp, endereço, dimensão e local do corpo."
         />
         <div className="flex flex-wrap gap-3">
+          <Link
+            to="/clientes"
+            className="border border-border px-5 py-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Clientes
+          </Link>
           {papeis?.includes("master") ? (
             <Link
               to="/equipe"
