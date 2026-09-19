@@ -80,7 +80,7 @@ async function enviar(para: string, body: Record<string, unknown>) {
       "X-Connection-Api-Key": whatsappKey,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ messaging_product: "whatsapp", to: NUMERO_AVISO, ...body }),
+    body: JSON.stringify({ messaging_product: "whatsapp", to: para, ...body }),
   });
   const texto = await response.text();
   if (!response.ok) {
