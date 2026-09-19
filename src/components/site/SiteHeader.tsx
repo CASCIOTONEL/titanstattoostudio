@@ -35,12 +35,20 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <Link
-            to="/orcamento"
-            className="border border-foreground/80 px-4 py-2 text-xs uppercase tracking-[0.18em] text-foreground transition-colors hover:bg-foreground hover:text-background"
-          >
-            Solicitar orçamento
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              to="/orcamento"
+              className="border border-foreground/80 px-4 py-2 text-xs uppercase tracking-[0.18em] text-foreground transition-colors hover:bg-foreground hover:text-background"
+            >
+              Solicitar orçamento
+            </Link>
+            <Link
+              to="/auth"
+              className="px-4 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Área do estúdio
+            </Link>
+          </div>
         </nav>
 
         <button
