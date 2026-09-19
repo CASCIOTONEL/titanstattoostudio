@@ -17,6 +17,7 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as OrcamentoRouteImport } from './routes/orcamento'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as ServicosRouteImport } from './routes/servicos'
+import { Route as AuthenticatedClientesRouteImport } from './routes/_authenticated/clientes'
 import { Route as AuthenticatedEquipeRouteImport } from './routes/_authenticated/equipe'
 import { Route as AuthenticatedOrcamentosRouteImport } from './routes/_authenticated/orcamentos'
 import { Route as TatuadoresIndexRouteImport } from './routes/tatuadores.index'
@@ -62,6 +63,11 @@ const ServicosRoute = ServicosRouteImport.update({
   path: '/servicos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedClientesRoute = AuthenticatedClientesRouteImport.update({
+  id: '/clientes',
+  path: '/clientes',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedEquipeRoute = AuthenticatedEquipeRouteImport.update({
   id: '/equipe',
   path: '/equipe',
@@ -97,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/orcamento': typeof OrcamentoRoute
   '/portfolio': typeof PortfolioRoute
   '/servicos': typeof ServicosRoute
+  '/clientes': typeof AuthenticatedClientesRoute
   '/equipe': typeof AuthenticatedEquipeRoute
   '/orcamentos': typeof AuthenticatedOrcamentosRoute
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
@@ -111,6 +118,7 @@ export interface FileRoutesByTo {
   '/orcamento': typeof OrcamentoRoute
   '/portfolio': typeof PortfolioRoute
   '/servicos': typeof ServicosRoute
+  '/clientes': typeof AuthenticatedClientesRoute
   '/equipe': typeof AuthenticatedEquipeRoute
   '/orcamentos': typeof AuthenticatedOrcamentosRoute
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
@@ -127,6 +135,7 @@ export interface FileRoutesById {
   '/orcamento': typeof OrcamentoRoute
   '/portfolio': typeof PortfolioRoute
   '/servicos': typeof ServicosRoute
+  '/_authenticated/clientes': typeof AuthenticatedClientesRoute
   '/_authenticated/equipe': typeof AuthenticatedEquipeRoute
   '/_authenticated/orcamentos': typeof AuthenticatedOrcamentosRoute
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
@@ -143,6 +152,7 @@ export interface FileRouteTypes {
     | '/orcamento'
     | '/portfolio'
     | '/servicos'
+    | '/clientes'
     | '/equipe'
     | '/orcamentos'
     | '/tatuadores/$slug'
@@ -157,6 +167,7 @@ export interface FileRouteTypes {
     | '/orcamento'
     | '/portfolio'
     | '/servicos'
+    | '/clientes'
     | '/equipe'
     | '/orcamentos'
     | '/tatuadores/$slug'
@@ -172,6 +183,7 @@ export interface FileRouteTypes {
     | '/orcamento'
     | '/portfolio'
     | '/servicos'
+    | '/_authenticated/clientes'
     | '/_authenticated/equipe'
     | '/_authenticated/orcamentos'
     | '/tatuadores/$slug'
@@ -251,6 +263,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/clientes': {
+      id: '/_authenticated/clientes'
+      path: '/clientes'
+      fullPath: '/clientes'
+      preLoaderRoute: typeof AuthenticatedClientesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/equipe': {
       id: '/_authenticated/equipe'
       path: '/equipe'
@@ -290,11 +309,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedClientesRoute: typeof AuthenticatedClientesRoute
   AuthenticatedEquipeRoute: typeof AuthenticatedEquipeRoute
   AuthenticatedOrcamentosRoute: typeof AuthenticatedOrcamentosRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedClientesRoute: AuthenticatedClientesRoute,
   AuthenticatedEquipeRoute: AuthenticatedEquipeRoute,
   AuthenticatedOrcamentosRoute: AuthenticatedOrcamentosRoute,
 }
