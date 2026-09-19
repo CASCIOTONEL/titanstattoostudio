@@ -200,7 +200,7 @@ export const avisarNovoOrcamento = createServerFn({ method: "POST" })
       }
     }
 
-    return { enviado: true, mensagens: idsEnviados.length };
+    return { enviado: true, mensagens: enviados.length, destinos: numeros.length };
   });
 
 const ORDEM_STATUS: Record<string, number> = {
