@@ -16,9 +16,9 @@ export const Route = createFileRoute("/servicos")({
         property: "og:description",
         content: "Tattoo, cobertura, remoção a laser e piercing com hora marcada.",
       },
-      { property: "og:url", content: "https://pigmentflow-pro.lovable.app/servicos" },
+      { property: "og:url", content: "https://titanstattoostudio.com.br/servicos" },
     ],
-    links: [{ rel: "canonical", href: "https://pigmentflow-pro.lovable.app/servicos" }],
+    links: [{ rel: "canonical", href: "https://titanstattoostudio.com.br/servicos" }],
   }),
   component: ServicosPage,
 });

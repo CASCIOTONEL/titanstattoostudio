@@ -16,7 +16,7 @@ export const Route = createFileRoute("/tatuadores/$slug")({
     }
     const title = `${loaderData.name} — Titans Tattoo Studio`;
     const description = `${loaderData.name}, ${loaderData.role} no Titans Tattoo Studio. Veja trabalhos e solicite orçamento.`;
-    const url = `https://pigmentflow-pro.lovable.app/tatuadores/${loaderData.slug}`;
+    const url = `https://titanstattoostudio.com.br/tatuadores/${loaderData.slug}`;
     return {
       meta: [
         { title },

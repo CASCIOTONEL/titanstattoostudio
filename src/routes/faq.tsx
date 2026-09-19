@@ -22,9 +22,9 @@ export const Route = createFileRoute("/faq")({
         property: "og:description",
         content: "Como funciona orçamento, sinal, remarcação, cicatrização e retoque.",
       },
-      { property: "og:url", content: "https://pigmentflow-pro.lovable.app/faq" },
+      { property: "og:url", content: "https://titanstattoostudio.com.br/faq" },
     ],
-    links: [{ rel: "canonical", href: "https://pigmentflow-pro.lovable.app/faq" }],
+    links: [{ rel: "canonical", href: "https://titanstattoostudio.com.br/faq" }],
     scripts: [
       {
         type: "application/ld+json",
