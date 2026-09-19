@@ -25,7 +25,7 @@ export const Route = createFileRoute("/api/public/whatsapp/webhook")({
         const evento = request.headers.get("X-Lovable-Event");
         if (!deliveryId || !evento) return new Response("Cabeçalhos ausentes", { status: 400 });
 
-        let payload: unknown;
+        let payload: any;
         try {
           payload = JSON.parse(corpo);
         } catch {
