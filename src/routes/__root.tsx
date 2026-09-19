@@ -81,17 +81,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Titans Tattoo Studio" },
-      {
-        name: "description",
-        content: "Estúdio de tatuagem, cobertura, remoção a laser e piercing em São Paulo.",
-      },
       { name: "author", content: "Titans Tattoo Studio" },
-      { property: "og:title", content: "Titans Tattoo Studio" },
-      {
-        property: "og:description",
-        content: "Estúdio de tatuagem, cobertura, remoção a laser e piercing em São Paulo.",
-      },
+      { property: "og:site_name", content: "Titans Tattoo Studio" },
+      { property: "og:locale", content: "pt_BR" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
