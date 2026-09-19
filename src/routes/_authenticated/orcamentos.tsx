@@ -302,6 +302,14 @@ function OrcamentosPage() {
                 >
                   Responder no WhatsApp
                 </a>
+                {lead.status === "concluído" ? (
+                  <Link
+                    to="/pagamentos"
+                    className="border border-border px-6 py-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    Registrar recebimento
+                  </Link>
+                ) : null}
               </div>
             </article>
           ))}
