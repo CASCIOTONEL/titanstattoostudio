@@ -151,7 +151,7 @@ export const avisarNovoOrcamento = createServerFn({ method: "POST" })
       for (const [i, link] of links.entries()) {
         const id = await enviar(numero, {
           type: "image",
-          image: { link, caption: i === 0 ? texto : `Referência ${i + 1} — ${lead.nome}` },
+          image: { link, caption: i === 0 ? texto : `Referência ${i + 1} — ${lead!.nome}` },
         });
         if (id) enviados.push({ id, destinatario: numero });
       }
