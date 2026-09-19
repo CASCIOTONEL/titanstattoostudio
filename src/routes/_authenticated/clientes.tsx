@@ -358,10 +358,9 @@ function ClientesPage() {
                     </div>
                     <div className="flex flex-wrap gap-3">
                       <a
-                        href={whatsappLink(
+                        href={`https://wa.me/${onlyDigits(cliente.whatsapp)}?text=${encodeURIComponent(
                           `Olá ${cliente.nome}, aqui é do Titans Tattoo Studio.`,
-                          cliente.whatsapp,
-                        )}
+                        )}`}
                         target="_blank"
                         rel="noreferrer"
                         className="border border-border px-4 py-2 text-[11px] uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-foreground"
