@@ -152,15 +152,13 @@ function OrcamentoPage() {
         tatuador: d.tatuador,
         disponibilidade: d.disponibilidade || null,
         referencias: caminhos,
-      }).select("id").single();
+      });
       if (insertError) throw insertError;
 
-      if (novoLead?.id) {
-        try {
-          await avisarNovoOrcamento({ data: { leadId: novoLead.id } });
-        } catch (avisoErr) {
-          console.error("Falha ao avisar o estúdio no WhatsApp", avisoErr);
-        }
+      try {
+        await avisarNovoOrcamento({ data: { leadId } });
+      } catch (avisoErr) {
+        console.error("Falha ao avisar o estúdio no WhatsApp", avisoErr);
       }
     } catch (err) {
       console.error("Falha ao salvar o orçamento", err);
