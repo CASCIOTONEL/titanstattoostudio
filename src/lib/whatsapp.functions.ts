@@ -2,16 +2,26 @@ import { createServerFn } from "@tanstack/react-start";
 
 const GATEWAY_URL = "https://connector-gateway.lovable.dev/whatsapp";
 
-/** Número que recebe os avisos de novos orçamentos (somente dígitos, com DDI). */
+/** Número que recebe o orçamento quando o cliente não escolhe tatuador. */
 export const NUMERO_AVISO = "5551993526883";
 
+/** WhatsApp de cada tatuador (somente dígitos, com DDI). */
+const WHATSAPP_TATUADORES: Record<string, string> = {
+  cascio: "5551993526883",
+  braian: "5551997072442",
+  ricardo: "5551997025755",
+};
+
 /**
- * Somente o estúdio recebe o aviso; o repasse ao tatuador escolhido é feito
- * manualmente a partir dessa conversa (a mensagem já traz o nome do tatuador).
+ * Quando o cliente escolhe um tatuador, o orçamento vai direto para ele.
+ * Sem escolha, vai para o número padrão do estúdio.
  */
-function destinatarios(_tatuador: string | null) {
-  return [NUMERO_AVISO];
+function destinatarios(tatuador: string | null) {
+  const chave = (tatuador ?? "").trim().toLowerCase();
+  const numero = Object.entries(WHATSAPP_TATUADORES).find(([nome]) => chave.includes(nome))?.[1];
+  return [numero ?? NUMERO_AVISO];
 }
+
 
 type Lead = {
   id: string;
