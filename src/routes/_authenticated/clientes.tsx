@@ -4,7 +4,11 @@ import { useEffect, useMemo, useState } from "react";
 import { Section, SectionTitle } from "@/components/site/Section";
 import { supabase } from "@/integrations/supabase/client";
 import { meusPapeis, type Papel } from "@/lib/equipe.functions";
-import { whatsappLink } from "@/lib/studio";
+
+function onlyDigits(value: string) {
+  const digits = value.replace(/\D/g, "");
+  return digits.startsWith("55") ? digits : `55${digits}`;
+}
 
 export const Route = createFileRoute("/_authenticated/clientes")({
   head: () => ({
