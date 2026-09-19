@@ -140,6 +140,56 @@ export type Database = {
         }
         Relationships: []
       }
+      pagamentos: {
+        Row: {
+          cliente_nome: string
+          created_at: string
+          data: string
+          forma: string
+          id: string
+          lead_id: string | null
+          observacoes: string | null
+          registrado_por: string | null
+          tipo: string
+          updated_at: string
+          valor: number
+        }
+        Insert: {
+          cliente_nome: string
+          created_at?: string
+          data?: string
+          forma: string
+          id?: string
+          lead_id?: string | null
+          observacoes?: string | null
+          registrado_por?: string | null
+          tipo?: string
+          updated_at?: string
+          valor: number
+        }
+        Update: {
+          cliente_nome?: string
+          created_at?: string
+          data?: string
+          forma?: string
+          id?: string
+          lead_id?: string | null
+          observacoes?: string | null
+          registrado_por?: string | null
+          tipo?: string
+          updated_at?: string
+          valor?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pagamentos_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           ativo: boolean

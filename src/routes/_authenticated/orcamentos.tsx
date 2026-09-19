@@ -163,6 +163,12 @@ function OrcamentosPage() {
         />
         <div className="flex flex-wrap gap-3">
           <Link
+            to="/pagamentos"
+            className="border border-border px-5 py-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Recebimentos
+          </Link>
+          <Link
             to="/clientes"
             className="border border-border px-5 py-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
           >
@@ -296,6 +302,14 @@ function OrcamentosPage() {
                 >
                   Responder no WhatsApp
                 </a>
+                {lead.status === "concluído" ? (
+                  <Link
+                    to="/pagamentos"
+                    className="border border-border px-6 py-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    Registrar recebimento
+                  </Link>
+                ) : null}
               </div>
             </article>
           ))}
