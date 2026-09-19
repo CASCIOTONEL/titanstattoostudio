@@ -15,7 +15,9 @@ export const Route = createFileRoute("/contato")({
         property: "og:description",
         content: "Onde estamos, horários de atendimento e canais de contato.",
       },
+      { property: "og:url", content: "https://pigmentflow-pro.lovable.app/contato" },
     ],
+    links: [{ rel: "canonical", href: "https://pigmentflow-pro.lovable.app/contato" }],
   }),
   component: ContatoPage,
 });
@@ -24,6 +26,7 @@ function ContatoPage() {
   return (
     <Section>
       <SectionTitle
+        as="h1"
         eyebrow="Onde estamos"
         title="Contato"
         description="Atendimento com hora marcada. Para tirar dúvidas rápidas, chame no WhatsApp."

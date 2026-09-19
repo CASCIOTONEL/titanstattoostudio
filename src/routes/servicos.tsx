@@ -16,7 +16,9 @@ export const Route = createFileRoute("/servicos")({
         property: "og:description",
         content: "Tattoo, cobertura, remoção a laser e piercing com hora marcada.",
       },
+      { property: "og:url", content: "https://pigmentflow-pro.lovable.app/servicos" },
     ],
+    links: [{ rel: "canonical", href: "https://pigmentflow-pro.lovable.app/servicos" }],
   }),
   component: ServicosPage,
 });
@@ -26,6 +28,7 @@ function ServicosPage() {
     <>
       <Section className="pb-10">
         <SectionTitle
+          as="h1"
           eyebrow="O que fazemos"
           title="Serviços"
           description="Quatro frentes de trabalho, todas com avaliação prévia, material descartável e orçamento fechado antes de começar."

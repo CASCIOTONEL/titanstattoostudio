@@ -22,7 +22,9 @@ export const Route = createFileRoute("/faq")({
         property: "og:description",
         content: "Como funciona orçamento, sinal, remarcação, cicatrização e retoque.",
       },
+      { property: "og:url", content: "https://pigmentflow-pro.lovable.app/faq" },
     ],
+    links: [{ rel: "canonical", href: "https://pigmentflow-pro.lovable.app/faq" }],
   }),
   component: FaqPage,
 });
@@ -30,7 +32,7 @@ export const Route = createFileRoute("/faq")({
 function FaqPage() {
   return (
     <Section>
-      <SectionTitle eyebrow="Antes de tatuar" title="Dúvidas frequentes" />
+      <SectionTitle as="h1" eyebrow="Antes de tatuar" title="Dúvidas frequentes" />
       <Accordion type="single" collapsible className="mt-10 max-w-3xl">
         {faq.map((item, i) => (
           <AccordionItem key={item.q} value={`item-${i}`}>
