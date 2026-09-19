@@ -134,7 +134,7 @@ function OrcamentoPage() {
         if (!upErr) caminhos.push(path);
       }
 
-      const { error: insertError } = await supabase.from("leads").insert({
+      const { data: novoLead, error: insertError } = await supabase.from("leads").insert({
         nome: d.nome,
         whatsapp: d.whatsapp,
         email: d.email || null,
