@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://pigmentflow-pro.lovable.app/sitemap.xml

@@ -18,6 +18,42 @@ export const Route = createFileRoute("/contato")({
       { property: "og:url", content: "https://pigmentflow-pro.lovable.app/contato" },
     ],
     links: [{ rel: "canonical", href: "https://pigmentflow-pro.lovable.app/contato" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "TattooParlor",
+          name: studio.name,
+          url: "https://pigmentflow-pro.lovable.app/",
+          telephone: "+55" + studio.whatsapp.slice(2),
+          email: studio.email,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "Rua Mathias Velho, 170 — Sala 201",
+            addressLocality: "Canoas",
+            addressRegion: "RS",
+            postalCode: "92310-300",
+            addressCountry: "BR",
+          },
+          sameAs: [`https://instagram.com/${studio.instagram.replace("@", "")}`],
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              opens: "10:00",
+              closes: "19:00",
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Saturday"],
+              opens: "10:00",
+              closes: "17:00",
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: ContatoPage,
 });
