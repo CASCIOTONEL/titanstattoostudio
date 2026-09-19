@@ -63,7 +63,7 @@ export function SiteHeader() {
 
       <div className={cn("border-t border-border/60 md:hidden", open ? "block" : "hidden")}>
         <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-4">
-          {[...nav, { to: "/orcamento", label: "Solicitar orçamento" } as const].map((item) => (
+          {[...nav, { to: "/orcamento", label: "Solicitar orçamento" } as const, { to: "/auth", label: "Área do estúdio" } as const].map((item) => (
             <Link
               key={item.to}
               to={item.to}
