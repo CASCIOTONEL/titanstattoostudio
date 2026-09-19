@@ -14,6 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
+      clientes: {
+        Row: {
+          alergias: string | null
+          cep: string | null
+          cidade: string | null
+          created_at: string
+          documento: string | null
+          email: string | null
+          endereco: string | null
+          estado: string | null
+          id: string
+          nascimento: string | null
+          nome: string
+          observacoes: string | null
+          origem: string | null
+          updated_at: string
+          whatsapp: string
+        }
+        Insert: {
+          alergias?: string | null
+          cep?: string | null
+          cidade?: string | null
+          created_at?: string
+          documento?: string | null
+          email?: string | null
+          endereco?: string | null
+          estado?: string | null
+          id?: string
+          nascimento?: string | null
+          nome: string
+          observacoes?: string | null
+          origem?: string | null
+          updated_at?: string
+          whatsapp: string
+        }
+        Update: {
+          alergias?: string | null
+          cep?: string | null
+          cidade?: string | null
+          created_at?: string
+          documento?: string | null
+          email?: string | null
+          endereco?: string | null
+          estado?: string | null
+          id?: string
+          nascimento?: string | null
+          nome?: string
+          observacoes?: string | null
+          origem?: string | null
+          updated_at?: string
+          whatsapp?: string
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           altura_cm: number
