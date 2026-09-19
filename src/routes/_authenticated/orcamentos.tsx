@@ -185,14 +185,15 @@ function OrcamentosPage() {
         </div>
       </div>
 
-      {papeis !== null && papeis.length === 0 ? (
+      {!podeVerOrcamentos ? (
         <p role="alert" className="mt-10 text-sm text-destructive">
-          Seu acesso ainda não tem permissão para ver os orçamentos. Peça ao administrador do estúdio
-          para liberar o seu nível de permissão.
+          Seu acesso não tem permissão para ver os orçamentos. Esta área é da recepção e do
+          administrador do estúdio.
         </p>
       ) : null}
 
-
+      {podeVerOrcamentos ? (
+      <>
       <div className="mt-8 flex flex-wrap gap-2">
         {["todos", ...statusOptions].map((s) => (
           <button
