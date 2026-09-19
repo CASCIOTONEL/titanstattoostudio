@@ -1,7 +1,9 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useMemo, useState } from "react";
 import { Section, SectionTitle } from "@/components/site/Section";
 import { supabase } from "@/integrations/supabase/client";
+import { meusPapeis, type Papel } from "@/lib/equipe.functions";
 import { whatsappLink } from "@/lib/studio";
 
 export const Route = createFileRoute("/_authenticated/orcamentos")({
@@ -54,6 +56,8 @@ function onlyDigits(value: string) {
 
 function OrcamentosPage() {
   const navigate = useNavigate();
+  const carregarPapeis = useServerFn(meusPapeis);
+  const [papeis, setPapeis] = useState<Papel[] | null>(null);
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
