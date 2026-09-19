@@ -1,0 +1,1 @@
+DROP POLICY IF EXISTS "Equipe com permissao ve referencias" ON storage.objects;
