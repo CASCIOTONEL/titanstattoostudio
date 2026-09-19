@@ -11,11 +11,12 @@ export const Route = createFileRoute("/api/public/whatsapp/webhook")({
 
         let corpo: string;
         try {
-          const resultado = await verifyWebhookRequest(request, {
+          const resultado = await verifyWebhookRequest({
+            req: request,
             secret: segredo,
             maxBodyBytes: 4 * 1024 * 1024,
           });
-          corpo = typeof resultado === "string" ? resultado : ((resultado as any)?.body ?? "");
+          corpo = resultado.body;
         } catch {
           return new Response("Assinatura inválida", { status: 401 });
         }
