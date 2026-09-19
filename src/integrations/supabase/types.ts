@@ -116,7 +116,7 @@ export type Database = {
           created_at: string
           disponibilidade: string | null
           email: string | null
-          endereco: string
+          endereco: string | null
           id: string
           ideia: string
           largura_cm: number
@@ -139,7 +139,7 @@ export type Database = {
           created_at?: string
           disponibilidade?: string | null
           email?: string | null
-          endereco: string
+          endereco?: string | null
           id?: string
           ideia: string
           largura_cm: number
@@ -162,7 +162,7 @@ export type Database = {
           created_at?: string
           disponibilidade?: string | null
           email?: string | null
-          endereco?: string
+          endereco?: string | null
           id?: string
           ideia?: string
           largura_cm?: number

@@ -58,7 +58,6 @@ const orcamentoSchema = z.object({
   nome: z.string().trim().min(2, "Informe seu nome completo.").max(100),
   whatsapp: z.string().trim().min(8, "Informe um WhatsApp válido com DDD.").max(20),
   email: z.string().trim().email("Informe um e-mail válido.").max(255).or(z.literal("")),
-  endereco: z.string().trim().min(5, "Informe seu endereço (cidade e bairro no mínimo).").max(200),
   servico: z.string().trim().min(1),
   ideia: z.string().trim().min(10, "Descreva sua ideia com pelo menos 10 caracteres.").max(1500),
   largura: z.coerce.number().positive("Informe a largura em centímetros.").max(300),
@@ -108,7 +107,6 @@ function OrcamentoPage() {
       `Nome: ${d.nome}`,
       `WhatsApp: ${d.whatsapp}`,
       `E-mail: ${d.email || "-"}`,
-      `Endereço: ${d.endereco}`,
       `Serviço: ${d.servico}`,
       `Ideia: ${d.ideia}`,
       `Tamanho: ${d.largura} cm x ${d.altura} cm`,
@@ -141,7 +139,6 @@ function OrcamentoPage() {
         nome: d.nome,
         whatsapp: d.whatsapp,
         email: d.email || null,
-        endereco: d.endereco,
         servico: d.servico,
         ideia: d.ideia,
         largura_cm: d.largura,
@@ -233,10 +230,6 @@ function OrcamentoPage() {
         <div>
           <label className={labelClass} htmlFor="email">E-mail</label>
           <input id="email" name="email" type="email" maxLength={255} className={fieldClass} placeholder="voce@email.com" />
-        </div>
-        <div>
-          <label className={labelClass} htmlFor="endereco">Endereço *</label>
-          <input id="endereco" name="endereco" maxLength={200} className={fieldClass} placeholder="Rua, número, bairro, cidade" />
         </div>
 
         <div className="md:col-span-2">

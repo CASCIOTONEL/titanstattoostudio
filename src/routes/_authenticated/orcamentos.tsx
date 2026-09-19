@@ -24,7 +24,7 @@ type Lead = {
   nome: string;
   whatsapp: string;
   email: string | null;
-  endereco: string;
+  endereco: string | null;
   servico: string;
   ideia: string;
   largura_cm: number;
@@ -259,7 +259,7 @@ function OrcamentosPage() {
               <dl className="mt-6 grid gap-4 text-sm sm:grid-cols-2 lg:grid-cols-3">
                 <Info label="WhatsApp" value={lead.whatsapp} />
                 <Info label="E-mail" value={lead.email || "-"} />
-                <Info label="Endereço" value={lead.endereco} />
+                <Info label="Endereço" value={lead.endereco || "—"} />
                 <Info label="Serviço" value={lead.servico} />
                 <Info label="Dimensão" value={`${lead.largura_cm} cm x ${lead.altura_cm} cm`} />
                 <Info label="Local do corpo" value={lead.local_corpo} />
