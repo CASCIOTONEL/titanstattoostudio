@@ -68,6 +68,45 @@ export type Database = {
         }
         Relationships: []
       }
+      comissoes_pagas: {
+        Row: {
+          created_at: string
+          id: string
+          pagar_em: string
+          pago_em: string
+          periodo_fim: string
+          periodo_inicio: string
+          registrado_por: string | null
+          tatuador: string
+          updated_at: string
+          valor: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          pagar_em: string
+          pago_em?: string
+          periodo_fim: string
+          periodo_inicio: string
+          registrado_por?: string | null
+          tatuador: string
+          updated_at?: string
+          valor: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          pagar_em?: string
+          pago_em?: string
+          periodo_fim?: string
+          periodo_inicio?: string
+          registrado_por?: string | null
+          tatuador?: string
+          updated_at?: string
+          valor?: number
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           altura_cm: number
@@ -143,6 +182,7 @@ export type Database = {
       pagamentos: {
         Row: {
           cliente_nome: string
+          comissao_percentual: number
           created_at: string
           data: string
           forma: string
@@ -150,12 +190,14 @@ export type Database = {
           lead_id: string | null
           observacoes: string | null
           registrado_por: string | null
+          tatuador: string | null
           tipo: string
           updated_at: string
           valor: number
         }
         Insert: {
           cliente_nome: string
+          comissao_percentual?: number
           created_at?: string
           data?: string
           forma: string
@@ -163,12 +205,14 @@ export type Database = {
           lead_id?: string | null
           observacoes?: string | null
           registrado_por?: string | null
+          tatuador?: string | null
           tipo?: string
           updated_at?: string
           valor: number
         }
         Update: {
           cliente_nome?: string
+          comissao_percentual?: number
           created_at?: string
           data?: string
           forma?: string
@@ -176,6 +220,7 @@ export type Database = {
           lead_id?: string | null
           observacoes?: string | null
           registrado_por?: string | null
+          tatuador?: string | null
           tipo?: string
           updated_at?: string
           valor?: number

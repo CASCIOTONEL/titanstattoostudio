@@ -28,5 +28,6 @@
 ## Etapa 3 — Agenda
 ## Etapa 4 — Pagamento e financeiro
 - [x] Tela de recebimentos (/pagamentos) com valor, data, forma e vínculo aos orçamentos concluídos
+- [x] Financeiro por tatuador, movimento dia a dia e fechamento semanal de comissão de 60% (terça a segunda, repasse na terça)
 ## Etapa 5 — Comissões
 ## Etapa 6 — Ficha, documentos, painel e permissões
