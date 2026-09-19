@@ -68,7 +68,7 @@ function resumo(lead: Lead) {
   ].join("\n");
 }
 
-async function enviar(body: Record<string, unknown>) {
+async function enviar(para: string, body: Record<string, unknown>) {
   const lovableKey = process.env["LOVABLE_API_KEY"];
   const whatsappKey = process.env["WHATSAPP_API_KEY"];
   if (!lovableKey || !whatsappKey) throw new Error("Credenciais do WhatsApp não configuradas");
