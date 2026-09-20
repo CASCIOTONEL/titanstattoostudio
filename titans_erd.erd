@@ -1,0 +1,106 @@
+# Modelo do banco de dados - Titans Tattoo Studio
+# Formato ERD (compativel com a ferramenta "erd" de BurntSushi)
+
+[profiles]
+*id {label:"uuid PK, FK -> auth.users"}
+nome
+email
+ativo {label:"boolean"}
+created_at
+updated_at
+
+[user_roles]
+*id {label:"uuid PK"}
++user_id {label:"uuid FK -> auth.users"}
+role {label:"master | recepcao | financeiro | tatuador"}
+created_at
+
+[leads]
+*id {label:"uuid PK"}
+nome
+whatsapp
+email
+servico
+ideia
+largura_cm
+altura_cm
+local_corpo
+tatuador
+referencias {label:"text[]"}
+status {label:"aberto | em andamento | concluido"}
+aviso_wa_id
+aviso_em
+created_at
+updated_at
+
+[clientes]
+*id {label:"uuid PK"}
+nome
+whatsapp
+email
+nascimento
+documento
+endereco
+cidade
+estado
+cep
+alergias
+observacoes
+origem
+created_at
+updated_at
+
+[pagamentos]
+*id {label:"uuid PK"}
++lead_id {label:"uuid FK -> leads (SET NULL)"}
+cliente_nome
+tatuador
+valor
+data
+forma
+tipo
+comissao_percentual {label:"numeric, padrao 60"}
++registrado_por {label:"uuid FK -> auth.users"}
+observacoes
+created_at
+updated_at
+
+[comissoes_pagas]
+*id {label:"uuid PK"}
+tatuador
+periodo_inicio
+periodo_fim
+pagar_em {label:"tercas-feiras"}
+valor
+pago_em
++registrado_por {label:"uuid FK -> auth.users"}
+created_at
+updated_at
+
+[whatsapp_mensagens]
+*id {label:"uuid PK"}
++lead_id {label:"uuid FK -> leads"}
+provider_id
+destinatario
+corpo
+status
+status_em
+erro {label:"jsonb"}
+created_at
+updated_at
+
+[whatsapp_webhook_events]
+*id {label:"uuid PK"}
+delivery_id
+event
+payload {label:"jsonb"}
+received_at
+processed_at
+processing_error
+
+# Relacionamentos
+profiles       1--1 user_roles
+leads          1--* pagamentos
+leads          1--* whatsapp_mensagens
+profiles       1--* pagamentos
+profiles       1--* comissoes_pagas
