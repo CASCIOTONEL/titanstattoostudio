@@ -1,0 +1,105 @@
+erDiagram
+    auth_users ||--|| profiles : "id"
+    auth_users ||--o{ user_roles : "user_id"
+    auth_users ||--o{ pagamentos : "registrado_por"
+    auth_users ||--o{ comissoes_pagas : "registrado_por"
+    leads ||--o{ pagamentos : "lead_id"
+    leads ||--o{ whatsapp_mensagens : "lead_id"
+
+    profiles {
+        uuid id PK
+        text nome
+        text email
+        boolean ativo
+        timestamptz created_at
+        timestamptz updated_at
+    }
+    user_roles {
+        uuid id PK
+        uuid user_id FK
+        app_role role "master | recepcao | financeiro | tatuador"
+        timestamptz created_at
+    }
+    leads {
+        uuid id PK
+        text nome
+        text whatsapp
+        text email
+        text servico
+        text ideia
+        numeric largura_cm
+        numeric altura_cm
+        text local_corpo
+        text tatuador
+        text[] referencias
+        text status "aberto | em andamento | concluido"
+        text aviso_wa_id
+        timestamptz aviso_em
+        timestamptz created_at
+        timestamptz updated_at
+    }
+    clientes {
+        uuid id PK
+        text nome
+        text whatsapp
+        text email
+        date nascimento
+        text documento
+        text endereco
+        text cidade
+        text estado
+        text cep
+        text alergias
+        text observacoes
+        text origem
+        timestamptz created_at
+        timestamptz updated_at
+    }
+    pagamentos {
+        uuid id PK
+        uuid lead_id FK
+        text cliente_nome
+        text tatuador
+        numeric valor
+        date data
+        text forma
+        text tipo
+        numeric comissao_percentual "padrao 60"
+        uuid registrado_por FK
+        text observacoes
+        timestamptz created_at
+        timestamptz updated_at
+    }
+    comissoes_pagas {
+        uuid id PK
+        text tatuador
+        date periodo_inicio
+        date periodo_fim
+        date pagar_em
+        numeric valor
+        timestamptz pago_em
+        uuid registrado_por FK
+        timestamptz created_at
+        timestamptz updated_at
+    }
+    whatsapp_mensagens {
+        uuid id PK
+        uuid lead_id FK
+        text provider_id
+        text destinatario
+        text corpo
+        text status
+        timestamptz status_em
+        jsonb erro
+        timestamptz created_at
+        timestamptz updated_at
+    }
+    whatsapp_webhook_events {
+        uuid id PK
+        text delivery_id
+        text event
+        jsonb payload
+        timestamptz received_at
+        timestamptz processed_at
+        text processing_error
+    }
