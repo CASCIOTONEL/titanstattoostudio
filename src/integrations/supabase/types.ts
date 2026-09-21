@@ -142,12 +142,14 @@ export type Database = {
           cor: string | null
           created_at: string
           disponibilidade: string | null
+          documento: string | null
           email: string | null
           endereco: string | null
           id: string
           ideia: string
           largura_cm: number
           local_corpo: string
+          nascimento: string | null
           nome: string
           observacoes: string | null
           referencias: string[]
@@ -165,12 +167,14 @@ export type Database = {
           cor?: string | null
           created_at?: string
           disponibilidade?: string | null
+          documento?: string | null
           email?: string | null
           endereco?: string | null
           id?: string
           ideia: string
           largura_cm: number
           local_corpo: string
+          nascimento?: string | null
           nome: string
           observacoes?: string | null
           referencias?: string[]
@@ -188,12 +192,14 @@ export type Database = {
           cor?: string | null
           created_at?: string
           disponibilidade?: string | null
+          documento?: string | null
           email?: string | null
           endereco?: string | null
           id?: string
           ideia?: string
           largura_cm?: number
           local_corpo?: string
+          nascimento?: string | null
           nome?: string
           observacoes?: string | null
           referencias?: string[]
