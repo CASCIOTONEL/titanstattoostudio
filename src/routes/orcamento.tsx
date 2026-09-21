@@ -240,6 +240,15 @@ function OrcamentoPage() {
           <label className={labelClass} htmlFor="email">E-mail</label>
           <input id="email" name="email" type="email" maxLength={255} className={fieldClass} placeholder="voce@email.com" />
         </div>
+        <div>
+          <label className={labelClass} htmlFor="documento">CPF *</label>
+          <input id="documento" name="documento" inputMode="numeric" maxLength={14} className={fieldClass} placeholder="000.000.000-00" />
+        </div>
+        <div>
+          <label className={labelClass} htmlFor="nascimento">Data de nascimento *</label>
+          <input id="nascimento" name="nascimento" type="date" className={fieldClass} />
+        </div>
+
 
         <div className="md:col-span-2">
           <label className={labelClass} htmlFor="servico">Serviço *</label>
