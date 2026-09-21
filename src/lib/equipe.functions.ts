@@ -50,7 +50,7 @@ export const listarEquipe = createServerFn({ method: "GET" })
   .handler(async ({ context }): Promise<MembroEquipe[]> => {
     await assertMaster(context.supabase, context.userId);
     const [{ data: perfis, error: e1 }, { data: papeis, error: e2 }] = await Promise.all([
-      context.supabase.from("profiles").select("id, nome, email, ativo").order("created_at"),
+      context.supabase.from("profiles").select("id, nome, email, ativo, tatuador").order("created_at"),
       context.supabase.from("user_roles").select("user_id, role"),
     ]);
     if (e1) throw new Error(e1.message);
@@ -60,6 +60,7 @@ export const listarEquipe = createServerFn({ method: "GET" })
       nome: p.nome,
       email: p.email,
       ativo: p.ativo,
+      tatuador: p.tatuador ?? null,
       papeis: (papeis ?? []).filter((r: any) => r.user_id === p.id).map((r: any) => r.role as Papel),
     }));
   });
