@@ -30,6 +30,7 @@ export type MembroEquipe = {
   nome: string | null;
   email: string | null;
   ativo: boolean;
+  tatuador: string | null;
   papeis: Papel[];
 };
 
@@ -49,7 +50,7 @@ export const listarEquipe = createServerFn({ method: "GET" })
   .handler(async ({ context }): Promise<MembroEquipe[]> => {
     await assertMaster(context.supabase, context.userId);
     const [{ data: perfis, error: e1 }, { data: papeis, error: e2 }] = await Promise.all([
-      context.supabase.from("profiles").select("id, nome, email, ativo").order("created_at"),
+      context.supabase.from("profiles").select("id, nome, email, ativo, tatuador").order("created_at"),
       context.supabase.from("user_roles").select("user_id, role"),
     ]);
     if (e1) throw new Error(e1.message);
@@ -59,6 +60,7 @@ export const listarEquipe = createServerFn({ method: "GET" })
       nome: p.nome,
       email: p.email,
       ativo: p.ativo,
+      tatuador: p.tatuador ?? null,
       papeis: (papeis ?? []).filter((r: any) => r.user_id === p.id).map((r: any) => r.role as Papel),
     }));
   });
@@ -169,6 +171,43 @@ export const removerUsuario = createServerFn({ method: "POST" })
     if (data.userId === context.userId) throw new Error("Você não pode excluir o seu próprio acesso.");
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { error } = await supabaseAdmin.auth.admin.deleteUser(data.userId);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+export const NOMES_TATUADORES = ["Cascio", "Ricardo", "Braian"] as const;
+
+export type MeuAcesso = { papeis: Papel[]; tatuador: string | null };
+
+export const meuAcesso = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }): Promise<MeuAcesso> => {
+    const [{ data: papeis, error: e1 }, { data: perfil, error: e2 }] = await Promise.all([
+      context.supabase.from("user_roles").select("role").eq("user_id", context.userId),
+      context.supabase.from("profiles").select("tatuador").eq("id", context.userId).maybeSingle(),
+    ]);
+    if (e1) throw new Error(e1.message);
+    if (e2) throw new Error(e2.message);
+    return {
+      papeis: (papeis ?? []).map((r: { role: Papel }) => r.role),
+      tatuador: (perfil as { tatuador: string | null } | null)?.tatuador ?? null,
+    };
+  });
+
+export const definirTatuador = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data) =>
+    z
+      .object({ userId: z.string().uuid(), tatuador: z.string().trim().max(60).nullable() })
+      .parse(data),
+  )
+  .handler(async ({ context, data }) => {
+    await assertMaster(context.supabase, context.userId);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { error } = await supabaseAdmin
+      .from("profiles")
+      .update({ tatuador: data.tatuador || null })
+      .eq("id", data.userId);
     if (error) throw new Error(error.message);
     return { ok: true };
   });

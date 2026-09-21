@@ -33,15 +33,22 @@ function AuthPage() {
     setError(null);
     setLoading(true);
     try {
-      const { error } = await supabase.auth.signInWithPassword({ email, password: senha });
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password: senha });
       if (error) throw error;
-      await navigate({ to: "/orcamentos" });
+      const { data: papeis } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", data.user.id);
+      const lista = (papeis ?? []).map((p) => p.role as string);
+      const soTatuador = lista.includes("tatuador") && !lista.includes("master") && !lista.includes("recepcao");
+      await navigate({ to: soTatuador ? "/meu-painel" : "/orcamentos" });
     } catch {
       setError("E-mail ou senha incorretos.");
     } finally {
       setLoading(false);
     }
   }
+
 
   return (
     <Section>

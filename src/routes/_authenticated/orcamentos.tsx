@@ -174,6 +174,15 @@ function OrcamentosPage() {
           >
             Clientes
           </Link>
+          {papeis?.includes("tatuador") ? (
+            <Link
+              to="/meu-painel"
+              className="border border-border px-5 py-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Meu painel
+            </Link>
+          ) : null}
+
           {papeis?.includes("master") ? (
             <Link
               to="/equipe"

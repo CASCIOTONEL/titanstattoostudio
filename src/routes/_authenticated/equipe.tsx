@@ -3,11 +3,13 @@ import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 import { Section, SectionTitle } from "@/components/site/Section";
 import {
+  NOMES_TATUADORES,
   PAPEIS,
   ROTULO_PAPEL,
   criarUsuario,
   definirAtivo,
   definirPapeis,
+  definirTatuador,
   listarEquipe,
   redefinirSenha,
   removerUsuario,
@@ -41,6 +43,8 @@ function EquipePage() {
   const alternarAtivo = useServerFn(definirAtivo);
   const trocarSenha = useServerFn(redefinirSenha);
   const excluir = useServerFn(removerUsuario);
+  const salvarTatuador = useServerFn(definirTatuador);
+
 
   const [membros, setMembros] = useState<MembroEquipe[]>([]);
   const [carregando, setCarregando] = useState(true);
@@ -173,6 +177,12 @@ function EquipePage() {
                 acao(() => trocarSenha({ data: { userId: m.id, senha: nova } }), "Senha redefinida.")
               }
               onExcluir={() => acao(() => excluir({ data: { userId: m.id } }), "Usuário removido.")}
+              onTatuador={(nome) =>
+                acao(
+                  () => salvarTatuador({ data: { userId: m.id, tatuador: nome } }),
+                  "Tatuador vinculado.",
+                )
+              }
             />
           ))}
         </div>
@@ -187,17 +197,21 @@ function MembroCard({
   onAtivo,
   onSenha,
   onExcluir,
+  onTatuador,
 }: {
   membro: MembroEquipe;
   onPapeis: (papeis: Papel[]) => void;
   onAtivo: (ativo: boolean) => void;
   onSenha: (senha: string) => void;
   onExcluir: () => void;
+  onTatuador: (tatuador: string | null) => void;
 }) {
   const [papeis, setPapeis] = useState<Papel[]>(membro.papeis);
   const [novaSenha, setNovaSenha] = useState("");
+  const [tatuador, setTatuador] = useState<string>(membro.tatuador ?? "");
 
   useEffect(() => setPapeis(membro.papeis), [membro.papeis]);
+  useEffect(() => setTatuador(membro.tatuador ?? ""), [membro.tatuador]);
 
   return (
     <article className="border border-border bg-card/30 p-6">
@@ -249,6 +263,31 @@ function MembroCard({
           </button>
         </div>
       </div>
+
+      <div className="mt-6 flex flex-wrap items-end gap-3">
+        <div>
+          <label className={labelClass} htmlFor={`tatuador-${membro.id}`}>
+            Tatuador vinculado
+          </label>
+          <select
+            id={`tatuador-${membro.id}`}
+            className={fieldClass}
+            value={tatuador}
+            onChange={(e) => setTatuador(e.target.value)}
+          >
+            <option value="">Nenhum</option>
+            {NOMES_TATUADORES.map((n) => (
+              <option key={n} value={n}>
+                {n}
+              </option>
+            ))}
+          </select>
+        </div>
+        <button type="button" className={btnClass} onClick={() => onTatuador(tatuador || null)}>
+          Salvar tatuador
+        </button>
+      </div>
+
 
       <div className="mt-6 flex flex-wrap items-end gap-3">
         <div>

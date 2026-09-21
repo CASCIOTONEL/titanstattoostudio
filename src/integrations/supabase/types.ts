@@ -242,6 +242,7 @@ export type Database = {
           email: string | null
           id: string
           nome: string | null
+          tatuador: string | null
           updated_at: string
         }
         Insert: {
@@ -250,6 +251,7 @@ export type Database = {
           email?: string | null
           id: string
           nome?: string | null
+          tatuador?: string | null
           updated_at?: string
         }
         Update: {
@@ -258,6 +260,7 @@ export type Database = {
           email?: string | null
           id?: string
           nome?: string | null
+          tatuador?: string | null
           updated_at?: string
         }
         Relationships: []
