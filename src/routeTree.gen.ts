@@ -19,6 +19,7 @@ import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as AuthenticatedAgendaRouteImport } from './routes/_authenticated/agenda'
 import { Route as AuthenticatedClientesRouteImport } from './routes/_authenticated/clientes'
+import { Route as AuthenticatedContatosRouteImport } from './routes/_authenticated/contatos'
 import { Route as AuthenticatedEquipeRouteImport } from './routes/_authenticated/equipe'
 import { Route as AuthenticatedMeuPainelRouteImport } from './routes/_authenticated/meu-painel'
 import { Route as AuthenticatedOrcamentosRouteImport } from './routes/_authenticated/orcamentos'
@@ -77,6 +78,11 @@ const AuthenticatedClientesRoute = AuthenticatedClientesRouteImport.update({
   path: '/clientes',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedContatosRoute = AuthenticatedContatosRouteImport.update({
+  id: '/contatos',
+  path: '/contatos',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedEquipeRoute = AuthenticatedEquipeRouteImport.update({
   id: '/equipe',
   path: '/equipe',
@@ -130,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/servicos': typeof ServicosRoute
   '/agenda': typeof AuthenticatedAgendaRoute
   '/clientes': typeof AuthenticatedClientesRoute
+  '/contatos': typeof AuthenticatedContatosRoute
   '/equipe': typeof AuthenticatedEquipeRoute
   '/meu-painel': typeof AuthenticatedMeuPainelRoute
   '/orcamentos': typeof AuthenticatedOrcamentosRoute
@@ -149,6 +156,7 @@ export interface FileRoutesByTo {
   '/servicos': typeof ServicosRoute
   '/agenda': typeof AuthenticatedAgendaRoute
   '/clientes': typeof AuthenticatedClientesRoute
+  '/contatos': typeof AuthenticatedContatosRoute
   '/equipe': typeof AuthenticatedEquipeRoute
   '/meu-painel': typeof AuthenticatedMeuPainelRoute
   '/orcamentos': typeof AuthenticatedOrcamentosRoute
@@ -170,6 +178,7 @@ export interface FileRoutesById {
   '/servicos': typeof ServicosRoute
   '/_authenticated/agenda': typeof AuthenticatedAgendaRoute
   '/_authenticated/clientes': typeof AuthenticatedClientesRoute
+  '/_authenticated/contatos': typeof AuthenticatedContatosRoute
   '/_authenticated/equipe': typeof AuthenticatedEquipeRoute
   '/_authenticated/meu-painel': typeof AuthenticatedMeuPainelRoute
   '/_authenticated/orcamentos': typeof AuthenticatedOrcamentosRoute
@@ -191,6 +200,7 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/agenda'
     | '/clientes'
+    | '/contatos'
     | '/equipe'
     | '/meu-painel'
     | '/orcamentos'
@@ -210,6 +220,7 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/agenda'
     | '/clientes'
+    | '/contatos'
     | '/equipe'
     | '/meu-painel'
     | '/orcamentos'
@@ -230,6 +241,7 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/_authenticated/agenda'
     | '/_authenticated/clientes'
+    | '/_authenticated/contatos'
     | '/_authenticated/equipe'
     | '/_authenticated/meu-painel'
     | '/_authenticated/orcamentos'
@@ -327,6 +339,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedClientesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/contatos': {
+      id: '/_authenticated/contatos'
+      path: '/contatos'
+      fullPath: '/contatos'
+      preLoaderRoute: typeof AuthenticatedContatosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/equipe': {
       id: '/_authenticated/equipe'
       path: '/equipe'
@@ -389,6 +408,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAgendaRoute: typeof AuthenticatedAgendaRoute
   AuthenticatedClientesRoute: typeof AuthenticatedClientesRoute
+  AuthenticatedContatosRoute: typeof AuthenticatedContatosRoute
   AuthenticatedEquipeRoute: typeof AuthenticatedEquipeRoute
   AuthenticatedMeuPainelRoute: typeof AuthenticatedMeuPainelRoute
   AuthenticatedOrcamentosRoute: typeof AuthenticatedOrcamentosRoute
@@ -398,6 +418,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAgendaRoute: AuthenticatedAgendaRoute,
   AuthenticatedClientesRoute: AuthenticatedClientesRoute,
+  AuthenticatedContatosRoute: AuthenticatedContatosRoute,
   AuthenticatedEquipeRoute: AuthenticatedEquipeRoute,
   AuthenticatedMeuPainelRoute: AuthenticatedMeuPainelRoute,
   AuthenticatedOrcamentosRoute: AuthenticatedOrcamentosRoute,

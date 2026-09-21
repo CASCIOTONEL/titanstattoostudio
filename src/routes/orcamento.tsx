@@ -58,6 +58,11 @@ const orcamentoSchema = z.object({
   nome: z.string().trim().min(2, "Informe seu nome completo.").max(100),
   whatsapp: z.string().trim().min(8, "Informe um WhatsApp válido com DDD.").max(20),
   email: z.string().trim().email("Informe um e-mail válido.").max(255).or(z.literal("")),
+  documento: z
+    .string()
+    .trim()
+    .refine((v) => v.replace(/\D/g, "").length === 11, "Informe um CPF com 11 dígitos."),
+  nascimento: z.string().trim().min(1, "Informe sua data de nascimento."),
   servico: z.string().trim().min(1),
   ideia: z.string().trim().min(10, "Descreva sua ideia com pelo menos 10 caracteres.").max(1500),
   largura: z.coerce.number().positive("Informe a largura em centímetros.").max(300),
@@ -107,6 +112,8 @@ function OrcamentoPage() {
       `Nome: ${d.nome}`,
       `WhatsApp: ${d.whatsapp}`,
       `E-mail: ${d.email || "-"}`,
+      `CPF: ${d.documento}`,
+      `Nascimento: ${d.nascimento.split("-").reverse().join("/")}`,
       `Serviço: ${d.servico}`,
       `Ideia: ${d.ideia}`,
       `Tamanho: ${d.largura} cm x ${d.altura} cm`,
@@ -139,6 +146,8 @@ function OrcamentoPage() {
         nome: d.nome,
         whatsapp: d.whatsapp,
         email: d.email || null,
+        documento: d.documento,
+        nascimento: d.nascimento,
         servico: d.servico,
         ideia: d.ideia,
         largura_cm: d.largura,
@@ -231,6 +240,15 @@ function OrcamentoPage() {
           <label className={labelClass} htmlFor="email">E-mail</label>
           <input id="email" name="email" type="email" maxLength={255} className={fieldClass} placeholder="voce@email.com" />
         </div>
+        <div>
+          <label className={labelClass} htmlFor="documento">CPF *</label>
+          <input id="documento" name="documento" inputMode="numeric" maxLength={14} className={fieldClass} placeholder="000.000.000-00" />
+        </div>
+        <div>
+          <label className={labelClass} htmlFor="nascimento">Data de nascimento *</label>
+          <input id="nascimento" name="nascimento" type="date" className={fieldClass} />
+        </div>
+
 
         <div className="md:col-span-2">
           <label className={labelClass} htmlFor="servico">Serviço *</label>
