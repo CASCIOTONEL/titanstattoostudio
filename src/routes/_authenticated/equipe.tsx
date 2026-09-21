@@ -266,6 +266,31 @@ function MembroCard({
 
       <div className="mt-6 flex flex-wrap items-end gap-3">
         <div>
+          <label className={labelClass} htmlFor={`tatuador-${membro.id}`}>
+            Tatuador vinculado
+          </label>
+          <select
+            id={`tatuador-${membro.id}`}
+            className={fieldClass}
+            value={tatuador}
+            onChange={(e) => setTatuador(e.target.value)}
+          >
+            <option value="">Nenhum</option>
+            {NOMES_TATUADORES.map((n) => (
+              <option key={n} value={n}>
+                {n}
+              </option>
+            ))}
+          </select>
+        </div>
+        <button type="button" className={btnClass} onClick={() => onTatuador(tatuador || null)}>
+          Salvar tatuador
+        </button>
+      </div>
+
+
+      <div className="mt-6 flex flex-wrap items-end gap-3">
+        <div>
           <label className={labelClass} htmlFor={`senha-${membro.id}`}>Nova senha</label>
           <input
             id={`senha-${membro.id}`}
