@@ -393,6 +393,11 @@ function PagamentosPage() {
             Orçamentos
           </Link>
           <Link
+            to="/contatos"
+            className="border border-border px-5 py-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Contatos
+          </Link>          <Link
             to="/clientes"
             className="border border-border px-5 py-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
           >
