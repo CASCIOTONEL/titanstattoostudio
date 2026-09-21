@@ -191,18 +191,46 @@ function PagamentosPage() {
   }, [doMes]);
 
   const porTatuador = useMemo(() => {
-    const mapa: Record<string, { total: number; comissao: number; qtd: number }> = {};
+    const mapa: Record<
+      string,
+      { total: number; comissao: number; qtd: number; atendimentos: Set<string> }
+    > = {};
     for (const p of doMes) {
       const nome = p.tatuador || "Sem tatuador";
-      const atual = mapa[nome] ?? { total: 0, comissao: 0, qtd: 0 };
-      mapa[nome] = {
-        total: atual.total + Number(p.valor),
-        comissao: atual.comissao + (Number(p.valor) * Number(p.comissao_percentual)) / 100,
-        qtd: atual.qtd + 1,
-      };
+      const atual = mapa[nome] ?? { total: 0, comissao: 0, qtd: 0, atendimentos: new Set<string>() };
+      atual.total += Number(p.valor);
+      atual.comissao += (Number(p.valor) * Number(p.comissao_percentual)) / 100;
+      atual.qtd += 1;
+      atual.atendimentos.add(p.lead_id ?? p.cliente_nome.trim().toLowerCase());
+      mapa[nome] = atual;
     }
-    return Object.entries(mapa).sort((a, b) => b[1].total - a[1].total);
+    return Object.entries(mapa)
+      .map(
+        ([nome, d]) =>
+          [
+            nome,
+            {
+              total: d.total,
+              comissao: d.comissao,
+              qtd: d.qtd,
+              atendimentos: d.atendimentos.size,
+              ticket: d.atendimentos.size > 0 ? d.total / d.atendimentos.size : 0,
+            },
+          ] as const,
+      )
+      .sort((a, b) => b[1].total - a[1].total);
   }, [doMes]);
+
+  /** Ticket médio do estúdio: total recebido no mês dividido pelos atendimentos distintos. */
+  const ticketEstudio = useMemo(() => {
+    const atendimentos = new Set(
+      doMes.map((p) => p.lead_id ?? p.cliente_nome.trim().toLowerCase()),
+    );
+    return {
+      atendimentos: atendimentos.size,
+      valor: atendimentos.size > 0 ? totalMes / atendimentos.size : 0,
+    };
+  }, [doMes, totalMes]);
 
   const porDia = useMemo(() => {
     const mapa: Record<string, { total: number; comissao: number; porTatuador: Record<string, number> }> = {};
@@ -404,6 +432,11 @@ function PagamentosPage() {
               rotulo="Fica no estúdio"
               valor={moeda(totalMes - comissaoMes)}
               nota="Recebido menos comissões"
+            />
+            <Indicador
+              rotulo="Ticket médio do estúdio"
+              valor={moeda(ticketEstudio.valor)}
+              nota={`${ticketEstudio.atendimentos} atendimento(s) no mês`}
             />
           </div>
 
@@ -618,13 +651,17 @@ function PagamentosPage() {
                   <article key={nome} className="border border-border bg-card/30 p-6">
                     <h4 className="text-lg text-foreground">{nome}</h4>
                     <p className="mt-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                      {dados.qtd} recebimento(s) no mês
+                      {dados.qtd} recebimento(s) · {dados.atendimentos} atendimento(s) no mês
                     </p>
-                    <dl className="mt-5 grid gap-4 sm:grid-cols-3">
+                    <dl className="mt-5 grid gap-4 sm:grid-cols-2">
                       <Linha rotulo="Recebido" valor={moeda(dados.total)} />
+                      <Linha rotulo="Ticket médio" valor={moeda(dados.ticket)} />
                       <Linha rotulo="Comissão (60%)" valor={moeda(dados.comissao)} />
                       <Linha rotulo="Estúdio" valor={moeda(dados.total - dados.comissao)} />
                     </dl>
+                    <p className="mt-4 text-xs text-muted-foreground">
+                      Ticket médio do estúdio no mês: {moeda(ticketEstudio.valor)}
+                    </p>
                   </article>
                 ))}
               </div>
