@@ -4,6 +4,37 @@ import { useEffect, useMemo, useState } from "react";
 import { Section, SectionTitle } from "@/components/site/Section";
 import { supabase } from "@/integrations/supabase/client";
 import { meusPapeis, type Papel } from "@/lib/equipe.functions";
+import { importarClientesPlanilha } from "@/lib/importacao.functions";
+
+const COLUNAS_CSV: { chave: keyof Cliente; rotulo: string }[] = [
+  { chave: "nome", rotulo: "Nome" },
+  { chave: "whatsapp", rotulo: "WhatsApp" },
+  { chave: "email", rotulo: "E-mail" },
+  { chave: "documento", rotulo: "CPF" },
+  { chave: "nascimento", rotulo: "Nascimento" },
+  { chave: "endereco", rotulo: "Endereco" },
+  { chave: "cidade", rotulo: "Cidade" },
+  { chave: "estado", rotulo: "Estado" },
+  { chave: "cep", rotulo: "CEP" },
+  { chave: "origem", rotulo: "Origem" },
+  { chave: "alergias", rotulo: "Alergias" },
+  { chave: "observacoes", rotulo: "Observacoes" },
+];
+
+function baixarCsv(lista: Cliente[]) {
+  const escapar = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+  const linhas = [
+    COLUNAS_CSV.map((c) => escapar(c.rotulo)).join(";"),
+    ...lista.map((c) => COLUNAS_CSV.map((col) => escapar(c[col.chave])).join(";")),
+  ];
+  const blob = new Blob(["\uFEFF" + linhas.join("\n")], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `clientes-titans-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
 
 function onlyDigits(value: string) {
   const digits = value.replace(/\D/g, "");
@@ -132,6 +163,29 @@ function ClientesPage() {
   const [form, setForm] = useState<Formulario>(vazio);
   const [editandoId, setEditandoId] = useState<string | null>(null);
   const [salvando, setSalvando] = useState(false);
+  const [importando, setImportando] = useState(false);
+  const importar = useServerFn(importarClientesPlanilha);
+
+  async function importarPlanilha() {
+    if (!window.confirm("Importar a base de clientes da planilha do estúdio?")) return;
+    setImportando(true);
+    setError(null);
+    setAviso(null);
+    try {
+      const r = await importar();
+      setAviso(
+        `Importação concluída: ${r.inseridos} cliente(s) adicionados, ${r.jaExistiam} já estavam cadastrados.`,
+      );
+      const { data } = await supabase
+        .from("clientes")
+        .select("*")
+        .order("created_at", { ascending: false });
+      setClientes((data ?? []) as Cliente[]);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Não foi possível importar a base.");
+    }
+    setImportando(false);
+  }
 
   useEffect(() => {
     let ativo = true;
@@ -238,6 +292,23 @@ function ClientesPage() {
           description="Cadastro completo de cada pessoa atendida pelo estúdio."
         />
         <div className="flex flex-wrap gap-3">
+          <button
+            type="button"
+            onClick={() => baixarCsv(visiveis)}
+            className="border border-border px-5 py-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Exportar Excel/CSV
+          </button>
+          {ehMaster ? (
+            <button
+              type="button"
+              onClick={importarPlanilha}
+              disabled={importando}
+              className="border border-border px-5 py-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground disabled:opacity-50"
+            >
+              {importando ? "Importando..." : "Importar planilha"}
+            </button>
+          ) : null}
           <Link
             to="/orcamentos"
             className="border border-border px-5 py-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
