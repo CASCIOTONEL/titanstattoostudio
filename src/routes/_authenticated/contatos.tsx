@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { Section, SectionTitle } from "@/components/site/Section";
 import { supabase } from "@/integrations/supabase/client";
-import { whatsappLink } from "@/lib/studio";
+
 
 export const Route = createFileRoute("/_authenticated/contatos")({
   head: () => ({
@@ -36,6 +36,12 @@ const btn =
 
 function digitos(v: string) {
   return v.replace(/\D/g, "");
+}
+
+function linkPara(whatsapp: string, mensagem: string) {
+  const num = digitos(whatsapp);
+  const completo = num.startsWith("55") ? num : `55${num}`;
+  return `https://wa.me/${completo}?text=${encodeURIComponent(mensagem)}`;
 }
 
 function fmtData(v: string | null) {
@@ -250,11 +256,11 @@ function ContatosPage() {
                     </td>
                     <td className="px-4 py-3">
                       <a
-                        href={whatsappLink(
-                          aba === "aniversariantes"
-                            ? `Feliz aniversário, ${c.nome.split(" ")[0]}! Toda a equipe do Titans Tattoo Studio deseja um dia incrível. 🖤`
-                            : `Olá, ${c.nome.split(" ")[0]}! Aqui é do Titans Tattoo Studio.`,
+                        href={linkPara(
                           c.whatsapp,
+                          aba === "aniversariantes"
+                            ? `Feliz aniversário, ${c.nome.split(" ")[0]}! Toda a equipe do Titans Tattoo Studio deseja um dia incrível.`
+                            : `Olá, ${c.nome.split(" ")[0]}! Aqui é do Titans Tattoo Studio.`,
                         )}
                         target="_blank"
                         rel="noopener"
