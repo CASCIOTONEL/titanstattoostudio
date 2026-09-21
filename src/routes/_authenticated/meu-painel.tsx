@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useMemo, useState } from "react";
 import { Section, SectionTitle } from "@/components/site/Section";
@@ -164,13 +164,21 @@ function MeuPainelPage() {
           title={acesso?.tatuador ? `Painel de ${acesso.tatuador}` : "Meu painel"}
           description="Seus orçamentos, seu faturamento e a comissão da semana (segunda a segunda)."
         />
-        <button
-          type="button"
-          onClick={sair}
-          className="border border-border px-5 py-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Sair
-        </button>
+        <div className="flex flex-wrap gap-3">
+          <Link
+            to="/agenda"
+            className="border border-border px-5 py-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Minha agenda
+          </Link>
+          <button
+            type="button"
+            onClick={sair}
+            className="border border-border px-5 py-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Sair
+          </button>
+        </div>
       </div>
 
       {semVinculo ? (
