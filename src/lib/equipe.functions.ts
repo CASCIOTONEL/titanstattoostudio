@@ -30,6 +30,7 @@ export type MembroEquipe = {
   nome: string | null;
   email: string | null;
   ativo: boolean;
+  tatuador: string | null;
   papeis: Papel[];
 };
 
