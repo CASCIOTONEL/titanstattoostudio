@@ -58,6 +58,11 @@ const orcamentoSchema = z.object({
   nome: z.string().trim().min(2, "Informe seu nome completo.").max(100),
   whatsapp: z.string().trim().min(8, "Informe um WhatsApp válido com DDD.").max(20),
   email: z.string().trim().email("Informe um e-mail válido.").max(255).or(z.literal("")),
+  documento: z
+    .string()
+    .trim()
+    .refine((v) => v.replace(/\D/g, "").length === 11, "Informe um CPF com 11 dígitos."),
+  nascimento: z.string().trim().min(1, "Informe sua data de nascimento."),
   servico: z.string().trim().min(1),
   ideia: z.string().trim().min(10, "Descreva sua ideia com pelo menos 10 caracteres.").max(1500),
   largura: z.coerce.number().positive("Informe a largura em centímetros.").max(300),
