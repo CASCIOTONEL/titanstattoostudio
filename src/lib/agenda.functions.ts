@@ -100,7 +100,7 @@ export const iniciarConexaoGoogle = createServerFn({ method: "POST" })
       appUserId: context.userId,
       clientAPIKey: clientKey,
       returnUrl,
-      connectionAPIKey: connectionAPIKey ?? undefined,
+      ...(connectionAPIKey ? { connectionAPIKey } : {}),
       credentialsConfiguration: { scopes: GOOGLE_SCOPES },
     });
     return { authorizationUrl };

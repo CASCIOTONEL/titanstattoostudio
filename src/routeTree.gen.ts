@@ -24,6 +24,7 @@ import { Route as AuthenticatedOrcamentosRouteImport } from './routes/_authentic
 import { Route as AuthenticatedPagamentosRouteImport } from './routes/_authenticated/pagamentos'
 import { Route as TatuadoresIndexRouteImport } from './routes/tatuadores.index'
 import { Route as TatuadoresSlugRouteImport } from './routes/tatuadores.$slug'
+import { Route as OauthGoogleCalendarReturnRouteImport } from './routes/oauth/google-calendar/return'
 import { Route as ApiPublicWhatsappWebhookRouteImport } from './routes/api/public/whatsapp/webhook'
 
 const IndexRoute = IndexRouteImport.update({
@@ -100,6 +101,12 @@ const TatuadoresSlugRoute = TatuadoresSlugRouteImport.update({
   path: '/tatuadores/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OauthGoogleCalendarReturnRoute =
+  OauthGoogleCalendarReturnRouteImport.update({
+    id: '/oauth/google-calendar/return',
+    path: '/oauth/google-calendar/return',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicWhatsappWebhookRoute =
   ApiPublicWhatsappWebhookRouteImport.update({
     id: '/api/public/whatsapp/webhook',
@@ -122,6 +129,7 @@ export interface FileRoutesByFullPath {
   '/pagamentos': typeof AuthenticatedPagamentosRoute
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
   '/tatuadores/': typeof TatuadoresIndexRoute
+  '/oauth/google-calendar/return': typeof OauthGoogleCalendarReturnRoute
   '/api/public/whatsapp/webhook': typeof ApiPublicWhatsappWebhookRoute
 }
 export interface FileRoutesByTo {
@@ -139,6 +147,7 @@ export interface FileRoutesByTo {
   '/pagamentos': typeof AuthenticatedPagamentosRoute
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
   '/tatuadores': typeof TatuadoresIndexRoute
+  '/oauth/google-calendar/return': typeof OauthGoogleCalendarReturnRoute
   '/api/public/whatsapp/webhook': typeof ApiPublicWhatsappWebhookRoute
 }
 export interface FileRoutesById {
@@ -158,6 +167,7 @@ export interface FileRoutesById {
   '/_authenticated/pagamentos': typeof AuthenticatedPagamentosRoute
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
   '/tatuadores/': typeof TatuadoresIndexRoute
+  '/oauth/google-calendar/return': typeof OauthGoogleCalendarReturnRoute
   '/api/public/whatsapp/webhook': typeof ApiPublicWhatsappWebhookRoute
 }
 export interface FileRouteTypes {
@@ -177,6 +187,7 @@ export interface FileRouteTypes {
     | '/pagamentos'
     | '/tatuadores/$slug'
     | '/tatuadores/'
+    | '/oauth/google-calendar/return'
     | '/api/public/whatsapp/webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -194,6 +205,7 @@ export interface FileRouteTypes {
     | '/pagamentos'
     | '/tatuadores/$slug'
     | '/tatuadores'
+    | '/oauth/google-calendar/return'
     | '/api/public/whatsapp/webhook'
   id:
     | '__root__'
@@ -212,6 +224,7 @@ export interface FileRouteTypes {
     | '/_authenticated/pagamentos'
     | '/tatuadores/$slug'
     | '/tatuadores/'
+    | '/oauth/google-calendar/return'
     | '/api/public/whatsapp/webhook'
   fileRoutesById: FileRoutesById
 }
@@ -226,6 +239,7 @@ export interface RootRouteChildren {
   ServicosRoute: typeof ServicosRoute
   TatuadoresSlugRoute: typeof TatuadoresSlugRoute
   TatuadoresIndexRoute: typeof TatuadoresIndexRoute
+  OauthGoogleCalendarReturnRoute: typeof OauthGoogleCalendarReturnRoute
   ApiPublicWhatsappWebhookRoute: typeof ApiPublicWhatsappWebhookRoute
 }
 
@@ -336,6 +350,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TatuadoresSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/oauth/google-calendar/return': {
+      id: '/oauth/google-calendar/return'
+      path: '/oauth/google-calendar/return'
+      fullPath: '/oauth/google-calendar/return'
+      preLoaderRoute: typeof OauthGoogleCalendarReturnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/whatsapp/webhook': {
       id: '/api/public/whatsapp/webhook'
       path: '/api/public/whatsapp/webhook'
@@ -376,6 +397,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicosRoute: ServicosRoute,
   TatuadoresSlugRoute: TatuadoresSlugRoute,
   TatuadoresIndexRoute: TatuadoresIndexRoute,
+  OauthGoogleCalendarReturnRoute: OauthGoogleCalendarReturnRoute,
   ApiPublicWhatsappWebhookRoute: ApiPublicWhatsappWebhookRoute,
 }
 export const routeTree = rootRouteImport
