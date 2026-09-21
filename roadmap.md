@@ -44,4 +44,4 @@
 - [x] Agenda unica com Google Agenda dos tatuadores (/agenda)
 - [x] CPF e data de nascimento no formulario de orcamento
 - [x] Lista de contatos (/contatos): todos os leads, quem fechou e aniversariantes do dia
-- [ ] Ticket medio por tatuador e media do estudio na area financeira
+- [x] Ticket medio por tatuador e media do estudio na area financeira
