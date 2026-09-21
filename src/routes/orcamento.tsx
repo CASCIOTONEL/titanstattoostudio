@@ -146,6 +146,8 @@ function OrcamentoPage() {
         nome: d.nome,
         whatsapp: d.whatsapp,
         email: d.email || null,
+        documento: d.documento,
+        nascimento: d.nascimento,
         servico: d.servico,
         ideia: d.ideia,
         largura_cm: d.largura,
