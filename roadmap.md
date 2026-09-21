@@ -34,3 +34,8 @@
 ## Etapa 6 — Ficha, documentos, painel e permissões
 
 - [ ] Aviso de orcamento: enviar mensagem completa para 5551991786170 (estudio repassa ao tatuador manualmente)
+
+## Area do tatuador
+- [x] Painel do tatuador (/meu-painel): orcamentos proprios com status, faturamento e comissao semanal segunda a segunda
+- [x] Vinculo login <-> tatuador em Equipe e permissoes (profiles.tatuador) + RLS por tatuador
+- [ ] Agenda do tatuador com Google Agenda (cada tatuador conecta a propria conta) e horarios livres/agendamentos
