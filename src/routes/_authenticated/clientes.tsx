@@ -163,6 +163,29 @@ function ClientesPage() {
   const [form, setForm] = useState<Formulario>(vazio);
   const [editandoId, setEditandoId] = useState<string | null>(null);
   const [salvando, setSalvando] = useState(false);
+  const [importando, setImportando] = useState(false);
+  const importar = useServerFn(importarClientesPlanilha);
+
+  async function importarPlanilha() {
+    if (!window.confirm("Importar a base de clientes da planilha do estúdio?")) return;
+    setImportando(true);
+    setError(null);
+    setAviso(null);
+    try {
+      const r = await importar();
+      setAviso(
+        `Importação concluída: ${r.inseridos} cliente(s) adicionados, ${r.jaExistiam} já estavam cadastrados.`,
+      );
+      const { data } = await supabase
+        .from("clientes")
+        .select("*")
+        .order("created_at", { ascending: false });
+      setClientes((data ?? []) as Cliente[]);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Não foi possível importar a base.");
+    }
+    setImportando(false);
+  }
 
   useEffect(() => {
     let ativo = true;
