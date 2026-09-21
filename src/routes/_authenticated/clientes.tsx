@@ -292,6 +292,23 @@ function ClientesPage() {
           description="Cadastro completo de cada pessoa atendida pelo estúdio."
         />
         <div className="flex flex-wrap gap-3">
+          <button
+            type="button"
+            onClick={() => baixarCsv(visiveis)}
+            className="border border-border px-5 py-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
+          >
+            Exportar Excel/CSV
+          </button>
+          {ehMaster ? (
+            <button
+              type="button"
+              onClick={importarPlanilha}
+              disabled={importando}
+              className="border border-border px-5 py-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground disabled:opacity-50"
+            >
+              {importando ? "Importando..." : "Importar planilha"}
+            </button>
+          ) : null}
           <Link
             to="/orcamentos"
             className="border border-border px-5 py-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
