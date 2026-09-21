@@ -59,7 +59,7 @@ function inicioSemana(d: Date) {
 
 function dataLocal(iso: string) {
   const [a, m, d] = iso.split("-").map(Number);
-  return new Date(a, (m ?? 1) - 1, d ?? 1);
+  return new Date(a ?? 1970, (m ?? 1) - 1, d ?? 1);
 }
 
 const fmtDia = (d: Date) => d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" });
