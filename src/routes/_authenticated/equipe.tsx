@@ -177,6 +177,12 @@ function EquipePage() {
                 acao(() => trocarSenha({ data: { userId: m.id, senha: nova } }), "Senha redefinida.")
               }
               onExcluir={() => acao(() => excluir({ data: { userId: m.id } }), "Usuário removido.")}
+              onTatuador={(nome) =>
+                acao(
+                  () => salvarTatuador({ data: { userId: m.id, tatuador: nome } }),
+                  "Tatuador vinculado.",
+                )
+              }
             />
           ))}
         </div>
@@ -191,17 +197,21 @@ function MembroCard({
   onAtivo,
   onSenha,
   onExcluir,
+  onTatuador,
 }: {
   membro: MembroEquipe;
   onPapeis: (papeis: Papel[]) => void;
   onAtivo: (ativo: boolean) => void;
   onSenha: (senha: string) => void;
   onExcluir: () => void;
+  onTatuador: (tatuador: string | null) => void;
 }) {
   const [papeis, setPapeis] = useState<Papel[]>(membro.papeis);
   const [novaSenha, setNovaSenha] = useState("");
+  const [tatuador, setTatuador] = useState<string>(membro.tatuador ?? "");
 
   useEffect(() => setPapeis(membro.papeis), [membro.papeis]);
+  useEffect(() => setTatuador(membro.tatuador ?? ""), [membro.tatuador]);
 
   return (
     <article className="border border-border bg-card/30 p-6">
