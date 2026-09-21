@@ -17,6 +17,7 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as OrcamentoRouteImport } from './routes/orcamento'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as ServicosRouteImport } from './routes/servicos'
+import { Route as AuthenticatedAgendaRouteImport } from './routes/_authenticated/agenda'
 import { Route as AuthenticatedClientesRouteImport } from './routes/_authenticated/clientes'
 import { Route as AuthenticatedEquipeRouteImport } from './routes/_authenticated/equipe'
 import { Route as AuthenticatedMeuPainelRouteImport } from './routes/_authenticated/meu-painel'
@@ -65,6 +66,11 @@ const ServicosRoute = ServicosRouteImport.update({
   id: '/servicos',
   path: '/servicos',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAgendaRoute = AuthenticatedAgendaRouteImport.update({
+  id: '/agenda',
+  path: '/agenda',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedClientesRoute = AuthenticatedClientesRouteImport.update({
   id: '/clientes',
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/orcamento': typeof OrcamentoRoute
   '/portfolio': typeof PortfolioRoute
   '/servicos': typeof ServicosRoute
+  '/agenda': typeof AuthenticatedAgendaRoute
   '/clientes': typeof AuthenticatedClientesRoute
   '/equipe': typeof AuthenticatedEquipeRoute
   '/meu-painel': typeof AuthenticatedMeuPainelRoute
@@ -140,6 +147,7 @@ export interface FileRoutesByTo {
   '/orcamento': typeof OrcamentoRoute
   '/portfolio': typeof PortfolioRoute
   '/servicos': typeof ServicosRoute
+  '/agenda': typeof AuthenticatedAgendaRoute
   '/clientes': typeof AuthenticatedClientesRoute
   '/equipe': typeof AuthenticatedEquipeRoute
   '/meu-painel': typeof AuthenticatedMeuPainelRoute
@@ -160,6 +168,7 @@ export interface FileRoutesById {
   '/orcamento': typeof OrcamentoRoute
   '/portfolio': typeof PortfolioRoute
   '/servicos': typeof ServicosRoute
+  '/_authenticated/agenda': typeof AuthenticatedAgendaRoute
   '/_authenticated/clientes': typeof AuthenticatedClientesRoute
   '/_authenticated/equipe': typeof AuthenticatedEquipeRoute
   '/_authenticated/meu-painel': typeof AuthenticatedMeuPainelRoute
@@ -180,6 +189,7 @@ export interface FileRouteTypes {
     | '/orcamento'
     | '/portfolio'
     | '/servicos'
+    | '/agenda'
     | '/clientes'
     | '/equipe'
     | '/meu-painel'
@@ -198,6 +208,7 @@ export interface FileRouteTypes {
     | '/orcamento'
     | '/portfolio'
     | '/servicos'
+    | '/agenda'
     | '/clientes'
     | '/equipe'
     | '/meu-painel'
@@ -217,6 +228,7 @@ export interface FileRouteTypes {
     | '/orcamento'
     | '/portfolio'
     | '/servicos'
+    | '/_authenticated/agenda'
     | '/_authenticated/clientes'
     | '/_authenticated/equipe'
     | '/_authenticated/meu-painel'
@@ -301,6 +313,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/agenda': {
+      id: '/_authenticated/agenda'
+      path: '/agenda'
+      fullPath: '/agenda'
+      preLoaderRoute: typeof AuthenticatedAgendaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/clientes': {
       id: '/_authenticated/clientes'
       path: '/clientes'
@@ -368,6 +387,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAgendaRoute: typeof AuthenticatedAgendaRoute
   AuthenticatedClientesRoute: typeof AuthenticatedClientesRoute
   AuthenticatedEquipeRoute: typeof AuthenticatedEquipeRoute
   AuthenticatedMeuPainelRoute: typeof AuthenticatedMeuPainelRoute
@@ -376,6 +396,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAgendaRoute: AuthenticatedAgendaRoute,
   AuthenticatedClientesRoute: AuthenticatedClientesRoute,
   AuthenticatedEquipeRoute: AuthenticatedEquipeRoute,
   AuthenticatedMeuPainelRoute: AuthenticatedMeuPainelRoute,
