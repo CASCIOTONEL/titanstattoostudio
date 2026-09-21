@@ -3,11 +3,13 @@ import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 import { Section, SectionTitle } from "@/components/site/Section";
 import {
+  NOMES_TATUADORES,
   PAPEIS,
   ROTULO_PAPEL,
   criarUsuario,
   definirAtivo,
   definirPapeis,
+  definirTatuador,
   listarEquipe,
   redefinirSenha,
   removerUsuario,
