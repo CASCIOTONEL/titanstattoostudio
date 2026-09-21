@@ -43,6 +43,8 @@ function EquipePage() {
   const alternarAtivo = useServerFn(definirAtivo);
   const trocarSenha = useServerFn(redefinirSenha);
   const excluir = useServerFn(removerUsuario);
+  const salvarTatuador = useServerFn(definirTatuador);
+
 
   const [membros, setMembros] = useState<MembroEquipe[]>([]);
   const [carregando, setCarregando] = useState(true);
