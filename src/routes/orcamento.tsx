@@ -112,6 +112,8 @@ function OrcamentoPage() {
       `Nome: ${d.nome}`,
       `WhatsApp: ${d.whatsapp}`,
       `E-mail: ${d.email || "-"}`,
+      `CPF: ${d.documento}`,
+      `Nascimento: ${d.nascimento.split("-").reverse().join("/")}`,
       `Serviço: ${d.servico}`,
       `Ideia: ${d.ideia}`,
       `Tamanho: ${d.largura} cm x ${d.altura} cm`,
