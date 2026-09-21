@@ -4,6 +4,37 @@ import { useEffect, useMemo, useState } from "react";
 import { Section, SectionTitle } from "@/components/site/Section";
 import { supabase } from "@/integrations/supabase/client";
 import { meusPapeis, type Papel } from "@/lib/equipe.functions";
+import { importarClientesPlanilha } from "@/lib/importacao.functions";
+
+const COLUNAS_CSV: { chave: keyof Cliente; rotulo: string }[] = [
+  { chave: "nome", rotulo: "Nome" },
+  { chave: "whatsapp", rotulo: "WhatsApp" },
+  { chave: "email", rotulo: "E-mail" },
+  { chave: "documento", rotulo: "CPF" },
+  { chave: "nascimento", rotulo: "Nascimento" },
+  { chave: "endereco", rotulo: "Endereco" },
+  { chave: "cidade", rotulo: "Cidade" },
+  { chave: "estado", rotulo: "Estado" },
+  { chave: "cep", rotulo: "CEP" },
+  { chave: "origem", rotulo: "Origem" },
+  { chave: "alergias", rotulo: "Alergias" },
+  { chave: "observacoes", rotulo: "Observacoes" },
+];
+
+function baixarCsv(lista: Cliente[]) {
+  const escapar = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+  const linhas = [
+    COLUNAS_CSV.map((c) => escapar(c.rotulo)).join(";"),
+    ...lista.map((c) => COLUNAS_CSV.map((col) => escapar(c[col.chave])).join(";")),
+  ];
+  const blob = new Blob(["\uFEFF" + linhas.join("\n")], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `clientes-titans-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
 
 function onlyDigits(value: string) {
   const digits = value.replace(/\D/g, "");
