@@ -1,5 +1,7 @@
 import { encryptConnectionKey, decryptConnectionKey } from "@/lib/connectionKeyCrypto.server";
 
+const TATUADORES = ["Cascio", "Ricardo", "Braian"] as const;
+
 export async function saveConnectionKeyForUser(
   userId: string,
   connectorId: string,
@@ -53,11 +55,15 @@ export async function listarTatuadoresComConexao(connectorId: string) {
   if (e1) throw new Error(e1.message);
   if (e2) throw new Error(e2.message);
   const mapa = new Map((conexoes ?? []).map((c: any) => [c.user_id, c.connection_key_ciphertext]));
-  return (perfis ?? [])
-    .filter((p: any) => p.ativo)
-    .map((p: any) => ({
-      userId: p.id as string,
-      tatuador: p.tatuador as string,
-      connectionAPIKey: mapa.has(p.id) ? decryptConnectionKey(mapa.get(p.id) as string) : null,
-    }));
+  const perfisAtivos = (perfis ?? []).filter((p: any) => p.ativo);
+
+  return TATUADORES.map((tatuador) => {
+    const perfil = perfisAtivos.find((p: any) => p.tatuador === tatuador);
+    const ciphertext = perfil ? mapa.get(perfil.id) : null;
+    return {
+      userId: perfil?.id as string | undefined,
+      tatuador,
+      connectionAPIKey: typeof ciphertext === "string" ? decryptConnectionKey(ciphertext) : null,
+    };
+  });
 }
