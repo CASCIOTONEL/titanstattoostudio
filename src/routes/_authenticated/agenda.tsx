@@ -587,8 +587,8 @@ function AgendaPage() {
                       return (
                         <article
                           key={`${ev.tatuador}-${ev.id}`}
-                          className={`${cor.fundo} ${cor.texto} ${filtro === "todos" ? (faixaTatuador[ev.tatuador] ?? "inset-x-1") : "inset-x-1"} group absolute z-10 overflow-hidden border border-background/30 px-2 py-[2px] shadow-sm transition-all hover:z-30 hover:!inset-x-1 hover:!h-auto hover:overflow-visible hover:py-1 hover:shadow-lg`}
-                          style={{ top: posicao.top, height: 22 }}
+                          className={`${cor.fundo} ${cor.texto} inset-x-1 group absolute z-10 overflow-hidden border border-background/30 px-2 py-[2px] shadow-sm transition-all hover:z-30 hover:!h-auto hover:overflow-visible hover:py-1 hover:shadow-lg`}
+                          style={{ top: posicao.top, height: posicao.height }}
                           title={`${ev.tatuador} · ${ev.titulo} · ${fmtIntervalo(ev)}`}
                         >
                           <p className="truncate text-[11px] leading-[16px]">
