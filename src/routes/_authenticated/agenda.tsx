@@ -583,10 +583,10 @@ function AgendaPage() {
                         <article
                           key={`${ev.tatuador}-${ev.id}`}
                           className={`${cor.fundo} ${cor.texto} inset-x-1 group absolute z-10 overflow-hidden border border-background/30 px-2 py-[2px] shadow-sm transition-all hover:z-30 hover:!h-auto hover:overflow-visible hover:py-1 hover:shadow-lg`}
-                          style={{ top: posicao.top, height: posicao.height }}
+                          style={{ top: posicao.top, height: 22 }}
                           title={`${ev.tatuador} · ${ev.titulo} · ${fmtIntervalo(ev)}`}
                         >
-                          <p className="truncate text-[11px] leading-[16px]">
+                          <p className="truncate text-[11px] leading-[18px]">
                             <span className="font-semibold">{fmtIntervalo(ev)}</span>{" "}
                             {ev.titulo}
                           </p>
