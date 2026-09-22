@@ -396,11 +396,12 @@ function AgendaPage() {
               className={`${campo} mt-2`}
               value={form.tatuador}
               onChange={(e) => setForm({ ...form, tatuador: e.target.value })}
+              disabled={carregando}
             >
-              <option value="">Selecione</option>
+              <option value="">{carregando ? "Carregando…" : "Selecione"}</option>
               {status?.tatuadores.map((t) => (
                 <option key={t.tatuador} value={t.tatuador}>
-                  {t.tatuador}
+                  {t.tatuador}{t.conectado ? "" : " — agenda pendente"}
                 </option>
               ))}
             </select>
