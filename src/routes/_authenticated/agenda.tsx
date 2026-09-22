@@ -65,6 +65,12 @@ const corPadrao = {
   ponto: "bg-muted-foreground",
 };
 
+const faixaTatuador: Record<string, string> = {
+  Cascio: "left-1 right-[67%]",
+  Ricardo: "left-[34%] right-[34%]",
+  Braian: "left-[67%] right-1",
+};
+
 function corDoTatuador(nome: string) {
   return coresTatuador[nome] ?? corPadrao;
 }
@@ -492,12 +498,14 @@ function AgendaPage() {
 
       {carregando ? (
         <p className="mt-8 text-sm text-muted-foreground">Carregando agenda…</p>
-      ) : conectados === 0 ? (
-        <p className="mt-8 text-sm text-muted-foreground">
-          Nenhuma agenda conectada ainda. Cada tatuador precisa entrar aqui e conectar a conta
-          Google dele.
-        </p>
       ) : (
+        <>
+          {conectados === 0 ? (
+            <p className="mt-8 border border-border p-4 text-sm text-muted-foreground">
+              Nenhuma agenda conectada ainda. O quadro já está pronto; cada tatuador precisa entrar
+              com seu usuário e conectar a própria conta Google.
+            </p>
+          ) : null}
         <div className="mt-8 border border-border">
           <div className="overflow-x-auto">
             <div className="min-w-[1050px]">
@@ -562,7 +570,7 @@ function AgendaPage() {
                       return (
                         <article
                           key={`${ev.tatuador}-${ev.id}`}
-                          className={`${cor.fundo} ${cor.texto} absolute inset-x-1 z-10 overflow-hidden border border-background/30 px-2 py-1 shadow-sm`}
+                          className={`${cor.fundo} ${cor.texto} ${filtro === "todos" ? (faixaTatuador[ev.tatuador] ?? "inset-x-1") : "inset-x-1"} absolute z-10 overflow-hidden border border-background/30 px-2 py-1 shadow-sm`}
                           style={{ top: posicao.top, height: posicao.height }}
                           title={`${ev.tatuador} · ${ev.titulo} · ${fmtIntervalo(ev)}`}
                         >
@@ -578,6 +586,7 @@ function AgendaPage() {
             </div>
           </div>
         </div>
+        </>
       )}
     </Section>
   );
