@@ -161,45 +161,86 @@ export const listarEventos = createServerFn({ method: "POST" })
       alvos
         .filter((a) => a.connectionAPIKey)
         .map(async (alvo) => {
-          const params = new URLSearchParams({
-            timeMin: data.inicio,
-            timeMax: data.fim,
-            singleEvents: "true",
-            orderBy: "startTime",
-            maxResults: "250",
-          });
-          if (!alvo.connectionAPIKey) return;
-          const res = await callAsAppUser({
+          const chave = alvo.connectionAPIKey;
+          if (!chave) return;
+
+          // Descobre todas as agendas da conta (não só a principal)
+          let calendarios: string[] = ["primary"];
+          const listaRes = await callAsAppUser({
             gatewayBaseUrl: GATEWAY_BASE_URL,
-            connectionAPIKey: alvo.connectionAPIKey,
+            connectionAPIKey: chave,
             connectorId: CONNECTOR_ID,
-            path: `/calendar/v3/calendars/primary/events?${params.toString()}`,
+            path: "/calendar/v3/users/me/calendarList?maxResults=250",
             requiredScopes: GOOGLE_SCOPES,
           });
-          if (await appUserReconnectRequired(res)) {
+          if (await appUserReconnectRequired(listaRes)) {
             precisamReconectar.push(alvo.tatuador);
             return;
           }
-          if (!res.ok) {
-            const corpo = await res.text();
-            console.error(`Google Agenda falhou [${res.status}]: ${corpo}`);
-            throw new Error(`Não foi possível ler a agenda de ${alvo.tatuador}.`);
+          if (listaRes.ok) {
+            const listaBody = (await listaRes.json()) as { items?: any[] };
+            const ids = (listaBody.items ?? [])
+              .filter((c) => c.selected !== false && c.id)
+              .map((c) => String(c.id));
+            if (ids.length) calendarios = ids;
+          } else {
+            console.error(
+              `Lista de agendas falhou [${listaRes.status}]: ${await listaRes.text()}`,
+            );
           }
-          const body = (await res.json()) as { items?: any[] };
-          for (const item of body.items ?? []) {
-            if (item.status === "cancelled") continue;
-            const diaInteiro = !!item.start?.date;
-            eventos.push({
-              id: String(item.id),
-              tatuador: alvo.tatuador,
-              titulo: item.summary ?? "(sem título)",
-              inicio: item.start?.dateTime ?? item.start?.date,
-              fim: item.end?.dateTime ?? item.end?.date,
-              diaInteiro,
-            });
-          }
+
+          const vistos = new Set<string>();
+          await Promise.all(
+            calendarios.map(async (calendarId) => {
+              const params = new URLSearchParams({
+                timeMin: data.inicio,
+                timeMax: data.fim,
+                singleEvents: "true",
+                orderBy: "startTime",
+                maxResults: "250",
+              });
+              const res = await callAsAppUser({
+                gatewayBaseUrl: GATEWAY_BASE_URL,
+                connectionAPIKey: chave,
+                connectorId: CONNECTOR_ID,
+                path: `/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events?${params.toString()}`,
+                requiredScopes: GOOGLE_SCOPES,
+              });
+              if (await appUserReconnectRequired(res)) {
+                if (!precisamReconectar.includes(alvo.tatuador)) {
+                  precisamReconectar.push(alvo.tatuador);
+                }
+                return;
+              }
+              if (!res.ok) {
+                console.error(
+                  `Google Agenda falhou [${res.status}] (${calendarId}): ${await res.text()}`,
+                );
+                return;
+              }
+              const body = (await res.json()) as { items?: any[] };
+              for (const item of body.items ?? []) {
+                if (item.status === "cancelled") continue;
+                const inicio = item.start?.dateTime ?? item.start?.date;
+                const fim = item.end?.dateTime ?? item.end?.date;
+                if (!inicio || !fim) continue;
+                const chaveEvento = `${item.id}|${inicio}`;
+                if (vistos.has(chaveEvento)) continue;
+                vistos.add(chaveEvento);
+                eventos.push({
+                  id: `${calendarId}:${item.id}:${inicio}`,
+                  tatuador: alvo.tatuador,
+                  titulo: item.summary ?? "(sem título)",
+                  inicio,
+                  fim,
+                  diaInteiro: !!item.start?.date,
+                });
+              }
+            }),
+          );
         }),
     );
+
 
     eventos.sort((a, b) => a.inicio.localeCompare(b.inicio));
     return { eventos, precisamReconectar };
