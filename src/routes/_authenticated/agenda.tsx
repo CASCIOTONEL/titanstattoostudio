@@ -65,11 +65,6 @@ const corPadrao = {
   ponto: "bg-muted-foreground",
 };
 
-const faixaTatuador: Record<string, string> = {
-  Cascio: "left-1 right-[67%]",
-  Ricardo: "left-[34%] right-[34%]",
-  Braian: "left-[67%] right-1",
-};
 
 function corDoTatuador(nome: string) {
   return coresTatuador[nome] ?? corPadrao;
