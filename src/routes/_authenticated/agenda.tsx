@@ -170,6 +170,7 @@ function AgendaPage() {
     descricao: "",
   });
   const [salvando, setSalvando] = useState(false);
+  const [conectando, setConectando] = useState(false);
 
   const semana = useMemo(() => {
     const ini = inicioSemana(new Date());
@@ -218,11 +219,14 @@ function AgendaPage() {
   }, [semanaOffset]);
 
   async function conectar() {
+    if (conectando) return;
+    setConectando(true);
     setErro(null);
     setAviso(null);
     const popup = window.open("", "titans-google", "width=600,height=720");
     if (!popup) {
       setErro("Libere as janelas pop-up no navegador e tente de novo.");
+      setConectando(false);
       return;
     }
     let code: string | null = null;
@@ -234,6 +238,7 @@ function AgendaPage() {
     } catch (e) {
       popup.close();
       setErro(e instanceof Error ? e.message : "Não foi possível conectar o Google Agenda.");
+      setConectando(false);
       return;
     }
     try {
@@ -243,7 +248,14 @@ function AgendaPage() {
       await recarregar(s);
       setAviso("Google Agenda conectado.");
     } catch (e) {
-      setErro(e instanceof Error ? e.message : "Não foi possível salvar a conexão.");
+      const mensagem = e instanceof Error ? e.message : "";
+      setErro(
+        mensagem.includes("invalid_exchange_code")
+          ? "O código de confirmação do Google expirou ou já foi usado. Clique em conectar novamente para gerar um código novo."
+          : mensagem || "Não foi possível salvar a conexão.",
+      );
+    } finally {
+      setConectando(false);
     }
   }
 
@@ -358,8 +370,12 @@ function AgendaPage() {
             : "Conecte sua conta do Google para que seus horários apareçam na agenda do estúdio."}
         </p>
         <div className="mt-4 flex flex-wrap gap-3">
-          <button type="button" onClick={conectar} className={btnForte}>
-            {status?.conectado ? "Reconectar Google" : "Conectar Google Agenda"}
+          <button type="button" onClick={conectar} className={btnForte} disabled={conectando}>
+            {conectando
+              ? "Conectando…"
+              : status?.conectado
+                ? "Reconectar Google"
+                : "Conectar Google Agenda"}
           </button>
           {status?.conectado ? (
             <button type="button" onClick={remover} className={btn}>
