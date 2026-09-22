@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const Route = createFileRoute("/oauth/google-calendar/return")({
   ssr: false,
@@ -15,8 +15,11 @@ export const Route = createFileRoute("/oauth/google-calendar/return")({
 
 function OAuthReturn() {
   const [mensagem, setMensagem] = useState("Finalizando a conexão…");
+  const retornoEnviado = useRef(false);
 
   useEffect(() => {
+    if (retornoEnviado.current) return;
+    retornoEnviado.current = true;
     const params = new URLSearchParams(window.location.search);
     const avisar = (
       type: "appUserConnectorOAuthComplete" | "appUserConnectorOAuthFailed",
