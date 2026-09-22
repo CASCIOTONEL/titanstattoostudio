@@ -587,16 +587,23 @@ function AgendaPage() {
                       return (
                         <article
                           key={`${ev.tatuador}-${ev.id}`}
-                          className={`${cor.fundo} ${cor.texto} ${filtro === "todos" ? (faixaTatuador[ev.tatuador] ?? "inset-x-1") : "inset-x-1"} absolute z-10 overflow-hidden border border-background/30 px-2 py-1 shadow-sm`}
-                          style={{ top: posicao.top, height: posicao.height }}
+                          className={`${cor.fundo} ${cor.texto} ${filtro === "todos" ? (faixaTatuador[ev.tatuador] ?? "inset-x-1") : "inset-x-1"} group absolute z-10 overflow-hidden border border-background/30 px-2 py-[2px] shadow-sm transition-all hover:z-30 hover:!inset-x-1 hover:!h-auto hover:overflow-visible hover:py-1 hover:shadow-lg`}
+                          style={{ top: posicao.top, height: 22 }}
                           title={`${ev.tatuador} · ${ev.titulo} · ${fmtIntervalo(ev)}`}
                         >
-                          <p className="text-[11px] font-semibold">{fmtIntervalo(ev)}</p>
-                          <p className="truncate text-xs font-bold">{ev.titulo}</p>
-                          <p className="truncate text-[11px]">{ev.tatuador}</p>
+                          <p className="truncate text-[11px] leading-[16px]">
+                            <span className="font-semibold">{fmtIntervalo(ev)}</span>{" "}
+                            {ev.titulo}
+                          </p>
+                          <div className="hidden group-hover:block">
+                            <p className="mt-1 text-xs font-bold">{ev.titulo}</p>
+                            <p className="text-[11px]">{ev.tatuador}</p>
+                            <p className="text-[11px]">{fmtIntervalo(ev)}</p>
+                          </div>
                         </article>
                       );
                     })}
+
                   </div>
                 ))}
               </div>
