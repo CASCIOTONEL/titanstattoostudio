@@ -25,6 +25,8 @@ export const Route = createFileRoute("/_authenticated/agenda")({
       { name: "robots", content: "noindex" },
       { property: "og:title", content: "Agenda — Titans Tattoo Studio" },
       { property: "og:description", content: "Agenda interna do Titans Tattoo Studio." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: AgendaPage,
@@ -35,6 +37,37 @@ const btn =
 const btnForte =
   "border border-foreground/80 px-5 py-3 text-xs uppercase tracking-[0.2em] transition-colors hover:bg-foreground hover:text-background disabled:opacity-40";
 const campo = "w-full border border-border bg-transparent px-4 py-3 text-sm";
+const HORA_INICIAL = 8;
+const HORA_FINAL = 21;
+const ALTURA_HORA = 64;
+
+const coresTatuador: Record<string, { fundo: string; texto: string; ponto: string }> = {
+  Cascio: {
+    fundo: "bg-artist-cascio",
+    texto: "text-artist-cascio-foreground",
+    ponto: "bg-artist-cascio",
+  },
+  Ricardo: {
+    fundo: "bg-artist-ricardo",
+    texto: "text-artist-ricardo-foreground",
+    ponto: "bg-artist-ricardo",
+  },
+  Braian: {
+    fundo: "bg-artist-braian",
+    texto: "text-artist-braian-foreground",
+    ponto: "bg-artist-braian",
+  },
+};
+
+const corPadrao = {
+  fundo: "bg-secondary",
+  texto: "text-secondary-foreground",
+  ponto: "bg-muted-foreground",
+};
+
+function corDoTatuador(nome: string) {
+  return coresTatuador[nome] ?? corPadrao;
+}
 
 function inicioSemana(d: Date) {
   const base = new Date(d.getFullYear(), d.getMonth(), d.getDate());
@@ -50,6 +83,26 @@ const fmtHora = (iso: string, diaInteiro: boolean) =>
   diaInteiro
     ? "Dia inteiro"
     : new Date(iso).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+
+const fmtIntervalo = (evento: EventoAgenda) =>
+  evento.diaInteiro
+    ? "Dia inteiro"
+    : `${fmtHora(evento.inicio, false)}–${fmtHora(evento.fim, false)}`;
+
+function posicaoEvento(evento: EventoAgenda) {
+  const inicio = new Date(evento.inicio);
+  const fim = new Date(evento.fim);
+  const inicioEmMinutos = inicio.getHours() * 60 + inicio.getMinutes();
+  const fimEmMinutos = fim.getHours() * 60 + fim.getMinutes();
+  const limiteInicial = HORA_INICIAL * 60;
+  const limiteFinal = HORA_FINAL * 60;
+  const inicioVisivel = Math.max(inicioEmMinutos, limiteInicial);
+  const fimVisivel = Math.min(Math.max(fimEmMinutos, inicioVisivel + 30), limiteFinal);
+  return {
+    top: ((inicioVisivel - limiteInicial) / 60) * ALTURA_HORA,
+    height: Math.max(((fimVisivel - inicioVisivel) / 60) * ALTURA_HORA, 34),
+  };
+}
 
 function esperarOAuth(popup: Window) {
   return new Promise<string | null>((resolve, reject) => {
@@ -260,6 +313,11 @@ function AgendaPage() {
     return lista;
   }, [eventos, semana, filtro]);
 
+  const horas = useMemo(
+    () => Array.from({ length: HORA_FINAL - HORA_INICIAL + 1 }, (_, i) => HORA_INICIAL + i),
+    [],
+  );
+
   const conectados = status?.tatuadores.filter((t) => t.conectado).length ?? 0;
 
   return (
@@ -304,10 +362,14 @@ function AgendaPage() {
           ) : null}
         </div>
         {status?.podeVerTodos ? (
-          <ul className="mt-5 space-y-1 text-sm text-muted-foreground">
+          <ul className="mt-5 grid gap-2 sm:grid-cols-3">
             {status.tatuadores.map((t) => (
-              <li key={t.tatuador}>
-                {t.tatuador}: {t.conectado ? "agenda conectada" : "ainda não conectou"}
+              <li key={t.tatuador} className="flex items-center gap-2 border border-border px-3 py-2 text-sm">
+                <span className={`size-2 shrink-0 rounded-full ${corDoTatuador(t.tatuador).ponto}`} />
+                <span className="font-medium">{t.tatuador}</span>
+                <span className="ml-auto text-xs text-muted-foreground">
+                  {t.conectado ? "Conectada" : "Pendente"}
+                </span>
               </li>
             ))}
           </ul>
@@ -409,15 +471,18 @@ function AgendaPage() {
           </button>
         </div>
         {status?.podeVerTodos ? (
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2" aria-label="Filtrar agenda por tatuador">
             {["todos", ...(status?.tatuadores.map((t) => t.tatuador) ?? [])].map((t) => (
               <button
                 key={t}
                 type="button"
                 aria-pressed={filtro === t}
                 onClick={() => setFiltro(t)}
-                className={`${btn} ${filtro === t ? "text-foreground" : ""}`}
+                className={`${btn} flex items-center gap-2 ${filtro === t ? "border-foreground text-foreground" : ""}`}
               >
+                {t !== "todos" ? (
+                  <span className={`size-2 rounded-full ${corDoTatuador(t).ponto}`} />
+                ) : null}
                 {t === "todos" ? "Todos" : t}
               </button>
             ))}
@@ -433,29 +498,85 @@ function AgendaPage() {
           Google dele.
         </p>
       ) : (
-        <div className="mt-8 grid gap-4">
-          {dias.map((d) => (
-            <div key={d.data.toISOString()} className="border border-border p-5">
-              <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                {fmtDia(d.data)}
-              </p>
-              {d.eventos.length === 0 ? (
-                <p className="mt-3 text-sm text-muted-foreground">Sem compromissos.</p>
-              ) : (
-                <ul className="mt-3 space-y-2">
-                  {d.eventos.map((ev) => (
-                    <li key={`${ev.tatuador}-${ev.id}`} className="flex flex-wrap gap-3 text-sm">
-                      <span className="w-28 text-muted-foreground">
-                        {fmtHora(ev.inicio, ev.diaInteiro)}
-                      </span>
-                      <span className="font-medium">{ev.tatuador}</span>
-                      <span>{ev.titulo}</span>
-                    </li>
+        <div className="mt-8 border border-border">
+          <div className="overflow-x-auto">
+            <div className="min-w-[1050px]">
+              <div className="grid grid-cols-[64px_repeat(7,minmax(140px,1fr))] border-b border-border bg-card">
+                <div className="border-r border-border p-3" />
+                {dias.map((d) => (
+                  <div key={d.data.toISOString()} className="border-r border-border p-3 text-center last:border-r-0">
+                    <p className="text-xs uppercase text-muted-foreground">{fmtDia(d.data)}</p>
+                    <p className="mt-1 font-display text-2xl">{d.data.getDate()}</p>
+                  </div>
+                ))}
+              </div>
+
+              {dias.some((d) => d.eventos.some((ev) => ev.diaInteiro)) ? (
+                <div className="grid grid-cols-[64px_repeat(7,minmax(140px,1fr))] border-b border-border">
+                  <div className="border-r border-border p-2 text-center text-[10px] uppercase text-muted-foreground">
+                    Dia
+                  </div>
+                  {dias.map((d) => (
+                    <div key={`inteiro-${d.data.toISOString()}`} className="min-h-12 border-r border-border p-1 last:border-r-0">
+                      {d.eventos.filter((ev) => ev.diaInteiro).map((ev) => {
+                        const cor = corDoTatuador(ev.tatuador);
+                        return (
+                          <div key={`${ev.tatuador}-${ev.id}`} className={`${cor.fundo} ${cor.texto} mb-1 px-2 py-1 text-xs`}>
+                            <strong>{ev.tatuador}</strong> · {ev.titulo}
+                          </div>
+                        );
+                      })}
+                    </div>
                   ))}
-                </ul>
-              )}
+                </div>
+              ) : null}
+
+              <div className="grid grid-cols-[64px_repeat(7,minmax(140px,1fr))]">
+                <div className="relative border-r border-border" style={{ height: (HORA_FINAL - HORA_INICIAL) * ALTURA_HORA }}>
+                  {horas.slice(0, -1).map((hora) => (
+                    <div
+                      key={hora}
+                      className="absolute right-0 w-full border-t border-border pr-2 pt-1 text-right text-[11px] text-muted-foreground"
+                      style={{ top: (hora - HORA_INICIAL) * ALTURA_HORA }}
+                    >
+                      {String(hora).padStart(2, "0")}:00
+                    </div>
+                  ))}
+                </div>
+                {dias.map((d) => (
+                  <div
+                    key={`grade-${d.data.toISOString()}`}
+                    className="relative border-r border-border last:border-r-0"
+                    style={{ height: (HORA_FINAL - HORA_INICIAL) * ALTURA_HORA }}
+                  >
+                    {horas.slice(0, -1).map((hora) => (
+                      <div
+                        key={hora}
+                        className="absolute w-full border-t border-border/70"
+                        style={{ top: (hora - HORA_INICIAL) * ALTURA_HORA }}
+                      />
+                    ))}
+                    {d.eventos.filter((ev) => !ev.diaInteiro).map((ev) => {
+                      const cor = corDoTatuador(ev.tatuador);
+                      const posicao = posicaoEvento(ev);
+                      return (
+                        <article
+                          key={`${ev.tatuador}-${ev.id}`}
+                          className={`${cor.fundo} ${cor.texto} absolute inset-x-1 z-10 overflow-hidden border border-background/30 px-2 py-1 shadow-sm`}
+                          style={{ top: posicao.top, height: posicao.height }}
+                          title={`${ev.tatuador} · ${ev.titulo} · ${fmtIntervalo(ev)}`}
+                        >
+                          <p className="text-[11px] font-semibold">{fmtIntervalo(ev)}</p>
+                          <p className="truncate text-xs font-bold">{ev.titulo}</p>
+                          <p className="truncate text-[11px]">{ev.tatuador}</p>
+                        </article>
+                      );
+                    })}
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
+          </div>
         </div>
       )}
     </Section>

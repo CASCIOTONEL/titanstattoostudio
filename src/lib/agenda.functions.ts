@@ -168,9 +168,10 @@ export const listarEventos = createServerFn({ method: "POST" })
             orderBy: "startTime",
             maxResults: "250",
           });
+          if (!alvo.connectionAPIKey) return;
           const res = await callAsAppUser({
             gatewayBaseUrl: GATEWAY_BASE_URL,
-            connectionAPIKey: alvo.connectionAPIKey!,
+            connectionAPIKey: alvo.connectionAPIKey,
             connectorId: CONNECTOR_ID,
             path: `/calendar/v3/calendars/primary/events?${params.toString()}`,
             requiredScopes: GOOGLE_SCOPES,

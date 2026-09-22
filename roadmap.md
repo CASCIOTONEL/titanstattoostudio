@@ -41,7 +41,7 @@
 - [ ] Agenda do tatuador com Google Agenda (cada tatuador conecta a propria conta) e horarios livres/agendamentos
 
 ## Contatos e financeiro (em andamento)
-- [x] Agenda unica com Google Agenda dos tatuadores (/agenda)
+- [x] Agenda única com Google Agenda dos tatuadores (/agenda), em calendário semanal com cores por profissional
 - [x] CPF e data de nascimento no formulario de orcamento
 - [x] Lista de contatos (/contatos): todos os leads, quem fechou e aniversariantes do dia
 - [x] Ticket medio por tatuador e media do estudio na area financeira
