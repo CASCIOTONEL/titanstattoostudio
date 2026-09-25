@@ -161,9 +161,26 @@ function OrcamentosPage() {
     };
   }, [leads, signed]);
 
+  const porTatuador = useMemo(
+    () =>
+      filtroTatuador === "todos"
+        ? leads
+        : leads.filter((l) => (l.tatuador ?? "") === filtroTatuador),
+    [leads, filtroTatuador],
+  );
+
   const visiveis = useMemo(
-    () => (filtro === "todos" ? leads : leads.filter((l) => l.status === filtro)),
-    [leads, filtro],
+    () => (filtro === "todos" ? porTatuador : porTatuador.filter((l) => etapaDoLead(l.status) === filtro)),
+    [porTatuador, filtro],
+  );
+
+  const colunas = useMemo(
+    () =>
+      ETAPAS.map((etapa) => ({
+        ...etapa,
+        itens: porTatuador.filter((l) => etapaDoLead(l.status) === etapa.key),
+      })),
+    [porTatuador],
   );
 
   async function mudarStatus(id: string, status: string) {
