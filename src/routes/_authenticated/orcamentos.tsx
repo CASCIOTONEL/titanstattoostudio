@@ -145,6 +145,16 @@ function OrcamentosPage() {
     if (error) setError(error.message);
   }
 
+  async function excluirLead(id: string) {
+    if (!window.confirm("Excluir este orçamento definitivamente?")) return;
+    const { error } = await supabase.from("leads").delete().eq("id", id);
+    if (error) {
+      setError(error.message);
+      return;
+    }
+    setLeads((prev) => prev.filter((l) => l.id !== id));
+  }
+
   async function sair() {
     await supabase.auth.signOut();
     await navigate({ to: "/auth" });
