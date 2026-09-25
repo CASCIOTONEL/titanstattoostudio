@@ -1,4 +1,4 @@
-import logoAsset from "@/assets/titans-logo.png.asset.json";
+import logoAsset from "@/assets/titans-logo-transparente.png.asset.json";
 import { cn } from "@/lib/utils";
 
 type BrandLogoProps = {
