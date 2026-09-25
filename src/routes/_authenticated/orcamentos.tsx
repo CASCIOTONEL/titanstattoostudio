@@ -347,6 +347,115 @@ function OrcamentosPage() {
         <p className="mt-10 text-sm text-muted-foreground">Carregando orçamentos...</p>
       ) : error ? (
         <p role="alert" className="mt-10 text-sm text-destructive">{error}</p>
+      ) : vista === "kanban" ? (
+        <div className="mt-10 overflow-x-auto pb-4">
+          <div className="flex min-w-[1100px] gap-4">
+            {colunas.map((coluna) => (
+              <section key={coluna.key} className="flex w-72 shrink-0 flex-col">
+                <header className="flex items-center justify-between border-b border-border pb-3">
+                  <h3 className="text-[11px] uppercase tracking-[0.2em] text-foreground">
+                    {coluna.label}
+                  </h3>
+                  <span className="text-[11px] text-muted-foreground">{coluna.itens.length}</span>
+                </header>
+                <div className="mt-4 space-y-3">
+                  {coluna.itens.length === 0 ? (
+                    <p className="text-xs text-muted-foreground">Nenhum pedido aqui.</p>
+                  ) : null}
+                  {coluna.itens.map((lead) => {
+                    const indice = ETAPAS.findIndex((e) => e.key === coluna.key);
+                    const capa = (lead.referencias ?? []).find((p) => signed[p]);
+                    return (
+                      <article
+                        key={lead.id}
+                        className="border border-border bg-card/40 p-4"
+                        style={{ borderLeft: `3px solid ${corDoTatuador(lead.tatuador)}` }}
+                      >
+                        <div className="flex items-start gap-3">
+                          {capa ? (
+                            <a href={signed[capa]} target="_blank" rel="noopener">
+                              <img
+                                src={signed[capa]}
+                                alt="Referência enviada pelo cliente"
+                                className="h-12 w-12 border border-border object-cover"
+                              />
+                            </a>
+                          ) : null}
+                          <div className="min-w-0">
+                            <h4 className="truncate text-sm text-foreground">{lead.nome}</h4>
+                            <p className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+                              {lead.tatuador || "sem tatuador"}
+                            </p>
+                          </div>
+                        </div>
+
+                        <p className="mt-3 text-xs text-muted-foreground">
+                          {lead.servico} · {lead.largura_cm}x{lead.altura_cm} cm · {lead.local_corpo}
+                        </p>
+                        <p className="mt-1 text-[11px] text-muted-foreground">
+                          {new Date(lead.created_at).toLocaleDateString("pt-BR")}
+                        </p>
+
+                        <div className="mt-4 flex flex-wrap items-center gap-2">
+                          <a
+                            href={whatsappLink(
+                              `Olá ${lead.nome.split(" ")[0]}, aqui é do Titans Tattoo Studio sobre seu orçamento (${lead.servico}, ${lead.largura_cm}x${lead.altura_cm} cm, ${lead.local_corpo}).`,
+                            ).replace(/wa\.me\/\d+/, `wa.me/${onlyDigits(lead.whatsapp)}`)}
+                            target="_blank"
+                            rel="noopener"
+                            className="border border-border px-3 py-2 text-[10px] uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-foreground"
+                          >
+                            WhatsApp
+                          </a>
+                          <button
+                            type="button"
+                            disabled={indice <= 0}
+                            onClick={() => mudarStatus(lead.id, ETAPAS[indice - 1]!.key)}
+                            className="border border-border px-3 py-2 text-[10px] uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-foreground disabled:opacity-30"
+                            aria-label="Voltar etapa"
+                          >
+                            ←
+                          </button>
+                          <button
+                            type="button"
+                            disabled={indice >= ETAPAS.length - 1}
+                            onClick={() => mudarStatus(lead.id, ETAPAS[indice + 1]!.key)}
+                            className="border border-border px-3 py-2 text-[10px] uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-foreground disabled:opacity-30"
+                            aria-label="Avançar etapa"
+                          >
+                            →
+                          </button>
+                        </div>
+
+                        <select
+                          value={etapaDoLead(lead.status)}
+                          onChange={(e) => mudarStatus(lead.id, e.target.value)}
+                          aria-label={`Etapa de ${lead.nome}`}
+                          className="mt-3 w-full border border-border bg-background px-3 py-2 text-[11px] uppercase tracking-[0.16em] text-muted-foreground"
+                        >
+                          {ETAPAS.map((e) => (
+                            <option key={e.key} value={e.key}>
+                              {e.label}
+                            </option>
+                          ))}
+                        </select>
+
+                        {coluna.key === "concluído" ? (
+                          <Link
+                            to="/pagamentos"
+                            className="mt-3 block border border-foreground/70 px-3 py-2 text-center text-[10px] uppercase tracking-[0.16em] transition-colors hover:bg-foreground hover:text-background"
+                          >
+                            Registrar recebimento
+                          </Link>
+                        ) : null}
+                      </article>
+                    );
+                  })}
+                </div>
+              </section>
+            ))}
+          </div>
+        </div>
       ) : visiveis.length === 0 ? (
         <p className="mt-10 text-sm text-muted-foreground">Nenhum orçamento nesta situação ainda.</p>
       ) : (
