@@ -4,6 +4,22 @@ import { BrandLogo } from "@/components/site/BrandLogo";
 import heroImage from "@/assets/hero-studio.jpg";
 import { artists, campaigns, portfolio, services, studio, testimonials, whatsappLink } from "@/lib/studio";
 
+// Intercala trabalhos dos tatuadores para a vitrine da home
+const portfolioMixed = (() => {
+  const byArtist = ["Cascio", "Ricardo", "Braian"].map((name) =>
+    portfolio.filter((item) => item.artist === name),
+  );
+  const mixed = [];
+  const max = Math.max(...byArtist.map((a) => a.length));
+  for (let i = 0; i < max; i++) {
+    for (const arr of byArtist) {
+      if (arr[i]) mixed.push(arr[i]);
+    }
+  }
+  return mixed;
+})();
+
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
