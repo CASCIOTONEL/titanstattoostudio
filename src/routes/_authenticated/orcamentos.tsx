@@ -145,6 +145,16 @@ function OrcamentosPage() {
     if (error) setError(error.message);
   }
 
+  async function excluirLead(id: string) {
+    if (!window.confirm("Excluir este orçamento definitivamente?")) return;
+    const { error } = await supabase.from("leads").delete().eq("id", id);
+    if (error) {
+      setError(error.message);
+      return;
+    }
+    setLeads((prev) => prev.filter((l) => l.id !== id));
+  }
+
   async function sair() {
     await supabase.auth.signOut();
     await navigate({ to: "/auth" });
@@ -330,6 +340,15 @@ function OrcamentosPage() {
                   >
                     Registrar recebimento
                   </Link>
+                ) : null}
+                {papeis?.includes("master") ? (
+                  <button
+                    type="button"
+                    onClick={() => excluirLead(lead.id)}
+                    className="border border-destructive/60 px-6 py-3 text-xs uppercase tracking-[0.2em] text-destructive transition-colors hover:bg-destructive hover:text-destructive-foreground"
+                  >
+                    Excluir
+                  </button>
                 ) : null}
               </div>
             </article>
