@@ -39,7 +39,32 @@ type Lead = {
   created_at: string;
 };
 
-const statusOptions = ["aberto", "em andamento", "concluído"];
+const ETAPAS = [
+  { key: "aberto", label: "Novo" },
+  { key: "em andamento", label: "Em contato" },
+  { key: "agendado", label: "Agendado" },
+  { key: "concluído", label: "Concluído" },
+  { key: "não fechou", label: "Não fechou" },
+] as const;
+
+const statusOptions = ETAPAS.map((e) => e.key);
+
+const TATUADORES = ["Cascio", "Ricardo", "Braian"];
+
+const coresTatuador: Record<string, string> = {
+  Cascio: "var(--color-artist-cascio)",
+  Ricardo: "var(--color-artist-ricardo)",
+  Braian: "var(--color-artist-braian)",
+};
+
+function corDoTatuador(nome: string | null) {
+  if (!nome) return "var(--color-border)";
+  return coresTatuador[nome] ?? "var(--color-border)";
+}
+
+function etapaDoLead(status: string) {
+  return statusOptions.includes(status) ? status : "aberto";
+}
 
 function onlyDigits(value: string) {
   const digits = value.replace(/\D/g, "");
@@ -54,6 +79,8 @@ function OrcamentosPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filtro, setFiltro] = useState<string>("todos");
+  const [vista, setVista] = useState<"kanban" | "lista">("kanban");
+  const [filtroTatuador, setFiltroTatuador] = useState<string>("todos");
   const [signed, setSigned] = useState<Record<string, string>>({});
 
   useEffect(() => {
