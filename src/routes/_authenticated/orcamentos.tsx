@@ -276,23 +276,72 @@ function OrcamentosPage() {
 
       {podeVerOrcamentos ? (
       <>
-      <div className="mt-8 flex flex-wrap gap-2">
-        {["todos", ...statusOptions].map((s) => (
-          <button
-            key={s}
-            type="button"
-            onClick={() => setFiltro(s)}
-            className={
-              "border px-4 py-2 text-[11px] uppercase tracking-[0.18em] transition-colors " +
-              (filtro === s
-                ? "border-foreground text-foreground"
-                : "border-border text-muted-foreground hover:text-foreground")
-            }
-          >
-            {s}
-          </button>
-        ))}
+      <div className="mt-8 flex flex-wrap items-center gap-6">
+        <div className="flex gap-2" role="group" aria-label="Modo de visualização">
+          {(["kanban", "lista"] as const).map((v) => (
+            <button
+              key={v}
+              type="button"
+              onClick={() => setVista(v)}
+              aria-pressed={vista === v}
+              className={
+                "border px-4 py-2 text-[11px] uppercase tracking-[0.18em] transition-colors " +
+                (vista === v
+                  ? "border-foreground bg-foreground text-background"
+                  : "border-border text-muted-foreground hover:text-foreground")
+              }
+            >
+              {v === "kanban" ? "Quadro" : "Lista"}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap gap-2" role="group" aria-label="Filtrar por tatuador">
+          {["todos", ...TATUADORES].map((t) => (
+            <button
+              key={t}
+              type="button"
+              onClick={() => setFiltroTatuador(t)}
+              aria-pressed={filtroTatuador === t}
+              className={
+                "flex items-center gap-2 border px-4 py-2 text-[11px] uppercase tracking-[0.18em] transition-colors " +
+                (filtroTatuador === t
+                  ? "border-foreground text-foreground"
+                  : "border-border text-muted-foreground hover:text-foreground")
+              }
+            >
+              {t !== "todos" ? (
+                <span
+                  aria-hidden
+                  className="inline-block h-2 w-2 rounded-full"
+                  style={{ backgroundColor: corDoTatuador(t) }}
+                />
+              ) : null}
+              {t}
+            </button>
+          ))}
+        </div>
       </div>
+
+      {vista === "lista" ? (
+        <div className="mt-6 flex flex-wrap gap-2">
+          {["todos", ...statusOptions].map((s) => (
+            <button
+              key={s}
+              type="button"
+              onClick={() => setFiltro(s)}
+              className={
+                "border px-4 py-2 text-[11px] uppercase tracking-[0.18em] transition-colors " +
+                (filtro === s
+                  ? "border-foreground text-foreground"
+                  : "border-border text-muted-foreground hover:text-foreground")
+              }
+            >
+              {ETAPAS.find((e) => e.key === s)?.label ?? s}
+            </button>
+          ))}
+        </div>
+      ) : null}
 
       {loading ? (
         <p className="mt-10 text-sm text-muted-foreground">Carregando orçamentos...</p>
