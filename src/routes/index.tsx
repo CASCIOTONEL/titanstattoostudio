@@ -127,7 +127,7 @@ function Home() {
       <Section className="border-t border-border/60">
         <SectionTitle eyebrow="Trabalhos" title="Portfólio" />
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {portfolio.slice(0, 6).map((item) => (
+          {portfolioMixed.slice(0, 6).map((item) => (
             <figure key={item.id} className="group overflow-hidden border border-border/60">
               <img
                 src={item.src}
