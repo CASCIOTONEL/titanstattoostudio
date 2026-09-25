@@ -341,6 +341,15 @@ function OrcamentosPage() {
                     Registrar recebimento
                   </Link>
                 ) : null}
+                {papeis?.includes("master") ? (
+                  <button
+                    type="button"
+                    onClick={() => excluirLead(lead.id)}
+                    className="border border-destructive/60 px-6 py-3 text-xs uppercase tracking-[0.2em] text-destructive transition-colors hover:bg-destructive hover:text-destructive-foreground"
+                  >
+                    Excluir
+                  </button>
+                ) : null}
               </div>
             </article>
           ))}
