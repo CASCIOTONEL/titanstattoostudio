@@ -47,7 +47,7 @@ const ETAPAS = [
   { key: "não fechou", label: "Não fechou" },
 ] as const;
 
-const statusOptions = ETAPAS.map((e) => e.key);
+const statusOptions: string[] = ETAPAS.map((e) => e.key);
 
 const TATUADORES = ["Cascio", "Ricardo", "Braian"];
 
