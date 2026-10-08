@@ -5,6 +5,7 @@ import { Section, SectionTitle } from "@/components/site/Section";
 import { supabase } from "@/integrations/supabase/client";
 import { meusPapeis, type Papel } from "@/lib/equipe.functions";
 import { importarClientesPlanilha } from "@/lib/importacao.functions";
+import { ClienteExtras } from "@/components/estudio/ClienteExtras";
 
 const COLUNAS_CSV: { chave: keyof Cliente; rotulo: string }[] = [
   { chave: "nome", rotulo: "Nome" },
@@ -490,6 +491,8 @@ function ClientesPage() {
                   {cliente.observacoes ? (
                     <p className="mt-5 text-sm text-muted-foreground">{cliente.observacoes}</p>
                   ) : null}
+                  <ClienteExtras clienteId={cliente.id} nome={cliente.nome} whatsapp={cliente.whatsapp} ehMaster={ehMaster} />
+
                 </article>
               ))}
             </div>

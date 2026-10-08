@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as CuidadosRouteImport } from './routes/cuidados'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as OrcamentoRouteImport } from './routes/orcamento'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
@@ -24,6 +25,7 @@ import { Route as AuthenticatedEquipeRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedMeuPainelRouteImport } from './routes/_authenticated/meu-painel'
 import { Route as AuthenticatedOrcamentosRouteImport } from './routes/_authenticated/orcamentos'
 import { Route as AuthenticatedPagamentosRouteImport } from './routes/_authenticated/pagamentos'
+import { Route as FichaTokenRouteImport } from './routes/ficha.$token'
 import { Route as TatuadoresIndexRouteImport } from './routes/tatuadores.index'
 import { Route as TatuadoresSlugRouteImport } from './routes/tatuadores.$slug'
 import { Route as OauthGoogleCalendarReturnRouteImport } from './routes/oauth/google-calendar/return'
@@ -46,6 +48,11 @@ const AuthRoute = AuthRouteImport.update({
 const ContatoRoute = ContatoRouteImport.update({
   id: '/contato',
   path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CuidadosRoute = CuidadosRouteImport.update({
+  id: '/cuidados',
+  path: '/cuidados',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -103,6 +110,11 @@ const AuthenticatedPagamentosRoute = AuthenticatedPagamentosRouteImport.update({
   path: '/pagamentos',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const FichaTokenRoute = FichaTokenRouteImport.update({
+  id: '/ficha/$token',
+  path: '/ficha/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TatuadoresIndexRoute = TatuadoresIndexRouteImport.update({
   id: '/tatuadores/',
   path: '/tatuadores/',
@@ -130,6 +142,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
+  '/cuidados': typeof CuidadosRoute
   '/faq': typeof FaqRoute
   '/orcamento': typeof OrcamentoRoute
   '/portfolio': typeof PortfolioRoute
@@ -141,6 +154,7 @@ export interface FileRoutesByFullPath {
   '/meu-painel': typeof AuthenticatedMeuPainelRoute
   '/orcamentos': typeof AuthenticatedOrcamentosRoute
   '/pagamentos': typeof AuthenticatedPagamentosRoute
+  '/ficha/$token': typeof FichaTokenRoute
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
   '/tatuadores/': typeof TatuadoresIndexRoute
   '/oauth/google-calendar/return': typeof OauthGoogleCalendarReturnRoute
@@ -150,6 +164,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
+  '/cuidados': typeof CuidadosRoute
   '/faq': typeof FaqRoute
   '/orcamento': typeof OrcamentoRoute
   '/portfolio': typeof PortfolioRoute
@@ -161,6 +176,7 @@ export interface FileRoutesByTo {
   '/meu-painel': typeof AuthenticatedMeuPainelRoute
   '/orcamentos': typeof AuthenticatedOrcamentosRoute
   '/pagamentos': typeof AuthenticatedPagamentosRoute
+  '/ficha/$token': typeof FichaTokenRoute
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
   '/tatuadores': typeof TatuadoresIndexRoute
   '/oauth/google-calendar/return': typeof OauthGoogleCalendarReturnRoute
@@ -172,6 +188,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
+  '/cuidados': typeof CuidadosRoute
   '/faq': typeof FaqRoute
   '/orcamento': typeof OrcamentoRoute
   '/portfolio': typeof PortfolioRoute
@@ -183,6 +200,7 @@ export interface FileRoutesById {
   '/_authenticated/meu-painel': typeof AuthenticatedMeuPainelRoute
   '/_authenticated/orcamentos': typeof AuthenticatedOrcamentosRoute
   '/_authenticated/pagamentos': typeof AuthenticatedPagamentosRoute
+  '/ficha/$token': typeof FichaTokenRoute
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
   '/tatuadores/': typeof TatuadoresIndexRoute
   '/oauth/google-calendar/return': typeof OauthGoogleCalendarReturnRoute
@@ -194,6 +212,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/contato'
+    | '/cuidados'
     | '/faq'
     | '/orcamento'
     | '/portfolio'
@@ -205,6 +224,7 @@ export interface FileRouteTypes {
     | '/meu-painel'
     | '/orcamentos'
     | '/pagamentos'
+    | '/ficha/$token'
     | '/tatuadores/$slug'
     | '/tatuadores/'
     | '/oauth/google-calendar/return'
@@ -214,6 +234,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/contato'
+    | '/cuidados'
     | '/faq'
     | '/orcamento'
     | '/portfolio'
@@ -225,6 +246,7 @@ export interface FileRouteTypes {
     | '/meu-painel'
     | '/orcamentos'
     | '/pagamentos'
+    | '/ficha/$token'
     | '/tatuadores/$slug'
     | '/tatuadores'
     | '/oauth/google-calendar/return'
@@ -235,6 +257,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/contato'
+    | '/cuidados'
     | '/faq'
     | '/orcamento'
     | '/portfolio'
@@ -246,6 +269,7 @@ export interface FileRouteTypes {
     | '/_authenticated/meu-painel'
     | '/_authenticated/orcamentos'
     | '/_authenticated/pagamentos'
+    | '/ficha/$token'
     | '/tatuadores/$slug'
     | '/tatuadores/'
     | '/oauth/google-calendar/return'
@@ -257,10 +281,12 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   ContatoRoute: typeof ContatoRoute
+  CuidadosRoute: typeof CuidadosRoute
   FaqRoute: typeof FaqRoute
   OrcamentoRoute: typeof OrcamentoRoute
   PortfolioRoute: typeof PortfolioRoute
   ServicosRoute: typeof ServicosRoute
+  FichaTokenRoute: typeof FichaTokenRoute
   TatuadoresSlugRoute: typeof TatuadoresSlugRoute
   TatuadoresIndexRoute: typeof TatuadoresIndexRoute
   OauthGoogleCalendarReturnRoute: typeof OauthGoogleCalendarReturnRoute
@@ -295,6 +321,13 @@ declare module '@tanstack/react-router' {
       path: '/contato'
       fullPath: '/contato'
       preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cuidados': {
+      id: '/cuidados'
+      path: '/cuidados'
+      fullPath: '/cuidados'
+      preLoaderRoute: typeof CuidadosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -374,6 +407,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPagamentosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/ficha/$token': {
+      id: '/ficha/$token'
+      path: '/ficha/$token'
+      fullPath: '/ficha/$token'
+      preLoaderRoute: typeof FichaTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tatuadores/': {
       id: '/tatuadores/'
       path: '/tatuadores'
@@ -433,10 +473,12 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   ContatoRoute: ContatoRoute,
+  CuidadosRoute: CuidadosRoute,
   FaqRoute: FaqRoute,
   OrcamentoRoute: OrcamentoRoute,
   PortfolioRoute: PortfolioRoute,
   ServicosRoute: ServicosRoute,
+  FichaTokenRoute: FichaTokenRoute,
   TatuadoresSlugRoute: TatuadoresSlugRoute,
   TatuadoresIndexRoute: TatuadoresIndexRoute,
   OauthGoogleCalendarReturnRoute: OauthGoogleCalendarReturnRoute,

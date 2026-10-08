@@ -441,12 +441,24 @@ function OrcamentosPage() {
                         </select>
 
                         {coluna.key === "concluído" ? (
-                          <Link
-                            to="/pagamentos"
-                            className="mt-3 block border border-foreground/70 px-3 py-2 text-center text-[10px] uppercase tracking-[0.16em] transition-colors hover:bg-foreground hover:text-background"
-                          >
-                            Registrar recebimento
-                          </Link>
+                          <>
+                            <Link
+                              to="/pagamentos"
+                              className="mt-3 block border border-foreground/70 px-3 py-2 text-center text-[10px] uppercase tracking-[0.16em] transition-colors hover:bg-foreground hover:text-background"
+                            >
+                              Registrar recebimento
+                            </Link>
+                            <a
+                              href={`https://wa.me/${onlyDigits(lead.whatsapp)}?text=${encodeURIComponent(
+                                `Olá ${lead.nome.split(" ")[0]}! Obrigado por tatuar com o Titans. Aqui estão os cuidados para sua tattoo cicatrizar perfeitamente: ${typeof window !== "undefined" ? window.location.origin : ""}/cuidados — em cerca de 30 dias mande uma foto para avaliarmos o retoque.`,
+                              )}`}
+                              target="_blank"
+                              rel="noopener"
+                              className="mt-2 block border border-border px-3 py-2 text-center text-[10px] uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-foreground"
+                            >
+                              Enviar cuidados
+                            </a>
+                          </>
                         ) : null}
                       </article>
                     );

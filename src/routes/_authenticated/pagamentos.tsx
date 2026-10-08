@@ -3,6 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useMemo, useState } from "react";
 import { Section, SectionTitle } from "@/components/site/Section";
 import { supabase } from "@/integrations/supabase/client";
+import { DespesasAba } from "@/components/estudio/DespesasAba";
 import { meusPapeis, type Papel } from "@/lib/equipe.functions";
 import { artists } from "@/lib/studio";
 
@@ -78,6 +79,7 @@ const ABAS = [
   { id: "tatuadores", rotulo: "Por tatuador" },
   { id: "dias", rotulo: "Dia a dia" },
   { id: "comissoes", rotulo: "Comissões (terças)" },
+  { id: "despesas", rotulo: "Despesas e lucro" },
 ] as const;
 type Aba = (typeof ABAS)[number]["id"];
 
@@ -471,6 +473,8 @@ function PagamentosPage() {
             </p>
           ) : null}
           {loading ? <p className="mt-8 text-sm text-muted-foreground">Carregando financeiro...</p> : null}
+
+          {aba === "despesas" ? <DespesasAba mes={mes} recebido={totalMes} comissao={comissaoMes} /> : null}
 
           {aba === "recebimentos" ? (
             <>
