@@ -33,7 +33,7 @@ export const Route = createFileRoute("/tatuadores/$slug")({
   errorComponent: ({ error }) => (
     <Section>
       <p role="alert" className="text-sm text-muted-foreground">
-        {error.message}
+        {error instanceof Error ? error.message : "Erro ao carregar."}
       </p>
     </Section>
   ),
