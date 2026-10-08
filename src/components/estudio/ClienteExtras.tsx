@@ -50,7 +50,7 @@ export function ClienteExtras({ clienteId, nome, whatsapp, ehMaster }: { cliente
     const fl = (ft ?? []) as Foto[];
     if (fl.length) {
       const { data } = await supabase.storage.from("trabalhos").createSignedUrls(fl.map((f) => f.path), 3600);
-      fl.forEach((f, i) => (f.url = data?.[i]?.signedUrl ?? undefined));
+      fl.forEach((f, i) => { const u = data?.[i]?.signedUrl; if (u) f.url = u; });
     }
     setFotos(fl);
   }
