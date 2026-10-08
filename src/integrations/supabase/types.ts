@@ -41,6 +41,53 @@ export type Database = {
         }
         Relationships: []
       }
+      cliente_fotos: {
+        Row: {
+          cliente_id: string
+          created_at: string
+          data: string
+          enviado_por: string | null
+          id: string
+          legenda: string | null
+          path: string
+          tatuador: string | null
+          tipo: string
+          updated_at: string
+        }
+        Insert: {
+          cliente_id: string
+          created_at?: string
+          data?: string
+          enviado_por?: string | null
+          id?: string
+          legenda?: string | null
+          path: string
+          tatuador?: string | null
+          tipo?: string
+          updated_at?: string
+        }
+        Update: {
+          cliente_id?: string
+          created_at?: string
+          data?: string
+          enviado_por?: string | null
+          id?: string
+          legenda?: string | null
+          path?: string
+          tatuador?: string | null
+          tipo?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cliente_fotos_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       clientes: {
         Row: {
           alergias: string | null
@@ -133,6 +180,101 @@ export type Database = {
           valor?: number
         }
         Relationships: []
+      }
+      despesas: {
+        Row: {
+          categoria: string
+          created_at: string
+          data: string
+          descricao: string | null
+          forma: string | null
+          id: string
+          registrado_por: string | null
+          updated_at: string
+          valor: number
+        }
+        Insert: {
+          categoria: string
+          created_at?: string
+          data?: string
+          descricao?: string | null
+          forma?: string | null
+          id?: string
+          registrado_por?: string | null
+          updated_at?: string
+          valor: number
+        }
+        Update: {
+          categoria?: string
+          created_at?: string
+          data?: string
+          descricao?: string | null
+          forma?: string | null
+          id?: string
+          registrado_por?: string | null
+          updated_at?: string
+          valor?: number
+        }
+        Relationships: []
+      }
+      fichas_anamnese: {
+        Row: {
+          aceite_imagem: boolean
+          aceite_lgpd: boolean
+          aceite_politica: boolean
+          aceite_procedimento: boolean
+          assinada_em: string | null
+          assinatura_path: string | null
+          cliente_id: string
+          created_at: string
+          criado_por: string | null
+          expira_em: string
+          id: string
+          respostas: Json
+          token: string
+          updated_at: string
+        }
+        Insert: {
+          aceite_imagem?: boolean
+          aceite_lgpd?: boolean
+          aceite_politica?: boolean
+          aceite_procedimento?: boolean
+          assinada_em?: string | null
+          assinatura_path?: string | null
+          cliente_id: string
+          created_at?: string
+          criado_por?: string | null
+          expira_em?: string
+          id?: string
+          respostas?: Json
+          token?: string
+          updated_at?: string
+        }
+        Update: {
+          aceite_imagem?: boolean
+          aceite_lgpd?: boolean
+          aceite_politica?: boolean
+          aceite_procedimento?: boolean
+          assinada_em?: string | null
+          assinatura_path?: string | null
+          cliente_id?: string
+          created_at?: string
+          criado_por?: string | null
+          expira_em?: string
+          id?: string
+          respostas?: Json
+          token?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fichas_anamnese_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       leads: {
         Row: {
