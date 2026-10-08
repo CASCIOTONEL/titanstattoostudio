@@ -45,3 +45,11 @@
 - [x] CPF e data de nascimento no formulario de orcamento
 - [x] Lista de contatos (/contatos): todos os leads, quem fechou e aniversariantes do dia
 - [x] Ticket medio por tatuador e media do estudio na area financeira
+
+## Fase 2
+- [x] Kanban de orçamentos
+- [x] Ficha de anamnese + termos com assinatura digital (/ficha/$token, gerada em Clientes)
+- [x] Guia de pós-atendimento (/cuidados) + botão "Enviar cuidados" no Concluído
+- [x] Despesas e lucro líquido (aba em Pagamentos)
+- [x] Galeria de trabalhos por cliente
+- [ ] Revisar textos oficiais de cuidados e termos (aguardando o estúdio)
