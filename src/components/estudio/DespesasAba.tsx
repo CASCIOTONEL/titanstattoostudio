@@ -39,7 +39,7 @@ export function DespesasAba({ mes, recebido, comissao }: { mes: string; recebido
     const { data: u } = await supabase.auth.getUser();
     const { data, error } = await supabase
       .from("despesas")
-      .insert({ data: f.data, categoria: f.categoria, descricao: f.descricao.trim().slice(0, 300) || null, valor, forma: f.forma, registrado_por: u.user?.id })
+      .insert({ data: f.data, categoria: f.categoria, descricao: f.descricao.trim().slice(0, 300) || null, valor, forma: f.forma, registrado_por: u.user?.id ?? null })
       .select()
       .single();
     if (error) return setErro(error.message);

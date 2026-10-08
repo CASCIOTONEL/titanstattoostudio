@@ -119,7 +119,7 @@ function FichaPage() {
 
   return (
     <Section>
-      <SectionTitle eyebrow="Titans Tattoo Studio" title="Ficha de anamnese" description={nome ? `Olá, ${nome}. Preencha com atenção antes da sua sessão.` : undefined} />
+      <SectionTitle eyebrow="Titans Tattoo Studio" title="Ficha de anamnese" description={nome ? `Olá, ${nome}. Preencha com atenção antes da sua sessão.` : "Preencha com atenção antes da sua sessão."} />
       {estado !== "aberta" ? (
         <p className="mt-10 text-sm text-muted-foreground">{mensagens[estado]}</p>
       ) : (
