@@ -72,7 +72,7 @@ export const Route = createFileRoute("/api/public/hooks/aniversariantes")({
           if (!reservado) continue;
 
           const primeiro = nome.trim().split(" ")[0];
-          const texto = `Feliz aniversário, ${primeiro}! 🎉 Toda a equipe do Titans Tattoo Studio deseja um dia incrível pra você.`;
+          const texto = `Feliz aniversário, ${primeiro}! 🎉 Toda a equipe do Titans Tattoo Studio deseja um dia incrível pra você. Lembrando que durante o mês do seu aniversário você tem 20% de desconto em sua tattoo com todos os profissionais da loja.`;
           try {
             const resp = await fetch(`${GATEWAY_URL}/messages`, {
               method: "POST",
