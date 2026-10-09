@@ -217,6 +217,39 @@ export type Database = {
         }
         Relationships: []
       }
+      envios_aniversario: {
+        Row: {
+          ano: number
+          created_at: string
+          erro: string | null
+          id: string
+          nome: string
+          provider_id: string | null
+          status: string
+          whatsapp: string
+        }
+        Insert: {
+          ano: number
+          created_at?: string
+          erro?: string | null
+          id?: string
+          nome: string
+          provider_id?: string | null
+          status?: string
+          whatsapp: string
+        }
+        Update: {
+          ano?: number
+          created_at?: string
+          erro?: string | null
+          id?: string
+          nome?: string
+          provider_id?: string | null
+          status?: string
+          whatsapp?: string
+        }
+        Relationships: []
+      }
       fichas_anamnese: {
         Row: {
           aceite_imagem: boolean
@@ -437,6 +470,21 @@ export type Database = {
           nome?: string | null
           tatuador?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      rotina_tokens: {
+        Row: {
+          nome: string
+          token: string
+        }
+        Insert: {
+          nome: string
+          token?: string
+        }
+        Update: {
+          nome?: string
+          token?: string
         }
         Relationships: []
       }

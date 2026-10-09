@@ -8,6 +8,13 @@
       "when": 1791482606996,
       "tag": "0000_fase2_fichas_despesas_fotos",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791570661814,
+      "tag": "0001_aniversarios_automaticos",
+      "breakpoints": true
     }
   ]
 }
