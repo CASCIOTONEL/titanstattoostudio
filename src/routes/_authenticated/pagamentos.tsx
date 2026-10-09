@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Section, SectionTitle } from "@/components/site/Section";
 import { supabase } from "@/integrations/supabase/client";
 import { DespesasAba } from "@/components/estudio/DespesasAba";
+import { RelatorioPdfBotao } from "@/components/estudio/RelatorioPdf";
 import { meusPapeis, type Papel } from "@/lib/equipe.functions";
 import { artists } from "@/lib/studio";
 
@@ -421,7 +422,10 @@ function PagamentosPage() {
         </p>
       ) : (
         <>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 flex justify-end">
+            <RelatorioPdfBotao mes={mes} />
+          </div>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <div className="border border-border bg-card/30 p-5">
               <label className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
                 Mês
