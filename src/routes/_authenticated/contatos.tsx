@@ -259,7 +259,7 @@ function ContatosPage() {
                         href={linkPara(
                           c.whatsapp,
                           aba === "aniversariantes"
-                            ? `Feliz aniversário, ${c.nome.split(" ")[0]}! Toda a equipe do Titans Tattoo Studio deseja um dia incrível. Lembrando que durante o mês do seu aniversário você tem 20% de desconto em sua tattoo com todos os profissionais da loja.`
+                            ? `Parabéns, ${c.nome.split(" ")[0]}! 🤘🎉\n\nUm feliz aniversário de todo mundo aqui do Titans Tattoo! Que seu ano seja formidável.\n\nPra comemorar contigo: durante todo o mês do seu aniversário, preparamos **20% de desconto** pra você marcar essa nova fase na pele com qualquer profissional da casa.\n\nCurte muito seu dia, e conta com a gente quando der aquela vontade de rabiscar de novo!`
                             : `Olá, ${c.nome.split(" ")[0]}! Aqui é do Titans Tattoo Studio.`,
                         )}
                         target="_blank"
