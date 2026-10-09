@@ -50,7 +50,7 @@ export function RelatorioPdfBotao({ mes }: { mes: string }) {
       doc.setFontSize(18);
       doc.text("Titans Tattoo Studio", 14, 18);
       doc.setFontSize(12);
-      doc.text(`Relatório financeiro — ${nomeMes}`, 14, 26);
+      doc.text(`Relatório financeiro - ${nomeMes}`, 14, 26);
       doc.setFontSize(9);
       doc.text(`Gerado em ${new Date().toLocaleString("pt-BR")}`, 14, 32);
 
