@@ -29,6 +29,7 @@ import { Route as FichaTokenRouteImport } from './routes/ficha.$token'
 import { Route as TatuadoresIndexRouteImport } from './routes/tatuadores.index'
 import { Route as TatuadoresSlugRouteImport } from './routes/tatuadores.$slug'
 import { Route as OauthGoogleCalendarReturnRouteImport } from './routes/oauth/google-calendar/return'
+import { Route as ApiPublicHooksAniversariantesRouteImport } from './routes/api/public/hooks/aniversariantes'
 import { Route as ApiPublicWhatsappWebhookRouteImport } from './routes/api/public/whatsapp/webhook'
 
 const IndexRoute = IndexRouteImport.update({
@@ -131,6 +132,12 @@ const OauthGoogleCalendarReturnRoute =
     path: '/oauth/google-calendar/return',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicHooksAniversariantesRoute =
+  ApiPublicHooksAniversariantesRouteImport.update({
+    id: '/api/public/hooks/aniversariantes',
+    path: '/api/public/hooks/aniversariantes',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicWhatsappWebhookRoute =
   ApiPublicWhatsappWebhookRouteImport.update({
     id: '/api/public/whatsapp/webhook',
@@ -158,6 +165,7 @@ export interface FileRoutesByFullPath {
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
   '/tatuadores/': typeof TatuadoresIndexRoute
   '/oauth/google-calendar/return': typeof OauthGoogleCalendarReturnRoute
+  '/api/public/hooks/aniversariantes': typeof ApiPublicHooksAniversariantesRoute
   '/api/public/whatsapp/webhook': typeof ApiPublicWhatsappWebhookRoute
 }
 export interface FileRoutesByTo {
@@ -180,6 +188,7 @@ export interface FileRoutesByTo {
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
   '/tatuadores': typeof TatuadoresIndexRoute
   '/oauth/google-calendar/return': typeof OauthGoogleCalendarReturnRoute
+  '/api/public/hooks/aniversariantes': typeof ApiPublicHooksAniversariantesRoute
   '/api/public/whatsapp/webhook': typeof ApiPublicWhatsappWebhookRoute
 }
 export interface FileRoutesById {
@@ -204,6 +213,7 @@ export interface FileRoutesById {
   '/tatuadores/$slug': typeof TatuadoresSlugRoute
   '/tatuadores/': typeof TatuadoresIndexRoute
   '/oauth/google-calendar/return': typeof OauthGoogleCalendarReturnRoute
+  '/api/public/hooks/aniversariantes': typeof ApiPublicHooksAniversariantesRoute
   '/api/public/whatsapp/webhook': typeof ApiPublicWhatsappWebhookRoute
 }
 export interface FileRouteTypes {
@@ -228,6 +238,7 @@ export interface FileRouteTypes {
     | '/tatuadores/$slug'
     | '/tatuadores/'
     | '/oauth/google-calendar/return'
+    | '/api/public/hooks/aniversariantes'
     | '/api/public/whatsapp/webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -250,6 +261,7 @@ export interface FileRouteTypes {
     | '/tatuadores/$slug'
     | '/tatuadores'
     | '/oauth/google-calendar/return'
+    | '/api/public/hooks/aniversariantes'
     | '/api/public/whatsapp/webhook'
   id:
     | '__root__'
@@ -273,6 +285,7 @@ export interface FileRouteTypes {
     | '/tatuadores/$slug'
     | '/tatuadores/'
     | '/oauth/google-calendar/return'
+    | '/api/public/hooks/aniversariantes'
     | '/api/public/whatsapp/webhook'
   fileRoutesById: FileRoutesById
 }
@@ -290,6 +303,7 @@ export interface RootRouteChildren {
   TatuadoresSlugRoute: typeof TatuadoresSlugRoute
   TatuadoresIndexRoute: typeof TatuadoresIndexRoute
   OauthGoogleCalendarReturnRoute: typeof OauthGoogleCalendarReturnRoute
+  ApiPublicHooksAniversariantesRoute: typeof ApiPublicHooksAniversariantesRoute
   ApiPublicWhatsappWebhookRoute: typeof ApiPublicWhatsappWebhookRoute
 }
 
@@ -435,6 +449,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OauthGoogleCalendarReturnRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/aniversariantes': {
+      id: '/api/public/hooks/aniversariantes'
+      path: '/api/public/hooks/aniversariantes'
+      fullPath: '/api/public/hooks/aniversariantes'
+      preLoaderRoute: typeof ApiPublicHooksAniversariantesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/whatsapp/webhook': {
       id: '/api/public/whatsapp/webhook'
       path: '/api/public/whatsapp/webhook'
@@ -482,6 +503,7 @@ const rootRouteChildren: RootRouteChildren = {
   TatuadoresSlugRoute: TatuadoresSlugRoute,
   TatuadoresIndexRoute: TatuadoresIndexRoute,
   OauthGoogleCalendarReturnRoute: OauthGoogleCalendarReturnRoute,
+  ApiPublicHooksAniversariantesRoute: ApiPublicHooksAniversariantesRoute,
   ApiPublicWhatsappWebhookRoute: ApiPublicWhatsappWebhookRoute,
 }
 export const routeTree = rootRouteImport
