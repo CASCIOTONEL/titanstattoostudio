@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Section, SectionTitle } from "@/components/site/Section";
 import { supabase } from "@/integrations/supabase/client";
 import { DespesasAba } from "@/components/estudio/DespesasAba";
+import { AnaliseIA } from "@/components/estudio/AnaliseIA";
 import { RelatorioPdfBotao } from "@/components/estudio/RelatorioPdf";
 import { meusPapeis, type Papel } from "@/lib/equipe.functions";
 import { artists } from "@/lib/studio";
@@ -81,6 +82,7 @@ const ABAS = [
   { id: "dias", rotulo: "Dia a dia" },
   { id: "comissoes", rotulo: "Comissões (terças)" },
   { id: "despesas", rotulo: "Despesas e lucro" },
+  { id: "analise", rotulo: "Análise com IA" },
 ] as const;
 type Aba = (typeof ABAS)[number]["id"];
 
@@ -478,6 +480,7 @@ function PagamentosPage() {
           ) : null}
           {loading ? <p className="mt-8 text-sm text-muted-foreground">Carregando financeiro...</p> : null}
 
+          {aba === "analise" ? <AnaliseIA mesInicial={mes} /> : null}
           {aba === "despesas" ? <DespesasAba mes={mes} recebido={totalMes} comissao={comissaoMes} /> : null}
 
           {aba === "recebimentos" ? (
